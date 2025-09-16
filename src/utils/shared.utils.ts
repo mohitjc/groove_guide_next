@@ -1,0 +1,26 @@
+export const socialOptions = ["Word of Mouth",
+    "Drive By",
+    "Internet Search",
+    "Google Maps",
+    "Facebook",
+    "Instagram",
+    "YouTube",
+    "TikTok",
+    "Yelp",
+    "Shroom Locator",
+    "Blog",
+    "Flyer",
+    "Event",
+    "QR Code Sticker",
+    "Guest Sign-In",
+    "Club Programs",
+    "Twitter",
+    "Website",
+    "Walk-In",
+    "Friends & Family",
+    "Google",
+    "Apple Maps",
+    "Other"
+]
+    .sort()
+    .map(itm => ({ id: itm.toLowerCase(), name: itm }))

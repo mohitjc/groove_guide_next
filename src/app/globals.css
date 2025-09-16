@@ -1,3 +1,12 @@
+.bg-primary {
+  background-color: #541218;
+}
+.text-primary {
+  color: #541218;
+}
+button{
+  cursor: pointer;
+}
 @import "tailwindcss";
 
 :root {
