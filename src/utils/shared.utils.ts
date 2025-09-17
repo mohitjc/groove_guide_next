@@ -24,3 +24,32 @@ export const socialOptions = ["Word of Mouth",
 ]
     .sort()
     .map(itm => ({ id: itm.toLowerCase(), name: itm }))
+
+export const dietaryList = [
+    { id: 'vegan', name: 'Vegan' },
+    { id: 'dairyFree', name: 'Dairy Free' },
+    { id: 'glutenFree', name: 'Gluten Free' },
+    { id: 'nutFree', name: 'Nut Free' },
+]
+
+export const primaryUseList = [
+    { id: 'Therapeutic Use', name: 'Therapeutic' },
+    { id: 'Health & Wellness', name: 'Functional/Medicinal' },
+]
+
+export const dietaryChange=(key:string,dietaryKeys:any)=>{
+    let payload:any={};
+    dietaryList.map(itm=>{
+      payload={
+        ...payload,
+        [itm.id]:dietaryKeys?.[itm.id]?true:false,
+        [key]:dietaryKeys?.[key]?false:true
+      }
+    })
+
+    Object.keys(payload).find(key=>{
+        if(!payload[key]) delete payload[key]
+    })
+   
+    return payload
+  }

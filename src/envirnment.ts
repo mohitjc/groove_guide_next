@@ -6,6 +6,7 @@ const envirnment={
     api:env.NEXT_PUBLIC_API_URL,
     userRoleId:env.NEXT_PUBLIC_USER_ROLE_ID,
     joinUrl:'https://joincraftclub.com/membership',
+    frontUrl:'https://grooveguide.ai/',
     image_path:env.NEXT_PUBLIC_IMAGE_PATH,
     googleClientId:env.NEXT_PUBLIC_GOOGLE_CLIENT_ID
 }

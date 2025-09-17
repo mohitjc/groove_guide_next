@@ -1,6 +1,9 @@
 "use client";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import "./index.css";
+import "./main_css.css";
+
 import { ToastContainer } from "react-toastify";
 import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
@@ -57,6 +60,7 @@ export default function RootLayout({
           href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0"
           rel="stylesheet"
         />
+         <link rel="stylesheet" href="/assets/fontstyle/stylesheet.css" />
       </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased ${inter.className}`}
