@@ -40,7 +40,7 @@ export default function Layout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const router= useRouter()
+  const router = useRouter()
   const pathname = usePathname()
   const spathname = pathname.split('/')[1]
   const query = useSearchParams()
@@ -74,14 +74,14 @@ export default function Layout({
 
   const [submited, setSubmited] = useState(false)
 
-  const history = (url='')=>{
+  const history = (url = '') => {
     router.push(url)
   }
 
   const currentURL = `/${pathname}`;
 
   const getUserDetail = () => {
-    get("user/profile", { id: (user._id||user.id) }).then(async (res) => {
+    get("user/profile", { id: (user._id || user.id) }).then(async (res) => {
       if (res.success) {
         const data = { ...user, ...res.data };
         dispatch(login(data));
@@ -245,7 +245,7 @@ export default function Layout({
         socketModel.emit("notify-message", { user_id: user?._id });
       }
 
-      socketModel.on("notify-message", (data:any) => {
+      socketModel.on("notify-message", (data: any) => {
         const count = data.data.unread_count;
         localStorage.setItem("unreadMessages", count);
         setUnreadMessagesCount(data.data.unread_count);
@@ -289,7 +289,7 @@ export default function Layout({
       }
       getActiveSubscription()
       sessionStorage.setItem('unreadCount', 'true')
-      socketModel.on("unread-noti-count", (data:any) => {
+      socketModel.on("unread-noti-count", (data: any) => {
         setUnreadCount(data.data?.unread_count);
       });
     }
@@ -520,7 +520,9 @@ export default function Layout({
                 }}
                 aria-label="Groove Guide Home"
               >
-                <img
+                <Image
+                  height={47}
+                  width={180}
                   className="h-[37px] xl:h-[37px] 2xl:h-[47px] object-contain"
                   src="/assets/img/v2/logo.svg"
                   alt="logo header"
@@ -584,10 +586,7 @@ export default function Layout({
                 </div>
               </> : <></>}
 
-
               <div className="flex items-center space-x-4 shrink-0">
-
-
                 <div className="flex items-center space-x-2 lg:space-x-3">
                   {user ? (
                     <>
@@ -662,33 +661,13 @@ export default function Layout({
                     </>
                   ) : (
                     <>
-                      {/* <Link
-                            to="/getstarted/step1"
-                            className=" w-28 lg:w-32 flex justify-center bg-primary gap-x-1.5 rounded-[19px] px-4 py-2 mb-0 text-xs md:text-sm font-semibold text-white"
-                          >
-                            Get Started
-                          </Link> */}
-
                       <div className=" flex items-center justify-center gap-2 sm:gap-4 rounded-full py-2 ">
                         <p
                           className="inline-flex bg-primary px-[30px] py-[10px] text-center rounded-full !text-white justify-center border-gray-400 text-sm font-semibold text-gray-900 cursor-pointer" onClick={openModal}
                         >
                           Login
                         </p>
-
-                        {/* <p
-
-                              className="inline-flex  justify-center    mb-0 text-sm font-semibold text-gray-900 cursor-pointer" onClick={openModal2}
-                            >
-                              Signup
-                            </p> */}
                       </div>
-                      {/* <Link
-                            to="/login"
-                            className="inline-flex w-20 lg:w-24 justify-center gap-x-1.5 rounded-[19px] bg-[#EDEDED] px-4 py-2 mb-0 text-sm font-semibold text-gray-900"
-                          >
-                            Log in
-                          </Link> */}
                     </>
                   )}
                 </div>
@@ -708,7 +687,9 @@ export default function Layout({
                   }}
                   aria-label="Groove Guide Home"
                 >
-                  <img
+                  <Image
+                    height={107}
+                    width={28}
                     className="h-7 md:h-8 lg:h-10 object-contain"
                     src="/assets/img/v2/logo.svg"
                     alt="logo header"
@@ -794,12 +775,6 @@ export default function Layout({
                       </>
                     ) : (
                       <>
-                        {/* <Link
-            to="/getstarted/step1"
-            className=" w-28 lg:w-32 flex justify-center bg-primary gap-x-1.5 rounded-[19px] px-4 py-2 mb-0 text-xs md:text-sm font-semibold text-white"
-          >
-            Get Started
-          </Link> */}
 
                         <div className="flex items-center justify-center gap-2 sm:gap-4 rounded-full px-2 md:px-4 py-2 w-32 sm:w-40">
                           <p
@@ -807,20 +782,8 @@ export default function Layout({
                           >
                             Login
                           </p>
-
-                          {/* <p
-
-              className="inline-flex  justify-center    mb-0 text-sm font-semibold text-gray-900 cursor-pointer" onClick={openModal2}
-            >
-              Signup
-            </p> */}
                         </div>
-                        {/* <Link
-            to="/login"
-            className="inline-flex w-20 lg:w-24 justify-center gap-x-1.5 rounded-[19px] bg-[#EDEDED] px-4 py-2 mb-0 text-sm font-semibold text-gray-900"
-          >
-            Log in
-          </Link> */}
+                      
                       </>
                     )}
                   </div>
@@ -879,64 +842,69 @@ export default function Layout({
 
         </header >
 
-
-        <div
-          className={`fixed top-0 right-0 z-50 h-screen w-64 bg-white shadow-lg transform transition-transform duration-300 ${isOpen3 ? "translate-x-0" : "translate-x-full"
-            }`}
-        >
-          {/* Sidebar Header */}
-          <div className="flex justify-between items-center px-6 py-4 border-b">
-            <h2 className="text-lg font-semibold">
-              <Link
-                href="/"
-                onClick={() => {
-                  window.scrollTo({ top: 0, behavior: "smooth" });
-                }}
-                aria-label="Groove Guide Home"
-              >
-                <img
-                  className="h-10 object-contain"
-                  src="/assets/img/v2/logo.svg"
-                  alt="logo sidebar"
-                />
-              </Link>
-            </h2>
-            <IoMdClose
-              className="text-2xl cursor-pointer"
-              onClick={() => setIsOpen3(false)}
-            />
-          </div>
-
-          {/* Sidebar Content */}
-          <div>
-            <div className="flex flex-col gap-3 px-6 py-4 items-start w-full ">
-              {[...filteredMenu,
-              ].map((item, i) => (
-                <Fragment
-                  key={`menu_${i}`}
+        {isOpen3 ? <>
+          <div
+            className={`fixed top-0 right-0 z-50 h-screen w-64 bg-white shadow-lg transform transition-transform duration-300 ${isOpen3 ? "translate-x-0" : "translate-x-full"
+              }`}
+          >
+            {/* Sidebar Header */}
+            <div className="flex justify-between items-center px-6 py-4 border-b">
+              <h2 className="text-lg font-semibold">
+                <Link
+                  href="/"
+                  onClick={() => {
+                    window.scrollTo({ top: 0, behavior: "smooth" });
+                  }}
+                  aria-label="Groove Guide Home"
                 >
+                  <Image
+                    height={40}
+                    width={153}
+                    className="h-10 object-contain"
+                    src="/assets/img/v2/logo.svg"
+                    alt="logo sidebar"
+                  />
+                </Link>
+              </h2>
+              <IoMdClose
+                className="text-2xl cursor-pointer"
+                onClick={() => setIsOpen3(false)}
+              />
+            </div>
 
-                  <LinkHtml
-                    onClick={() => setIsOpen3(false)}
-
-                    target={item.url ? "_new" : ""}
-                    to={item.href}
-                    href={item.url}
-                    className={classNames(
-                      item.current
-                        ? " text-gray-700 font-semibold"
-                        : "text-gray-700 font-normal",
-                      "block  py-1  text-[16px]  font-normal"
-                    )}
+            {/* Sidebar Content */}
+            <div>
+              <div className="flex flex-col gap-3 px-6 py-4 items-start w-full ">
+                {[...filteredMenu,
+                ].map((item, i) => (
+                  <Fragment
+                    key={`menu_${i}`}
                   >
-                    {item.name}
-                  </LinkHtml>
-                </Fragment>
 
-              ))}
+                    <LinkHtml
+                      onClick={() => setIsOpen3(false)}
+
+                      target={item.url ? "_new" : ""}
+                      to={item.href}
+                      href={item.url}
+                      className={classNames(
+                        item.current
+                          ? " text-gray-700 font-semibold"
+                          : "text-gray-700 font-normal",
+                        "block  py-1  text-[16px]  font-normal"
+                      )}
+                    >
+                      {item.name}
+                    </LinkHtml>
+                  </Fragment>
+
+                ))}
+              </div>
             </div>
           </div>
-        </div>
+        </> : <></>}
+
+
 
 
         <main className="pageContent bg-white">
@@ -956,7 +924,9 @@ export default function Layout({
                     }}
                     aria-label="Groove Guide Home"
                   >
-                    <img
+                    <Image
+                      height={40}
+                      width={153}
                       className="h-10 lg:h-16 2xl:h-22  object-contain"
                       src="/assets/img/v2/logo.svg"
                       alt="logo footer"
@@ -1217,9 +1187,6 @@ export default function Layout({
             <div className="flex gap-4 w-full ">
               <div className=" relative hidden sm:block  lg:w-[600px]">
                 <Image height={420} width={320} src="/assets/img/sides.png" alt="login_modal" className="w-full h-full lg:object-contain" />
-                {/* <div className="absolute top-8 left-1/2 -translate-x-1/2">
-                            <img src="/assets/img/logo.png" className="mx-auto h-28" />
-                          </div> */}
               </div>
 
 
@@ -1231,27 +1198,12 @@ export default function Layout({
 
                 <div className="py-4 flex-col flex gap-3 xl:gap-4 w-[100%] lg:w-[90%] mx-auto">
                   {loginTab == 'email' ? <>
-                    {/* <div className="absolute right-2 top-2 cursor-pointer hover:bg-[#540C0F] hover:text-white rounded-full hover:shadow-lg p-1">
-                                <MdOutlineClose onClick={() => setLoginTab('')} />
-
-
-                              </div> */}
                   </> : <>
                     {!isForgot ? <>
                       <GoogleLogin result={() => closeModal()} />
-                      {/* <AppleLogin isSignup={false} /> */}
-
-                      {/* <div className="relative flex py-4 items-center">
-                          <div className="flex-grow border-t border-gray-300"></div>
-                          <span className="mx-4 text-xs text-gray-600 text-center uppercase whitespace-nowrap">Or</span>
-                          <div className="flex-grow border-t border-gray-300"></div>
-                        </div> */}
                     </> : <></>}
 
                   </>}
-
-
-
 
                   <form onSubmit={e => { e.preventDefault(); onLogin() }}>
 
@@ -1316,7 +1268,6 @@ export default function Layout({
 
                     </div>
                   </form>
-
                 </div>
 
                 <div>
@@ -1339,7 +1290,10 @@ export default function Layout({
           body={<>
             <div className="relative transform relative rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
               <div className="mt-2">
-                <img src="/assets/img/logo.png" alt="logo signup" className="mx-auto h-20" />
+                <Image
+                  height={80}
+                  width={80}
+                  src="/assets/img/logo.png" alt="logo signup" className="mx-auto h-20" />
                 <div className="text-center mt-2 text-[#540C0F]">Explore. Reflect. Connect.</div>
               </div>
               <div className="mt-4">
@@ -1481,7 +1435,7 @@ export default function Layout({
 
               {notificationDetail?.category_type?.length && (
                 <div className="flex items-center gap-2 flex-wrap mt-2 flex-grow">
-                  {notificationDetail?.category_type.map((tag: any,i:any) => {
+                  {notificationDetail?.category_type.map((tag: any, i: any) => {
                     return (
                       <span key={i} className="bg-primary px-2 py-1 rounded-full text-xs text-white">
                         {tag}
@@ -1493,7 +1447,7 @@ export default function Layout({
               )}
               {notificationDetail?.tags?.length && (
                 <div className="flex items-center gap-2 flex-wrap mt-2 flex-grow">
-                  {notificationDetail?.tags.map((tag: any,i:any) => {
+                  {notificationDetail?.tags.map((tag: any, i: any) => {
                     return (
                       <span key={i} className="bg-primary px-2 py-1 rounded-full text-xs text-white">
                         {tag}
