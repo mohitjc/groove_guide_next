@@ -131,7 +131,6 @@ export default function Layout({
     {
       name: "Join Club",
       url: `${envirnment.joinUrl}?q=${user?.id || user?._id || ''}`,
-      // href: `${localStorage.getItem('token') ? '/membership' : '/membership?noLogin=true'}`,
       isAuth: true,
     },
     { name: "My Experiences", href: "/myjournal", current: false, isAuth: true },
@@ -247,8 +246,7 @@ export default function Layout({
 
       socketModel.on("notify-message", (data: any) => {
         const count = data.data.unread_count;
-        localStorage.setItem("unreadMessages", count);
-        setUnreadMessagesCount(data.data.unread_count);
+        setUnreadMessagesCount(count);
       });
       sessionStorage.setItem("notify-message", "true");
     }

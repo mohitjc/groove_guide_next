@@ -603,7 +603,6 @@ const router=useRouter()
       list: extra.list,
       total: extra.total,
     })
-    localStorage.setItem("catId", catId)
     replaceUrl({ url: `/${module1}/${id}` })
     // history(`/product-detail/${id}`)
   }
@@ -928,7 +927,6 @@ const router=useRouter()
 
           result={e => {
             replaceUrl({ url: `/${module1}` })
-            localStorage.removeItem('catId')
             setProductModal('')
           }}
         />

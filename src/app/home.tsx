@@ -41,9 +41,6 @@ export default function HomeComponent() {
         : hasOnboarding
           ? "/"
           : "/getstarted";
-
-    localStorage.setItem("token", data.access_token);
-    // createCustomerId(data?.access_token)
     dispatch(login(data));
 
     const isCancel = query?.get('isCancel') || query?.get('cancelKey')
@@ -62,10 +59,6 @@ export default function HomeComponent() {
     } else {
       history(url);
     }
-
-    setTimeout(() => {
-      document.getElementById('cartBtn')?.click()
-    }, 200);
   };
 
   useEffect(() => {

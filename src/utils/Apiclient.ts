@@ -4,15 +4,9 @@ import { useState } from "react";
 import { useSelector } from "react-redux";
 import { loaderHtml } from "./shared";
 import envirnment from "@/envirnment";
+import { setAuthorizationToken } from "./api.utils";
 
-// Authorization header setup
-const setAuthorizationToken = (axiosInstance: any, token?: string) => {
-  if (token) {
-    axiosInstance.defaults.headers.common.Authorization = `Bearer ${token}`;
-  } else {
-    delete axiosInstance.defaults.headers.common.Authorization;
-  }
-};
+
 
 // Types
 type HttpMethod = "get" | "post" | "put" | "delete";

@@ -53,7 +53,6 @@ const {get,put,post}=ApiClientB()
         url = `/verify/details?id=${data?._id}&productId=${query}`
       }
 
-    localStorage.setItem("token", data.access_token);
     dispatch(login_success(data));
     if(isSurvey){
       // history(`/cancellation-survey?id=${data.id||data._id}`);
@@ -89,7 +88,6 @@ const {get,put,post}=ApiClientB()
         post(`user/google/signup/login`, payload).then((res:any) => {
           loaderHtml(false);
           if (res.success) {
-            localStorage.setItem("token", res.data?.access_token);
             setLogin(res.data);
           }
         });
