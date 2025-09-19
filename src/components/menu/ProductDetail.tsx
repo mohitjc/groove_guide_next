@@ -656,7 +656,6 @@ export default function ProductDetail({ id, isModal = false, dietary = {} }: Pro
                           const tag = item?.tag_detail;
                           if (tag)
                             return (
-                              <>
                                 <div className="flex flex-col items-center justify-end slidetop" key={i}>
                                   <div>
                                     <ImageHtml
@@ -729,7 +728,6 @@ export default function ProductDetail({ id, isModal = false, dietary = {} }: Pro
                                     </div>
                                   </div>
                                 </div>
-                              </>
                             );
                         })}
                       </div>

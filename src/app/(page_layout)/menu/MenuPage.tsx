@@ -888,36 +888,42 @@ const router=useRouter()
           title="Product Detail"
           className="!max-w-full"
           body={<>
+            <div className="">
+              {productSlide?.total ? <>
+                <div className="flex gap-3">
+                  {productSlide.current > 0 ? <>
+                    <button className="hidden md:block" onClick={prev}>
+                      <Image
+                        height={20}
+                        width={20}
+                        alt="left_arrow"
+                        src="/assets/img/arrow-left.png" className="h-[20px] w-full lg:h-[50px]" />
+                    </button>
+                  </> : <></>}
 
-            {productSlide?.total ? <>
-              <div className="flex gap-3">
-                {productSlide.current > 0 ? <>
-                  <button className="hidden md:block" onClick={prev}>
-                    <Image
-                    height={20}
-                    width={20}
-                    alt="left_arrow"
-                    src="/assets/img/arrow-left.png" className="h-[20px] w-full lg:h-[50px]" />
-                  </button>
-                </> : <></>}
+                  <div className="w-full overflow-auto max-h-[calc(100vh-100px)]">
+                    <ProductDetail id={productModal} dietary={dietaryKeys} />
+                  </div>
 
-                <div className="w-full">
-                  <ProductDetail id={productModal} dietary={dietaryKeys} />
+                  {productSlide.current < productSlide.total - 1 ? <>
+                    <button className="hidden md:block" onClick={next}>
+                      <Image
+                        height={20}
+                        width={20}
+                        alt="right_arrow"
+                        src="/assets/img/arrow-right.png" className="h-[20px] w-full lg:h-[50px]" />
+                    </button>
+                  </> : <></>}
+                </div>
+              </> : <>
+                <div className="overflow-auto max-h-[calc(100vh-100px)]">
+                  <ProductDetail id={productModal} />
                 </div>
 
-                {productSlide.current < productSlide.total - 1 ? <>
-                  <button className="hidden md:block" onClick={next}>
-                    <Image
-                    height={20}
-                    width={20}
-                    alt="right_arrow"
-                    src="/assets/img/arrow-right.png" className="h-[20px] w-full lg:h-[50px]" />
-                  </button>
-                </> : <></>}
-              </div>
-            </> : <>
-              <ProductDetail id={productModal} />
-            </>}
+              </>}
+            </div>
+
+           
           </>}
 
           result={e => {
