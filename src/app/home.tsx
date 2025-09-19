@@ -129,13 +129,28 @@ export default function HomeComponent() {
           <div className="flex flex-col gap-4">
             <div className="grid grid-cols-2 gap-4 items-center">
               <div>
-                <img src="/assets/img/v2/home/1.png" alt="People working" className="rounded-xl w-full h-auto object-content mb-4" />
-                <img src="/assets/img/v2/home/2.png" alt="Mushrooms and capsules" className="rounded-xl w-full h-auto object-content mb-4" />
+                <Image
+                  height={500}
+                  width={280}
+                  src="/assets/img/v2/home/1.png" alt="People working" className="rounded-xl w-full h-auto object-content mb-4" />
+                <Image
+                  height={500}
+                  width={280}
+                  src="/assets/img/v2/home/2.png" alt="Mushrooms and capsules" className="rounded-xl w-full h-auto object-content mb-4" />
               </div>
               <div>
-                <img src="/assets/img/v2/home/3.png" alt="People working" className="rounded-xl w-full h-auto object-content mb-4" />
-                <img src="/assets/img/v2/home/4.png" alt="Mushrooms and capsules" className="rounded-xl w-full h-auto object-content mb-4" />
-                <img src="/assets/img/v2/home/5.png" alt="Dog and person" className="rounded-xl w-full h-auto object-content " />
+                <Image
+                  height={160}
+                  width={280}
+                  src="/assets/img/v2/home/3.png" alt="People working" className="rounded-xl w-full h-auto object-content mb-4" />
+                <Image
+                  height={500}
+                  width={280}
+                  src="/assets/img/v2/home/4.png" alt="Mushrooms and capsules" className="rounded-xl w-full h-auto object-content mb-4" />
+                <Image
+                  height={400}
+                  width={280}
+                  src="/assets/img/v2/home/5.png" alt="Dog and person" className="rounded-xl w-full h-auto object-content " />
               </div>
             </div>
           </div>
@@ -163,13 +178,28 @@ export default function HomeComponent() {
           <div className="flex flex-col gap-4">
             <div className="grid grid-cols-2 gap-4 items-center">
               <div className="mt-4">
-                <img src="/assets/img/v2/home/6.png" alt="People working" className="rounded-xl w-full h-auto object-content mb-4" />
-                <img src="/assets/img/v2/home/7.png" alt="Mushrooms and capsules" className="rounded-xl w-full h-auto object-content mb-4" />
-                <img src="/assets/img/v2/home/8.png" alt="People working" className="rounded-xl w-full object-cover h-auto object-content " />
+                <Image
+                  height={260}
+                  width={280}
+                  src="/assets/img/v2/home/6.png" alt="People working" className="rounded-xl w-full h-auto object-content mb-4" />
+                <Image
+                  height={500}
+                  width={280}
+                  src="/assets/img/v2/home/7.png" alt="Mushrooms and capsules" className="rounded-xl w-full h-auto object-content mb-4" />
+                <Image
+                  height={260}
+                  width={280}
+                  src="/assets/img/v2/home/8.png" alt="People working" className="rounded-xl w-full object-cover h-auto object-content " />
               </div>
               <div className="mt-5">
-                <img src="/assets/img/v2/home/9.png" alt="Mushrooms and capsules" className="rounded-xlw-full h-auto object-content mb-4" />
-                <img src="/assets/img/v2/home/10.png" alt="Dog and person" className="rounded-xl w-full h-auto object-content" />
+                <Image
+                  height={500}
+                  width={280}
+                  src="/assets/img/v2/home/9.png" alt="Mushrooms and capsules" className="rounded-xlw-full h-auto object-content mb-4" />
+                <Image
+                  height={260}
+                  width={280}
+                  src="/assets/img/v2/home/10.png" alt="Dog and person" className="rounded-xl w-full h-auto object-content" />
               </div>
             </div>
           </div>
@@ -183,22 +213,52 @@ export default function HomeComponent() {
           <div className="col-span-12 flex flex-col gap-4 px-4 md:px-8">
             <div className="flex max-w-lg mx-auto gap-4 h-auto items-center">
               <div>
-                <img src="/assets/img/v2/home/1.png" alt="People working" className="rounded-xl w-[200px] h-auto object-contain mb-4" />
-                <img src="/assets/img/v2/home/2.png" alt="Mushrooms and capsules" className="rounded-xl w-[200px] h-auto object-contain mb-4" />
+                <Image
+                  height={149}
+                  width={83}
+                  src="/assets/img/v2/home/1.png" alt="People working" className="rounded-xl w-[200px] h-auto object-contain mb-4" />
+                <Image
+                  height={149}
+                  width={83}
+                  src="/assets/img/v2/home/2.png" alt="Mushrooms and capsules" className="rounded-xl w-[200px] h-auto object-contain mb-4" />
               </div>
               <div>
-                <img src="/assets/img/v2/home/3.png" alt="People working" className="rounded-xl w-[200px] object-cover h-auto object-contain mb-4" />
-                <img src="/assets/img/v2/home/4.png" alt="Mushrooms and capsules" className="rounded-xl w-[200px] h-auto object-contain mb-4" />
-                <img src="/assets/img/v2/home/5.png" alt="Dog and person" className="rounded-xl w-[200px] h-auto object-contain " />
+                <Image
+                  height={47}
+                  width={83}
+                  src="/assets/img/v2/home/3.png" alt="People working" className="rounded-xl w-[200px] object-cover h-auto object-contain mb-4" />
+                <Image
+                  height={149}
+                  width={83}
+                  src="/assets/img/v2/home/4.png" alt="Mushrooms and capsules" className="rounded-xl w-[200px] h-auto object-contain mb-4" />
+                <Image
+                  height={47}
+                  width={83}
+                  src="/assets/img/v2/home/5.png" alt="Dog and person" className="rounded-xl w-[200px] h-auto object-contain " />
               </div>
               <div>
-                <img src="/assets/img/v2/home/6.png" alt="People working" className="rounded-xl w-[200px] object-cover h-auto object-contain mb-4" />
-                <img src="/assets/img/v2/home/7.png" alt="Mushrooms and capsules" className="rounded-xl w-[200px] h-auto object-contain mb-4" />
-                <img src="/assets/img/v2/home/8.png" alt="People working" className="rounded-xl w-[200px] object-cover h-auto object-contain " />
+                <Image
+                  height={77}
+                  width={83}
+                  src="/assets/img/v2/home/6.png" alt="People working" className="rounded-xl w-[200px] object-cover h-auto object-contain mb-4" />
+                <Image
+                  height={149}
+                  width={83}
+                  src="/assets/img/v2/home/7.png" alt="Mushrooms and capsules" className="rounded-xl w-[200px] h-auto object-contain mb-4" />
+                <Image
+                  height={77}
+                  width={83}
+                  src="/assets/img/v2/home/8.png" alt="People working" className="rounded-xl w-[200px] object-cover h-auto object-contain " />
               </div>
               <div>
-                <img src="/assets/img/v2/home/9.png" alt="People working" className="rounded-xl w-[200px] h-auto object-contain mb-4" />
-                <img src="/assets/img/v2/home/10.png" alt="Mushrooms and capsules" className="rounded-xl w-[200px] h-auto object-contain mb-4" />
+                <Image
+                  height={149}
+                  width={83}
+                  src="/assets/img/v2/home/9.png" alt="People working" className="rounded-xl w-[200px] h-auto object-contain mb-4" />
+                <Image
+                  height={149}
+                  width={83}
+                  src="/assets/img/v2/home/10.png" alt="Mushrooms and capsules" className="rounded-xl w-[200px] h-auto object-contain mb-4" />
               </div>
             </div>
           </div>
@@ -219,12 +279,8 @@ export default function HomeComponent() {
               </button>
             </div>
           </div>
-
-
         </div>
       </div>
-
-
     </section>
 
 
@@ -234,21 +290,36 @@ export default function HomeComponent() {
         <h3 className="text-2xl  md:text-3xl max-w-md mx-auto font-bold text-black text-center text-center mb-6 lg:mb-0 lg:text-left shrink-0 pr-4 xl:pr-10">Explore our extensive ecosystem of brands.</h3>
         <div className="flex items-center justify-center lg:justify-between gap-6 flex-wrap  mx-auto lg:w-full">
           <div className="flex flex-col items-center">
-            <img src="/assets/img/v2/icons/1.png" onClick={() => window.scrollTo({ top: 0 })} alt="Groove Guide" className="lg:h-14 hover:scale-110 transition-transform duration-200 drop-shadow-md cursor-pointer xl:h-18  " />
+            <Image
+              height={72}
+              width={115}
+              src="/assets/img/v2/icons/1.png" onClick={() => window.scrollTo({ top: 0 })} alt="Groove Guide" className="lg:h-14 hover:scale-110 transition-transform duration-200 drop-shadow-md cursor-pointer xl:h-18  " />
 
           </div>
           <div className="flex flex-col items-center">
-            <img src="/assets/img/v2/icons/2.png" onClick={() => window.open('https://theshroomgroove.com/')} alt="Shroom Groove" className="lg:h-14 hover:scale-110 transition-transform duration-200 drop-shadow-md cursor-pointer xl:h-18 " />
+            <Image
+              height={72}
+              width={103}
+              src="/assets/img/v2/icons/2.png" onClick={() => window.open('https://theshroomgroove.com/')} alt="Shroom Groove" className="lg:h-14 hover:scale-110 transition-transform duration-200 drop-shadow-md cursor-pointer xl:h-18 " />
 
           </div>
           <div className="flex flex-col items-center">
-            <img src="/assets/img/v2/icons/3.svg" alt="Groove Grill" className="lg:h-14  xl:h-16 " />
+            <Image
+              height={64}
+              width={64}
+              src="/assets/img/v2/icons/3.svg" alt="Groove Grill" className="lg:h-14  xl:h-16 " />
           </div>
           <div className="flex flex-col items-center ">
-            <img src="/assets/img/newPhoto.jpeg" alt="Craft Therapy" onClick={() => window.open('https://youtube.com/@crafttherapynetwork?si=YeHPdkOfy-RJtpjs')} className="cursor-pointer hover:scale-110 transition-transform duration-200 drop-shadow-md imageResponsive rounded-full " />
+            <Image
+              height={64}
+              width={64}
+              src="/assets/img/newPhoto.jpeg" alt="Craft Therapy" onClick={() => window.open('https://youtube.com/@crafttherapynetwork?si=YeHPdkOfy-RJtpjs')} className="cursor-pointer hover:scale-110 transition-transform duration-200 drop-shadow-md imageResponsive rounded-full " />
           </div>
           <div className="flex flex-col items-center">
-            <img src="/assets/img/v2/icons/5.svg" alt="Craft Club" onClick={() => window.open('https://joincraftclub.com/')} className="lg:h-14 hover:scale-110 transition-transform duration-200 drop-shadow-md cursor-pointer xl:h-16 " />
+            <Image
+              height={64}
+              width={64}
+              src="/assets/img/v2/icons/5.svg" alt="Craft Club" onClick={() => window.open('https://joincraftclub.com/')} className="lg:h-14 hover:scale-110 transition-transform duration-200 drop-shadow-md cursor-pointer xl:h-16 " />
           </div>
         </div>
       </div>
@@ -259,8 +330,8 @@ export default function HomeComponent() {
       <div className="hidden md:flex desktopview relative  items-center justify-center h-[600px] bg-gray-100 p-6 ">
         <div className="absolute inset-0">
           <Image
-          height={600}
-          width={1400}
+            height={600}
+            width={1400}
             src="/assets/img/v2/bg1.png"
             alt="Shrooms"
             className="w-full h-full object-cover"
@@ -308,16 +379,16 @@ export default function HomeComponent() {
 
         </div>
         <Image
-        height={415}
-        width={900}
+          height={415}
+          width={900}
           src="/assets/img/v2/remove1.png"
           alt="Shrooms"
           className="w-full h-full object-cover"
         />
 
         <Image
-        height={415}
-        width={900}
+          height={415}
+          width={900}
           src="/assets/img/v2/line.png"
           alt="Shrooms"
           className="w-full h-full object-cover"
@@ -370,8 +441,8 @@ export default function HomeComponent() {
 
         </div>
         <Image
-        height={415}
-        width={900}
+          height={415}
+          width={900}
           src="/assets/img/v2/remove2.png"
           alt="Shrooms"
           className="w-full h-full object-cover"
@@ -388,8 +459,8 @@ export default function HomeComponent() {
         {/* Background Image */}
         <div className="absolute inset-0">
           <Image
-          height={650}
-        width={1400}
+            height={650}
+            width={1400}
             src="/assets/img/v2/bg3.png"
             alt="Shrooms"
             className="w-full h-full object-cover object-left"
@@ -427,8 +498,8 @@ export default function HomeComponent() {
 
       <div className="mobileview relative block md:hidden bg-[#EEEAE7] pb-8 ">
         <Image
-        height={415}
-        width={900}
+          height={415}
+          width={900}
           src="/assets/img/v2/remove3.png"
           alt="Shrooms"
           className="w-full h-full object-cover"
@@ -479,8 +550,8 @@ export default function HomeComponent() {
         {/* Right Image */}
         <div className="md:w-1/2 flex justify-end mt-6 md:mt-0">
           <Image
-          height={460}
-          width={670}
+            height={460}
+            width={670}
             src="/assets/img/v2/bg4.png"
             alt="Shrooms"
             className="w-full h-auto max-w-2xl"
@@ -499,10 +570,10 @@ export default function HomeComponent() {
           {/* Left images */}
           <div className="col-span-12 lg:col-span-4  xl:col-span-3 hidden lg:flex flex-col gap-4 ">
             <div className="">
-              <Image 
-              height={300}
-              width={370}
-              src="/assets/img/v2/bg6.png" alt="People working" className="rounded-xl w-full md:h-[300px] lg:h-[220px] xl:h-[240px] 2xl:h-[300px] object-contain lg:object-cover mb-4" />
+              <Image
+                height={300}
+                width={370}
+                src="/assets/img/v2/bg6.png" alt="People working" className="rounded-xl w-full md:h-[300px] lg:h-[220px] xl:h-[240px] 2xl:h-[300px] object-contain lg:object-cover mb-4" />
             </div>
           </div>
 
@@ -529,9 +600,9 @@ export default function HomeComponent() {
           <div className="col-span-12 lg:col-span-4 xl:col-span-3 flex flex-col gap-4 ">
             <div className="">
               <Image
-              height={300}
-              width={370}
-              src="/assets/img/v2/bg5.png" alt="People working" className="rounded-xl w-full md:h-[300px] lg:h-[220px] xl:h-[240px] 2xl:h-[300px] object-contain lg:object-cover mb-4" />
+                height={300}
+                width={370}
+                src="/assets/img/v2/bg5.png" alt="People working" className="rounded-xl w-full md:h-[300px] lg:h-[220px] xl:h-[240px] 2xl:h-[300px] object-contain lg:object-cover mb-4" />
             </div>
           </div>
         </div>
@@ -576,9 +647,9 @@ export default function HomeComponent() {
 
         <div className="flex flex-col lg:flex-row gap-5">
           <Image
-          height={120}
-          width={120}
-          src="/assets/img/v2/email2.svg" alt="email icon" className="h-20 2xl:h-25 2xl:h-24 2xl:h-30" />
+            height={120}
+            width={120}
+            src="/assets/img/v2/email2.svg" alt="email icon" className="h-20 2xl:h-25 2xl:h-24 2xl:h-30" />
           <div>
             <h2 className="text-[30px] lg:text-[24px] 2xl:text-[34px] lg:max-w-[280px]  2xl:max-w-[420px] !leading-[35px] 2xl:!leading-[45px] text-center font-bold text-[#061522] tracking-[-2px]">
               Stay Updated with the Latest Insights
