@@ -290,6 +290,7 @@ const FilterSection = ({
                       className="h-3 w-3 cursor-pointer custom-input "
                       checked={filters?.primaryUse?.includes(item.id) ? true : false}
                       style={{ accentColor: "#540C0F" }}
+                      onChange={()=>{}}
                     />
                     {item.name}
                   </li>

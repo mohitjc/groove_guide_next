@@ -6,6 +6,7 @@ import ApiClientB from "@/utils/Apiclient";
 import { scrollId } from "@/utils/shared";
 import SingleProduct from "./SingleProduct";
 import Link from "next/link";
+import Image from "next/image";
 function ProductsList({ title, products = [], isBox = false, setBoxes = () => { }, boxExclusive = false, link, onSuccess, seeMore = false, viewProduct, category_detail = null, categoryId = '', pfilter = {}, isSlider = false, productCount = 3 }: any) {
   const user = useSelector((state: any) => state.user)
   const {get,post,isLoading:apiLoading}=ApiClientB()
@@ -169,11 +170,13 @@ function ProductsList({ title, products = [], isBox = false, setBoxes = () => { 
 
           {total == 0 && (
             <div className="text-center">
-              <img
-                src="/assets/img/noproducts.png"
-                alt=""
-                className="h-16 mx-auto"
-              />
+                <Image
+                  height={64}
+                  width={64}
+                  src="/assets/img/noproducts.png"
+                  alt="no_data"
+                  className="h-16 mx-auto"
+                />
               <p className="text-gray-400 text-[18px] font-regular">
                 No products.
               </p>

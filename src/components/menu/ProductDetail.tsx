@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, Fragment } from "react";
 import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import { Tab } from "@headlessui/react";
@@ -14,6 +14,7 @@ import { useRouter } from "next/navigation";
 import { loaderHtml, noImg } from "@/utils/shared";
 import Product from "./Product";
 import SlickSlider from "../SlickSlider";
+import Image from "next/image";
 
 const dietaryList = ["glutenFree", 'nutFree', 'dairyFree', 'vegan']
 
@@ -46,15 +47,6 @@ const ProductLabel = ({ product, pProduct, onImageClick = () => { } }: ProductLa
 
   return <>
     <div className="mt-2 shadow-lg bg-white rounded-xl">
-      {/* <div className="flex justify-between imagesline">
-          <div>
-            <img src="../assets/img/line.png" className="h-16" alt=""/>
-          </div>
-          <div className="rotate-180">
-        
-            <img src="../assets/img/line.png" className="h-16" alt=""/>
-          </div>
-      </div> */}
       <div className="px-4 lg:px-6 py-6">
         <div className="sm:flex gap-4  justify-between mb-2">
           <p className="text-primary font-bold lg:text-md mb-1 lg:mb-0 2xl:text-3xl text-xl">GROOVE<span className="text-black lg:text-md 2xl:text-3xl text-xl uppercase"> {pProduct?.category_detail?.name}</span></p>
@@ -239,64 +231,31 @@ const ProductLabel = ({ product, pProduct, onImageClick = () => { } }: ProductLa
 
         <div className="flex gap-2 lg:gap-6 flex-wrap mt-4">
           {product?.vegan ? <>
-            <img src="/assets/img/vegan.png" className="h-12 md:h-16 " title="Vegan" alt="vegan" />
+            <Image
+              height={64}
+              width={46}
+              src="/assets/img/vegan.png" className="h-12 md:h-16 " title="Vegan" alt="vegan" />
           </> : <></>}
           {product?.dairyFree ? <>
-            <img src="/assets/img/dairyfree.png" className="h-16  md:h-20" title="Dairy Free" alt="dairyfree" />
+            <Image
+              height={80}
+              width={44}
+              src="/assets/img/dairyfree.png" className="h-16  md:h-20" title="Dairy Free" alt="dairyfree" />
           </> : <></>}
           {product?.glutenFree ? <>
-            <img src="/assets/img/glutenfree.png" className="h-16  md:h-20" title="Gluten Free" alt="glutenfree" />
+            <Image
+              height={80}
+              width={52}
+              src="/assets/img/glutenfree.png" className="h-16  md:h-20" title="Gluten Free" alt="glutenfree" />
           </> : <></>}
           {product?.nutFree ? <>
-            <img src="/assets/img/nutfree.png" className="h-16  md:h-20" title="Peanut Free" alt="peanutfree" />
+            <Image
+              height={80}
+              width={45}
+              src="/assets/img/nutfree.png" className="h-16  md:h-20" title="Peanut Free" alt="peanutfree" />
           </> : <></>}
-
         </div>
-
-
-
-
-        <div className="md:flex hidden  gap-4 mt-1 justify-end">
-          {/* <div className="barcode mt-2 w-full">
-            <div className="flex items-end gap-2">
-              <img src="../assets/img/barcode.png" alt="" className="lg:h-12 h-28 w-full  object-cover" />
-              <p className="font-bold text-xl">{pipeModel.currency(product?.price)}</p>
-            </div>
-            <div className="text-center">
-              <p className="font-bold lg:text-md text-xl">123456789452465</p>
-              <p className="text-normal italic lg:text-sm text-md">Find your groove with natural mushroom therapy</p>
-            </div>
-          </div> */}
-
-          {/* <div className="barcode shrink-0 text-right">
-            <div className="">
-              <p className="text-primary lg:text-lg text-xl">Explore. Reflect. Connect. </p>
-            </div>
-            <div className="flex  justify-end gap-2">
-                <div className="text-right">
-                  <p className="lg:text-md text-lg text-primary font-medium">Scan for your </p>
-                  <p className="lg:text-lg text-xl text-primary font-bold">GROOVE GUIDE:</p>
-                </div>
-                <img src={methodModel.noImg(product?.qr_image)} alt="" className="lg:h-24 h-40  object-contain" />
-            </div>
-          
-            
-          </div> */}
-
-
-
-        </div>
-
       </div>
-      {/* <div className="flex justify-between imagesline">
-          <div>
-            <img src="../assets/img/line.png" className="h-16" alt=""/>
-          </div>
-          <div className="rotate-180">
-        
-            <img src="../assets/img/line.png" className="h-16" alt=""/>
-          </div>
-      </div> */}
     </div>
   </>
 }
@@ -518,7 +477,6 @@ export default function ProductDetail({ id, isModal = false, dietary = {} }: Pro
   }
 
   const shareExp = () => {
-    // history(`/myjournal?product=${id}`)
     document.getElementById('myProTab')?.click()
   }
 
@@ -536,7 +494,6 @@ export default function ProductDetail({ id, isModal = false, dietary = {} }: Pro
     }
 
     setSpeachStart(true);
-    // voiceBtn?.classList.add("glowing")
     const recognition = speechModel.recognition;
     recognition.lang = "en-US";
     recognition.interimResults = false;
@@ -637,8 +594,6 @@ export default function ProductDetail({ id, isModal = false, dietary = {} }: Pro
       <ProductLabel product={selectedVariant} pProduct={product} onImageClick={handleImageClick} />
     </> : <></>}
 
-
-
     <div className="pt-[20px] md:pt-[40px] lg:pt-[50px] xl:pt-[60px]  px-2 lg:px-10">
       <div className="">
         <div className="tabs_styles">
@@ -682,9 +637,11 @@ export default function ProductDetail({ id, isModal = false, dietary = {} }: Pro
                     {productReviews?.length == 0 && (
                       <div className="text-center h-[300px] flex items-center justify-center">
                         <div className="flex flex-col gap-6">
-                          <img
+                          <Image
+                            height={144}
+                            width={144}
                             src="/assets/img/noproducts.png"
-                            alt=""
+                            alt="No Experiences"
                             className="h-36 mx-auto"
                           />
                           <p className="text-gray-400 text-[18px] font-regular">
@@ -695,18 +652,13 @@ export default function ProductDetail({ id, isModal = false, dietary = {} }: Pro
                     )}
                     {productReviews && productReviews?.length > 0 && (
                       <div className="flex justify-start gap-4 h-[450px] md:h-[500px]">
-                        {productReviews?.map((item) => {
+                        {productReviews?.map((item,i:any) => {
                           const tag = item?.tag_detail;
-                          // if(!item.tag_detail&&item.other)tag={name:'Other'}
                           if (tag)
                             return (
                               <>
-                                <div className="flex flex-col items-center justify-end slidetop">
+                                <div className="flex flex-col items-center justify-end slidetop" key={i}>
                                   <div>
-
-
-
-
                                     <ImageHtml
                                       height={48}
                                       width={48}
@@ -725,14 +677,7 @@ export default function ProductDetail({ id, isModal = false, dietary = {} }: Pro
                                     className={`bg-[${tag.color || "#00cbca"
                                       }] w-[70px]  h-full flex items-end justify-center relative`}
                                   >
-
-                                    {/* <div className=" flex items-center justify-center bg-white  w-[50px] h-[50px] rounded-[5px] absolute top-3">
-                                   <p className="text-[10px] md:text-[15px] lg:text-[20px] xl:text-[30px] text-[#ec5a63] text-center font-[600]  leading-[0px]">
-                                      {item?.count}
-                                    </p>
-                                   </div> */}
                                     <div className="px-1 h-full py-2">
-
                                       <TooltipHtml title="Total Review">
                                         <div className="bg-white flex  items-center justify-center rounded-[4px]  mb-3 ">
                                           <div className="flex flex-col gap-1 py-1  items-center  ">
@@ -745,15 +690,14 @@ export default function ProductDetail({ id, isModal = false, dietary = {} }: Pro
                                           </div>
                                         </div>
                                       </TooltipHtml>
-
-
-
-
                                       {item.validateTrue ? <>
                                         <TooltipHtml title="Verified">
                                           <div className="bg-white flex  items-center justify-center rounded-[4px]  mb-3 ">
                                             <div className="flex flex-col gap-1 py-1  items-center  ">
-                                              <img
+                                              <Image
+                                                height={20}
+                                                width={20}
+                                                alt="Verified"
                                                 src="/assets/img/veri.png"
                                                 className="w-[20px] h-[20px] mx-auto"
                                               />
@@ -764,16 +708,14 @@ export default function ProductDetail({ id, isModal = false, dietary = {} }: Pro
                                           </div>
                                         </TooltipHtml>
                                       </> : <></>}
-
-
-
-
                                       {item.validateFalse ? <>
-
                                         <TooltipHtml title="Un-verified">
                                           <div className="bg-white flex  items-center justify-center rounded-[4px]  mb-3 ">
                                             <div className="flex flex-col gap-1 py-1  items-center  ">
-                                              <img
+                                              <Image
+                                                height={20}
+                                                width={20}
+                                                alt="Unverified"
                                                 src="/assets/img/inveri.png"
                                                 className="w-[20px] h-[20px] mx-auto"
                                               />
@@ -783,12 +725,7 @@ export default function ProductDetail({ id, isModal = false, dietary = {} }: Pro
                                             </div>
                                           </div>
                                         </TooltipHtml>
-
-
-
                                       </> : <></>}
-
-
                                     </div>
                                   </div>
                                 </div>
@@ -813,11 +750,12 @@ export default function ProductDetail({ id, isModal = false, dietary = {} }: Pro
                       <div className="imagses_co grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-4">
                         {theraTag.map((itm: any, index) => {
                           return (
-                            <>
+                            <Fragment key={index}>
                               <input
                                 type="checkbox"
                                 id={`coin${index}`}
                                 className="hidden"
+                                onChange={()=>{}}
                                 checked={reviewForm.tags.find(ritm => ritm.id == itm.id) ? true : false}
                               />
                               <label
@@ -834,7 +772,7 @@ export default function ProductDetail({ id, isModal = false, dietary = {} }: Pro
                                 />
                                 {itm.name}
                               </label>
-                            </>
+                            </Fragment>
                           );
                         })}
                       </div>
@@ -845,11 +783,12 @@ export default function ProductDetail({ id, isModal = false, dietary = {} }: Pro
                       <div className="imagses_co grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-4">
                         {fucTag.map((itm: any, index) => {
                           return (
-                            <>
+                            <Fragment key={index}>
                               <input
                                 type="checkbox"
                                 id={`coin${index}`}
                                 className="hidden"
+                                onChange={()=>{}}
                                 checked={reviewForm.tags.find(ritm => ritm.id == itm.id) ? true : false}
                               />
                               <label
@@ -866,7 +805,7 @@ export default function ProductDetail({ id, isModal = false, dietary = {} }: Pro
                                 />
                                 {itm.name}
                               </label>
-                            </>
+                            </Fragment>
                           );
                         })}
                       </div>
@@ -876,6 +815,7 @@ export default function ProductDetail({ id, isModal = false, dietary = {} }: Pro
                         type="checkbox"
                         id={`coin_other`}
                         className="hidden"
+                        onChange={()=>{}}
                         checked={reviewForm.tags.find(ritm => ritm.id == 'other') ? true : false}
                       />
                       <label
@@ -937,13 +877,7 @@ export default function ProductDetail({ id, isModal = false, dietary = {} }: Pro
                           }}
                         />
                       </div>
-
                     </> : <></>}
-
-
-
-
-
 
                     <div className="mt-4">
                       <h5 className="text-[14px] font-regular mb-3">
@@ -962,12 +896,6 @@ export default function ProductDetail({ id, isModal = false, dietary = {} }: Pro
                         placeholder="Write comments....."
                         className="h-36 p-4 w-full rounded-[21px] border-[0.21px] border-black/50 bg-white"
                       ></textarea>
-                      {/* {submitted && !reviewForm.personal_notes && (
-                        <div className="text-danger small mt-1 capitalize">
-                          please write comments.
-                        </div>
-                      )} */}
-
                       <div className="flex justify-end">
                         <button
                           type="button"
@@ -981,32 +909,8 @@ export default function ProductDetail({ id, isModal = false, dietary = {} }: Pro
                         </button>
                       </div>
                     </div>
-
-                    {/* <div>
-                                  <p className="mb-2 text-[16px] font-semibold">
-                                    Public/Private
-                                  </p>
-
-                                  <label className="inline-flex items-center cursor-pointer">
-                                    <input
-                                      type="checkbox"
-                                      value=""
-                                      className="sr-only peer"
-                                      checked={reviewForm.privacy}
-                                      onChange={(e) =>
-                                        setReviewForm({
-                                          ...reviewForm,
-                                          privacy: e.target.checked,
-                                        })
-                                      }
-                                    />
-                                    <div className="relative w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-0 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-[#540C0F]"></div>
-                                  </label>
-                                </div> */}
-
                     <div className="flex justify-end mt-6">
                       <button
-                        // disabled={reviewForm.tags?.length == 0}
                         className={`lg:px-8 px-4 py-3 rounded-xl text-white bg-primary `}
                         onClick={handleSubmitReview}
                       >

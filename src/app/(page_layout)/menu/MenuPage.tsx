@@ -893,7 +893,11 @@ const router=useRouter()
               <div className="flex gap-3">
                 {productSlide.current > 0 ? <>
                   <button className="hidden md:block" onClick={prev}>
-                    <img src="/assets/img/arrow-left.png" className="h-[20px] w-full lg:h-[50px]" />
+                    <Image
+                    height={20}
+                    width={20}
+                    alt="left_arrow"
+                    src="/assets/img/arrow-left.png" className="h-[20px] w-full lg:h-[50px]" />
                   </button>
                 </> : <></>}
 
@@ -903,7 +907,11 @@ const router=useRouter()
 
                 {productSlide.current < productSlide.total - 1 ? <>
                   <button className="hidden md:block" onClick={next}>
-                    <img src="/assets/img/arrow-right.png" className="h-[20px] w-full lg:h-[50px]" />
+                    <Image
+                    height={20}
+                    width={20}
+                    alt="right_arrow"
+                    src="/assets/img/arrow-right.png" className="h-[20px] w-full lg:h-[50px]" />
                   </button>
                 </> : <></>}
               </div>

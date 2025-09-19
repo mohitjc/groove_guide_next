@@ -128,35 +128,38 @@ function SingleProduct({
 
           <div className="flex  justify-between">
             {price ? <>
-              <p
+              <div
                 className="flex items-center gap-2 space-x-2  cursor-pointer"
                 onClick={() => view(item?.product_slug)}
               >
-                {/* <span className="text-[10px] sm:text-[12px] lg:text-[14px] font-medium uppercase text-gray-700">
-                {gram}
-                {item.quantity_type || 'g'}
-              </span> */}
                 <div className="font-bold text-[18px] xl:text-[24px] text-[#1C1C1C]">
                   {pipeModel.currency(price)}
                 </div>
-
-                {/* <div className="font-bold text-[18px] xl:text-[24px] text-[#8B96A5] line-through">
-                  {pipeModel.currency(price + 10)}
-
-                </div> */}
-              </p>
+              </div>
             </> : <></>}
 
 
             <div className={`flex flex-wrap items-end justify-end ${(!item.isBox && !item.earlyRelease && !item?.boxExclusive) ? 'h-10 lg:h-9 xl:h-12 2xl:h-14' : ''}`}>
               {item.isBox && (
-                <img src="/assets/img/star.png" className=" object-contain h-10 lg:h-9 xl:h-12 2xl:h-14 isBox" />
+                <Image
+                height={56}
+                width={56}
+                alt="isBox"
+                src="/assets/img/star.png" className="object-contain h-10 lg:h-9 xl:h-12 2xl:h-14 isBox" />
               )}
               {item.earlyRelease && (
-                <img src="/assets/img/early.png" className=" object-contain h-10 lg:h-9 xl:h-12 2xl:h-14 earlyRelease" />
+                <Image
+                  height={56}
+                width={56}
+                alt="earlyRelease"
+                src="/assets/img/early.png" className="object-contain h-10 lg:h-9 xl:h-12 2xl:h-14 earlyRelease" />
               )}
               {item?.boxExclusive && (
-                <img src="/assets/img/BoxExclusive.png" className=" object-contain h-10 lg:h-9 xl:h-12 2xl:h-14 boxExclusive" />
+                <Image
+                  height={56}
+                width={56}
+                alt="boxExclusive"
+                src="/assets/img/BoxExclusive.png" className="object-contain h-10 lg:h-9 xl:h-12 2xl:h-14 boxExclusive" />
               )}
             </div>
 
@@ -205,63 +208,8 @@ function SingleProduct({
               </> : <></>}
             </div>
             <div className="flex flex-col gap-2 xl:gap-2 justify-between">
-
-              {!isBox ? <>
-                <div className="flex gap-1 items-center">
-                  {/* <p
-                    className="text-[#2C2C2C] ml-auto font-semibold hover:underline hover:text-[#540C0F]  text-[10px] md:text-[12px] inline-flex items-center  shrink-0 relative cursor-pointer"
-                    onClick={() => view(item?.product_slug)}
-                  >
-                    View Details
-                    <MdChevronRight className="text-lg mt-1 chevron-animation" />
-                  </p> */}
-                  {/* <SocialShare shareUrl={`${environment.frontUrl}menu/${item?.product_slug}`} /> */}
-                </div>
-              </> : <></>}
             </div>
           </div>
-
-
-
-
-          {/* <div
-              className={`coinsimg flex flex-wrap  gap-3 mt-4 ${
-                item?.product_tags?.length ? "h-auto" : "h-14"
-              }`}
-            >
-            {item?.product_tags ? (
-              <>
-                {item?.product_tags
-                  .slice(0, tagsToDisplay)
-                  .map((titm: any, index: any) => {
-                    return (
-                      <>
-                       <TooltipHtml Id={index} title={titm.description} placement="top" key={index}>
-                        <span className="flex gap-2 items-center">
-                        <ImageHtml
-                            src={methodModel.noImg(titm.image)}
-                            title={titm.name}
-                            className="h-10 w-10   rounded-full object-contain"
-                          />
-                          <span className="text-[10px] 2xl:text-[12px] block break-all ">{titm.name}</span>
-                        </span>
-                       </TooltipHtml>
-                       
-                      </>
-                    );
-                  })}
-               
-              </>
-            ) : (
-              <>
-              </>
-            )}
-          </div> */}
-          {/* <div className="mt-4 flex justify-between">
-          
-              
-              </div> */}
-
         </div>
       </div>
     </>
