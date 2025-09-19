@@ -25,7 +25,6 @@ async function fetchDetail(slug: string) {
   }
 }
 
-// ✅ Dynamic SEO Metadata
 export async function generateMetadata(
   { params }: { params: { slug: string } }
 ): Promise<Metadata> {
