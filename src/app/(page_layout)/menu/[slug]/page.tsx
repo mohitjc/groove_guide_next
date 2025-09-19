@@ -3,6 +3,7 @@ import { APP_DESCRIPTION, APP_NAME, noImg } from "@/utils/shared";
 import axios from "axios";
 import envirnment from "@/envirnment";
 import { cookies } from "next/headers";
+import ProductDetail from "@/components/menu/ProductDetail";
 
 async function fetchDetail(slug: string) {
   try {
@@ -71,7 +72,7 @@ export async function generateMetadata(
 export default function MenuDetail() {
   return (
    <>
-  menu detail
+   <ProductDetail />
    </>
   );
 }

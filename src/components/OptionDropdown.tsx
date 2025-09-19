@@ -21,6 +21,7 @@ interface OptionDropdownProps {
   disabled?: boolean;
   options?: Option[];
   className?: string;
+  menuClassName?:string;
   placeholder?: string;
   value?: string | number;
   displayValue?: string;
@@ -65,6 +66,7 @@ const OptionDropdown: React.FC<OptionDropdownProps> = ({
   disabled = false,
   options = [],
   className = '',
+  menuClassName = '',
   placeholder = 'Select',
   value = '',
   displayValue = 'name',
@@ -201,7 +203,7 @@ const OptionDropdown: React.FC<OptionDropdownProps> = ({
         createPortal(
           <div ref={dropdownRef}>
             <div className="fixed w-full h-full z-[9999] top-0 left-0" onClick={() => setIsOpen(false)}></div>
-            <div style={dropdownStyle} className="rounded-[5px] border-2 mt-2 border-primary shadow">
+            <div style={dropdownStyle} className={`rounded-[5px] border-2 mt-2 border-primary shadow ${menuClassName||''}`}>
               {content ? <>
                 {content}
               </> : <>

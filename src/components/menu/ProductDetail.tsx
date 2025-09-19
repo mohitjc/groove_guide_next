@@ -1,3 +1,5 @@
+'use client'
+
 import React, { useState, useEffect, Fragment } from "react";
 import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
@@ -10,7 +12,7 @@ import TooltipHtml from "../TooltipHtml";
 import FormControl from "../FormControl";
 import SpeachToText from "./SpeachToText";
 import ImageHtml from "../ImageHtml";
-import { useRouter } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import { loaderHtml, noImg } from "@/utils/shared";
 import Product from "./Product";
 import SlickSlider from "../SlickSlider";
@@ -261,13 +263,15 @@ const ProductLabel = ({ product, pProduct, onImageClick = () => { } }: ProductLa
 }
 
 type ProductDetailProps = {
-  id: string;
+  id?: string;
   isModal?: boolean;
   dietary?: any;
 }
 
 export default function ProductDetail({ id, isModal = false, dietary = {} }: ProductDetailProps) {
   const user: any = useSelector((state: RootState) => state.user.data);
+    const {slug}=useParams()
+    const productId=id||slug||''
   const { get, post, put } = ApiClientB()
   const [submitted, setSubmitted] = useState(false);
   const router = useRouter()
@@ -292,7 +296,7 @@ export default function ProductDetail({ id, isModal = false, dietary = {} }: Pro
 
   const getProductDetail = () => {
     loaderHtml(true)
-    get("product/detail", { slug: id, user_id: user?._id }).then(
+    get("product/detail", { slug: productId, user_id: user?._id }).then(
       (res) => {
         loaderHtml(false)
         if (res.success) {
@@ -420,7 +424,7 @@ export default function ProductDetail({ id, isModal = false, dietary = {} }: Pro
     }
   };
 
-  const handleFavClick = (id: string) => {
+  const handleFavClick = (id: any) => {
     post("fav/add-remove", { product_id: id }).then((res) => {
       if (res.success) {
         // toast.success(res.message);
@@ -440,10 +444,10 @@ export default function ProductDetail({ id, isModal = false, dietary = {} }: Pro
   };
 
   useEffect(() => {
-    if (id) {
+    if (productId) {
       getProductDetail();
     }
-  }, [id]);
+  }, [productId]);
 
 
   useEffect(() => {
@@ -567,7 +571,7 @@ export default function ProductDetail({ id, isModal = false, dietary = {} }: Pro
               isLoggedIn={user?.loggedIn}
               isFav={product.isFav}
               onFavClick={() => {
-                handleFavClick(id);
+                handleFavClick(productId);
               }}
             />
             <div>

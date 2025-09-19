@@ -23,11 +23,9 @@ const SocialShare = ({ shareUrl }: Props) => {
         <TooltipHtml title="Social Share">
           <Menu.Button className="flex cursor-pointer hover:shadow-lg flex-col items-center justify-center  bg-gray-white rounded-lg text-[16px] 2xl:text-[20px] focus:outline-none">
             <IoShareSocialOutline className='text-black' />
-
-
           </Menu.Button>
         </TooltipHtml>
-        <Menu.Items className="absolute top-0 right-6 lg:-right-8 lg:-top-48 mt-2 w-48 bg-white border rounded-lg shadow-lg">
+        <Menu.Items className="absolute top-[100%] right-[0] mt-2 w-48 bg-white border rounded-lg shadow-lg">
           <div className="py-2 h-32 lg:h-auto overflow-auto">
             {/* Whatsapp Share */}
             <Menu.Item>
