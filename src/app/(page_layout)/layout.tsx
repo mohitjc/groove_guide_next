@@ -17,6 +17,7 @@ import ApiClientB from "@/utils/Apiclient";
 import { isNumber, loaderHtml, noImg } from "@/utils/shared";
 import { socialOptions } from "@/utils/shared.utils";
 import socketModel from "@/utils/socketModel";
+import Image from "next/image";
 import Link from "next/link";
 import { useParams, usePathname, useRouter, useSearchParams } from "next/navigation";
 import { Fragment, useEffect, useState } from "react";
@@ -579,8 +580,6 @@ export default function Layout({
                         className="text-black text-[14px] 2xl:text-[18px]"
                       />
                     </div>
-
-
                   </form>
                 </div>
               </> : <></>}
@@ -1217,7 +1216,7 @@ export default function Layout({
           body={<>
             <div className="flex gap-4 w-full ">
               <div className=" relative hidden sm:block  lg:w-[600px]">
-                <img src="/assets/img/sides.png" alt="login_modal" className="w-full h-full lg:object-contain" />
+                <Image height={420} width={320} src="/assets/img/sides.png" alt="login_modal" className="w-full h-full lg:object-contain" />
                 {/* <div className="absolute top-8 left-1/2 -translate-x-1/2">
                             <img src="/assets/img/logo.png" className="mx-auto h-28" />
                           </div> */}
@@ -1328,7 +1327,6 @@ export default function Layout({
             </div>
           </>}
           result={() => {
-            // closeModal()
             setIsOpen1(false)
             history('/')
           }}
@@ -1424,21 +1422,8 @@ export default function Layout({
                       onChange={(value) => {
                         setLoginForm((pev: any) => ({ ...pev, how_did_you_hear_about_us: value }));
                       }}
-                      // required={true}
-                      // intialValue={form?.how_did_you_hear_about_us}
                       value={loginForm.how_did_you_hear_about_us}
                     />
-                    {/* <MultiSelectDropdown
-                            id={""}
-                            options={socialOptions}
-                            placeholder="How Did You Hear About Us?"
-                            result={({ value }) => {
-                              setLoginForm(pev => ({ ...pev, how_did_you_hear_about_us: value }));
-                            }}
-                            required={true}
-                            // intialValue={form?.how_did_you_hear_about_us}
-                            intialValue={loginForm.how_did_you_hear_about_us}
-                          /> */}
                     {loginForm?.how_did_you_hear_about_us?.includes('other') ? <>
                       <div className="flex items-center border border-gray-300 rounded-full overflow-hidden mb-3 mt-3">
                         <div className="px-4 text-gray-500">
@@ -1451,24 +1436,6 @@ export default function Layout({
                           className="flex-1 py-2  text-gray-700 focus:outline-none" placeholder="Other" />
                       </div>
                     </> : <></>}
-                    {/* <div className="flex items-center border border-gray-300 rounded-full overflow-hidden mt-4">
-                              <div className="px-4 text-gray-500">
-                                <RiLockPasswordLine />
-                              </div>
-                              <div className="relative w-full">
-                                <input type={eye ? 'text' : 'password'}
-                                  value={loginForm.password}
-                                  onChange={e => {
-                                    setLoginForm({
-                                      ...loginForm,
-                                      password: e.target.value
-                                    })
-                                  }}
-                                  required
-                                  className=" py-2 w-full  text-gray-700 focus:outline-none" placeholder="Enter your Password" />
-                                <i className={`fa fa-${eye ? 'eye' : 'eye-slash'} cursor-pointer text-gray-300   mr-2 text-sm absolute right-2 -translate-y-1/2 top-1/2 `} onClick={() => setEye(!eye)}></i>
-                              </div>
-                            </div> */}
                     <div className="mt-6 flex items-center justify-center">
                       <button type="submit" className="py-2 rounded-full w-full font-semibold text-center text-white hover:opacity-80 transition-all">
                         Register
@@ -1500,8 +1467,6 @@ export default function Layout({
             }}
 
             body={<>
-              {/* <p className="text-xl">{getNotificationIcon(notificationDetail?.type)}</p> */}
-
 
               <div>
                 {notificationDetail?.type == 'video' ? <>

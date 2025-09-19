@@ -13,6 +13,7 @@ import ApiClientB from "@/utils/Apiclient";
 import Modal from "@/components/Modal";
 import { RootState } from "@/redux/store";
 import envirnment from "@/envirnment";
+import Image from "next/image";
 
 
 export default function HomeComponent() {
@@ -257,7 +258,9 @@ export default function HomeComponent() {
     <section className="fomesixth  ">
       <div className="hidden md:flex desktopview relative  items-center justify-center h-[600px] bg-gray-100 p-6 ">
         <div className="absolute inset-0">
-          <img
+          <Image
+          height={600}
+          width={1400}
             src="/assets/img/v2/bg1.png"
             alt="Shrooms"
             className="w-full h-full object-cover"
@@ -304,13 +307,17 @@ export default function HomeComponent() {
           </button>
 
         </div>
-        <img
+        <Image
+        height={415}
+        width={900}
           src="/assets/img/v2/remove1.png"
           alt="Shrooms"
           className="w-full h-full object-cover"
         />
 
-        <img
+        <Image
+        height={415}
+        width={900}
           src="/assets/img/v2/line.png"
           alt="Shrooms"
           className="w-full h-full object-cover"
@@ -362,7 +369,9 @@ export default function HomeComponent() {
           </button>
 
         </div>
-        <img
+        <Image
+        height={415}
+        width={900}
           src="/assets/img/v2/remove2.png"
           alt="Shrooms"
           className="w-full h-full object-cover"
@@ -378,7 +387,9 @@ export default function HomeComponent() {
       <div className="relative hidden md:flex items-center justify-center h-[500px] 2xl:h-[650px] bg-gray-100 p-6 ">
         {/* Background Image */}
         <div className="absolute inset-0">
-          <img
+          <Image
+          height={650}
+        width={1400}
             src="/assets/img/v2/bg3.png"
             alt="Shrooms"
             className="w-full h-full object-cover object-left"
@@ -414,9 +425,10 @@ export default function HomeComponent() {
         </div>
       </div>
 
-
       <div className="mobileview relative block md:hidden bg-[#EEEAE7] pb-8 ">
-        <img
+        <Image
+        height={415}
+        width={900}
           src="/assets/img/v2/remove3.png"
           alt="Shrooms"
           className="w-full h-full object-cover"
@@ -436,15 +448,8 @@ export default function HomeComponent() {
               <TbArrowUpRight size={16} />
             </span>
           </a>
-
         </div>
-
-
-
-
       </div>
-
-
     </section>
 
 
@@ -473,10 +478,12 @@ export default function HomeComponent() {
 
         {/* Right Image */}
         <div className="md:w-1/2 flex justify-end mt-6 md:mt-0">
-          <img
+          <Image
+          height={460}
+          width={670}
             src="/assets/img/v2/bg4.png"
             alt="Shrooms"
-            className="w-full max-w-2xl"
+            className="w-full h-auto max-w-2xl"
           />
 
         </div>
@@ -492,7 +499,10 @@ export default function HomeComponent() {
           {/* Left images */}
           <div className="col-span-12 lg:col-span-4  xl:col-span-3 hidden lg:flex flex-col gap-4 ">
             <div className="">
-              <img src="/assets/img/v2/bg6.png" alt="People working" className="rounded-xl w-full md:h-[300px] lg:h-[220px] xl:h-[240px] 2xl:h-[300px] object-contain lg:object-cover mb-4" />
+              <Image 
+              height={300}
+              width={370}
+              src="/assets/img/v2/bg6.png" alt="People working" className="rounded-xl w-full md:h-[300px] lg:h-[220px] xl:h-[240px] 2xl:h-[300px] object-contain lg:object-cover mb-4" />
             </div>
           </div>
 
@@ -518,7 +528,10 @@ export default function HomeComponent() {
           {/* Right images */}
           <div className="col-span-12 lg:col-span-4 xl:col-span-3 flex flex-col gap-4 ">
             <div className="">
-              <img src="/assets/img/v2/bg5.png" alt="People working" className="rounded-xl w-full md:h-[300px] lg:h-[220px] xl:h-[240px] 2xl:h-[300px] object-contain lg:object-cover mb-4" />
+              <Image
+              height={300}
+              width={370}
+              src="/assets/img/v2/bg5.png" alt="People working" className="rounded-xl w-full md:h-[300px] lg:h-[220px] xl:h-[240px] 2xl:h-[300px] object-contain lg:object-cover mb-4" />
             </div>
           </div>
         </div>
@@ -562,7 +575,10 @@ export default function HomeComponent() {
       <div className="bg-white border-t border-gray-300 p-4 py-10 flex flex-col lg:flex-row items-center justify-between px-5 sm:px-6 md:px-16 lg:px-20 xl:px-30 2xl:px-40 gap-5">
 
         <div className="flex flex-col lg:flex-row gap-5">
-          <img src="/assets/img/v2/email2.svg" alt="email icon" className="h-20 2xl:h-25 2xl:h-24 2xl:h-30" />
+          <Image
+          height={120}
+          width={120}
+          src="/assets/img/v2/email2.svg" alt="email icon" className="h-20 2xl:h-25 2xl:h-24 2xl:h-30" />
           <div>
             <h2 className="text-[30px] lg:text-[24px] 2xl:text-[34px] lg:max-w-[280px]  2xl:max-w-[420px] !leading-[35px] 2xl:!leading-[45px] text-center font-bold text-[#061522] tracking-[-2px]">
               Stay Updated with the Latest Insights
@@ -593,7 +609,9 @@ export default function HomeComponent() {
       <Modal
         body={<>
           <div className="text-center flex flex-col items-center gap-6">
-            <img
+            <Image
+              height={128}
+              width={128}
               src="/assets/img/alert.png"
               alt=""
               className="h-32 mx-auto"
