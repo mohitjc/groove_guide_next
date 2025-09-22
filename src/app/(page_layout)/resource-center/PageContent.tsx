@@ -50,8 +50,111 @@ type ContentListType={
   showAnotherSlider?:boolean;
 }
 
-const ResourceItem=({}:any)=>{
-  return <></>
+const ResourceItem=({item,onClick = (e:any) => { }}:any)=>{
+    
+    const scrollRef = useRef(null);
+
+const noImg = (img:any='', defaultImg = '/assets/img/placeholder.png') => {
+  let value = defaultImg;
+  if (img?.includes("https")) return img;
+  if (img) value = `${envirnment.image_path}${img}`;
+  return value;
+};
+    
+  return <>
+    <div className="w-full rounded-xl overflow-hidden  border bg-white">
+                {/* Image with Favorite Icon */}
+                <div className="relative">
+                    {/* <ImageHtml src={noImg((item.thumbnail || item.image), `/assets/img/thumbnail/${item.type}.jpg`)}
+                        alt="Workout"
+                        // className="w-full h-[185px] object-cover object-top"
+                        className="w-full cursor-pointer"
+                        onClick={() => onClick(item)} /> */}
+
+                        <img src={noImg(item.thumbnail || item.image)} alt="" className="w-full cursor-pointer" onClick={() => onClick(item)}/>
+                    {/* <button className="absolute top-3 right-3 bg-white p-2 rounded-full shadow-md">
+                        <IoMdHeart className="text-red-500 text-lg" />
+                    </button> */}
+                </div>
+
+                {/* Content */}
+                <div className="p-4 flex flex-col gap-2">
+                    {/* Tags */}
+                    <div className="flex gap-2 mb-2 items-center">
+                        {/* Scrollable Tags */}
+                        <div
+                            ref={scrollRef}
+                            className="flex gap-2 custom-scrollbar overflow-x-auto flex-grow items-center min-h-[24px] scrollbar-hide"
+                        >
+                            {(item?.tags || []).slice(0, 2).map((item:any, i:any) => (
+                                <span
+                                    key={i}
+                                    // onClick={() => onclick(item)}
+                                    className="capitalize text-[#540C0F] text-white text-[11px] 2xl:text-xs px-3 py-1 bg-primary rounded-full whitespace-nowrap"
+                                >
+                                    {item}
+                                </span>
+                            ))}
+                        </div>
+
+                        {/* Fixed "+X more" Button */}
+                        {(item?.tags || []).length > 2 && (
+                            <span
+                                // onClick={() => onClick(tags)}
+                                className="capitalize text-[#540C0F] text-white text-[11px] 2xl:text-xs px-3 py-1 bg-primary rounded-full shrink-0"
+                            >
+                                +{(item?.tags || []).length - 2} more
+                            </span>
+                        )}
+                    </div>
+
+
+                    {/* Engagement */}
+                    <div className="flex items-center text-gray-600 text-[12px] 2xl:text-sm gap-2">
+                        <div className="flex gap-1 items-center">
+                            <img
+                                src="/assets/img/v2/2.svg"
+                                alt="Author"
+                                className=" h-4 "
+                            />
+                            <span className="text-[#828282] mr-2">Helpful</span>
+                        </div>
+                        <div className="flex gap-1 items-center">
+                            <span className="material-symbols-outlined">visibility</span>
+                            <span className="font-semibold">{item.views}</span>
+                        </div>
+                        <SocialShare  shareUrl={`${envirnment.frontUrl}resource-center/${item?.content}/${item?.id}`} />
+                    </div>
+
+                    {/* Title */}
+                    <h3
+                        // onClick={() => onclick(item)}
+                        className={`cursor-pointer text-[17px] 2xl:!text-[24px] line-clamp-2 font-bold text-gray-800 text-left leading-[22px] 2xl:leading-[28px] capitalize ${(item?.title?.length || 0) > 18 ? 'lg:h-[50px] 2xl:h-[60px]' : ''
+                            }`}
+                    >
+                        {item?.title || ''}
+                    </h3>
+
+
+
+                    {/* Author Info */}
+                    <div className="flex justify-between items-center mt-3 text-gray-500 text-sm gap-2 ">
+                        <div className="flex text-left items-center gap-2">
+                            {/* <img
+                                src="/assets/img/v2/123.png"
+                                alt="Author"
+                                className="w-6 h-6 2xl:w-8 2xl:h-8 rounded-full"
+                            /> */}
+                            <span className="text-[12px] 2xl:text-[16px] font-[500] text-[#97989F] worksans max-w-40 line-clamp-1">{contentTypes.find(itm => itm.id == item.content)?.name}</span>
+                        </div>
+
+                        <span className="text-[12px] 2xl:text-[16px] text-[#97989F] font-[400] worksans shrink-0">{datepipeModel.date(item.createdAt)}</span>
+                    </div>
+                </div>
+            </div>
+  
+  
+  </>
 }
 
     const ContentList = ({ list = [], api = '', content = '', onClick, pfilter = {}, title = '', slideCount = 4, isLoading = false, noData = '', showAnotherSlider = false }:ContentListType) => {
@@ -202,8 +305,8 @@ const ResourceItem=({}:any)=>{
                         >
 
                             {listData.map((itm, i) => {
-                                const key=itm.id||itm._id
-                                return  <SwiperSlide key={`list_${key}_${i}`}>
+                                const key=i
+                                return  <SwiperSlide key={i}>
                                         <ResourceItem item={itm} isMobile={isMobile} onClick={onClick} />
                                     </SwiperSlide>
                             })}
@@ -284,8 +387,8 @@ const ResourceItem=({}:any)=>{
                     className="gridstowslide forarrows"
                 >
                     {listData.map((itm, i) => {
-                        const key=itm.id||itm._id
-                        return <SwiperSlide key={`list_${key}_${i}`}>
+                      
+                        return <SwiperSlide key={i}>
                                 <ResourceItem item={itm} isMobile={isMobile} onClick={onClick} />
                             </SwiperSlide>
                     })}
@@ -294,8 +397,8 @@ const ResourceItem=({}:any)=>{
                 {isMobile ? <>
                     <div className="grid grid-cols-1 gap-4">
                         {listData.map((itm, i) => {
-                            const key=itm.id||itm._id
-                            return <Fragment key={`list_${key}_${i}`}>
+                            // const key=itm.id||itm._id
+                            return <Fragment key={i}>
                                 <ResourceItem item={itm} isMobile onClick={onClick} />
                             </Fragment>
                         })}
@@ -304,8 +407,8 @@ const ResourceItem=({}:any)=>{
                 </> : <>
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
                         {listData.map((itm, i) => {
-                            const key=itm.id||itm._id
-                            return <Fragment key={`list_${key}_${i}`}>
+                            // const key=itm.id||itm._id
+                            return <Fragment key={i}>
                                 <ResourceItem item={itm} onClick={onClick} />
                             </Fragment>
                         })}
@@ -383,7 +486,9 @@ export default function PageContent() {
         setDetailModal(null)
     }
 
-    const openModal = useCallback((e:any) => {
+    const openModal = (e:any) => {
+        console.log('openmodal');
+        
         setDetailModal(e)
         const url = `/resource-center/${e.content}/${e.id}`
         replaceUrl({ url: url })
@@ -394,7 +499,7 @@ export default function PageContent() {
             type: e.type || '',
             content_type: e.content
         }).then(res => { })
-    },[])
+    }
 
     const contentchange = (e:any) => {
         const checked = e.target.checked
@@ -627,12 +732,12 @@ export default function PageContent() {
 
                     <div className=" grid max-[480px]:!grid-cols-1 grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 gap-4 mt-8">
 
-                        {topCategory.map(item => {
+                        {topCategory.map((item,i) => {
                             return <div onClick={() => {
                                 filter({ main_category: item.id, types: '' })
                                 scrollId('contentGrid')
                             }} className={`w-full cursor-pointer hover:shadow-lg rounded-xl overflow-hidden  border bg-white ${filters.main_category == item.id ? 'shadow-lg' : ''}`} 
-                            key={`${item.id}_category`}>
+                            key={i}>
                                 {/* Image with Favorite Icon */}
                                 <div className="relative">
                                     <img
@@ -694,8 +799,8 @@ export default function PageContent() {
                                 </div>
 
                                 {contentCategory.map((item, i) => {
-                                    const key=item.id
-                                    return <div className="flex gap-2 items-center" key={`content_${key}`}>
+                                    // const key=item.id
+                                    return <div className="flex gap-2 items-center" key={i}>
                                         <label className="text-[#061522] font-inter text-[14px] xl:text-[16px] font-bold leading-[28px] uppercase flex gap-2 items-center">
                                             <input type="checkbox" className="h-3 w-3 cursor-pointer custom-input"
                                                 checked={contents.includes(item.id)}
@@ -725,8 +830,8 @@ export default function PageContent() {
                                             allTagsClick()
                                         }}>All</p>
                                         {tags.slice(0, 5).map((itm, i) => {
-                                             const key=itm.id||itm._id
-                                            return <p key={`tags_${key}`} onClick={() => tagClick(itm.id)} className={`capitalize ${filters.tags?.includes(itm.id) ? 'text-white bg-primary border-[#1a604c] font-bold' : 'text-black'} cursor-pointer px-4 xl:px-5 py-2 text-sm border border-[#000] rounded-full`}>{itm.name}</p>
+                                            //  const key=itm.id||itm._id
+                                            return <p key={i} onClick={() => tagClick(itm.id)} className={`capitalize ${filters.tags?.includes(itm.id) ? 'text-white bg-primary border-[#1a604c] font-bold' : 'text-black'} cursor-pointer px-4 xl:px-5 py-2 text-sm border border-[#000] rounded-full`}>{itm.name}</p>
                                         })}
                                         <span className="capitalize flex items-center text-[14px] text-primary cursor-pointer ml-auto" onClick={() => setTagModal(true)}>See All</span>
                                     </div>
@@ -756,11 +861,11 @@ export default function PageContent() {
                         </div>
                         {contentCategory.map((item, i) => {
                             let url = 'audio/list'
-                             const key=item.id
+                            //  const key=item.id
                             if (item.id == 'video') url = 'video/list'
                             if (item.id == 'guide') url = 'resource/listing'
                             if (contents.includes(item.id) || !contents.length)
-                                return <Fragment key={`content_${key}`}>
+                                return <Fragment key={i}>
                                     <ContentList title={item.name} api={url} content={item.id} pfilter={filters} onClick={openModal} />
                                 </Fragment>
                         })}
@@ -810,7 +915,7 @@ export default function PageContent() {
                                             }}
                                         >All</p>
                                         {tags.slice(0, 6).map((item, i) => {
-                                            return <p key={`tags_${i}`} onClick={() => tagClick(item.id)}
+                                            return <p key={i} onClick={() => tagClick(item.id)}
                                                 className={`capitalize px-3 ${filters?.tags?.includes(item.id) ? 'text-white bg-primary font-semibold text-[#540C0F]' : 'text-black '}  py-1 border-[#1a604c] border rounded-full text-xs italic`}>{item.name}</p>
                                         })}
                                         <span className="capitalize flex items-center text-[14px] text-primary cursor-pointer ml-auto" onClick={() => setTagModal(true)}>See All</span>
@@ -819,7 +924,7 @@ export default function PageContent() {
                                 <div className="flex items-center flex-wrap  gap-2">
                                     <p className="font-bold text-sm text-black">Sort by:</p>
                                     {sortByList.map((item, i) => {
-                                        return <p className={`${item.id == filters.sortBy ? 'font-bold' : ''} text-sm text-black`} key={`sort_${i}`} onClick={() => filter({ sortBy: item.id })}>{item.name}</p>
+                                        return <p className={`${item.id == filters.sortBy ? 'font-bold' : ''} text-sm text-black`} key={i} onClick={() => filter({ sortBy: item.id })}>{item.name}</p>
                                     })}
                                 </div>
                             </div>
@@ -831,7 +936,7 @@ export default function PageContent() {
                             if (item.id == 'video') url = 'video/list'
                             if (item.id == 'guide') url = 'resource/listing'
                             if (contents.includes(item.id) || !contents.length)
-                                return <Fragment key={`content_${key}`}>
+                                return <Fragment key={i}>
                                     <ContentList title={item.name} api={url} content={item.id} pfilter={filters} onClick={openModal} />
                                 </Fragment>
                         })}
@@ -850,11 +955,7 @@ export default function PageContent() {
                             {detailModal?.title}
                         </p>
                         <div className="mt-4 bg-gray-100">
-                            {/* <img
-                                                src="/assets/img/v2/girl.png"
-                                                alt="Workout"
-                                                className="w-full h-82 object-cover"
-                                            /> */}
+                           
                             {detailModal?.audio ? <>
                                 <AudioHtml
                                     src={detailModal?.audio}
@@ -905,7 +1006,7 @@ export default function PageContent() {
 
                         <div className="flex gap-2 mb-2 flex-wrap">
                             {detailModal?.tags?.map((item:any, i:any) => {
-                                return <span key={`tags_${i}`} className="bg-primary  text-white text-xs px-3 py-2 rounded-full">
+                                return <span key={i} className="bg-primary  text-white text-xs px-3 py-2 rounded-full">
                                     {item}
                                 </span>
                             })}
@@ -965,7 +1066,7 @@ export default function PageContent() {
                             </div> */}
 
                             {contentCategory.map((item, i) => {
-                                return <div className="flex gap-2 items-center" key={`content_${item.id}`}>
+                                return <div className="flex gap-2 items-center" key={i}>
                                     <label className="text-[#061522] font-inter text-[14px] xl:text-[16px] font-bold leading-[28px] uppercase flex gap-2 items-center">
                                         <input type="checkbox" className="h-3 w-3 cursor-pointer custom-input"
                                             checked={contents.includes(item.id)}
@@ -1022,7 +1123,7 @@ export default function PageContent() {
                                             allTagsClick()
                                         }}>All</p>
                                         {tags.map((itm, i) => {
-                                            return <p key={`tags_${itm.id}`} onClick={() => tagClick(itm.id)} className={`capitalize ${filters?.tags?.includes(itm.id) ? 'text-white bg-primary border-[#1a604c] font-bold' : 'text-black'} cursor-pointer px-4 xl:px-5 py-2 text-sm border border-[#000] rounded-full`}>{itm.name}</p>
+                                            return <p key={i} onClick={() => tagClick(itm.id)} className={`capitalize ${filters?.tags?.includes(itm.id) ? 'text-white bg-primary border-[#1a604c] font-bold' : 'text-black'} cursor-pointer px-4 xl:px-5 py-2 text-sm border border-[#000] rounded-full`}>{itm.name}</p>
                                         })}
                                     </div>
                                 </div>
