@@ -243,12 +243,13 @@ export default function Layout({
       if (!notify) {
         socketModel.emit("notify-message", { user_id: user?._id });
       }
-
       socketModel.on("notify-message", (data: any) => {
         const count = data.data.unread_count;
         setUnreadMessagesCount(count);
       });
-      sessionStorage.setItem("notify-message", "true");
+    }
+    return ()=>{
+      socketModel.off('notify-message')
     }
   }, [user]);
 
@@ -614,7 +615,7 @@ export default function Layout({
                         </div>
                       </TooltipHtml>
                       <TooltipHtml placement="top" title="Messages">
-                        <a className="relative notif">
+                        <div className="relative notif">
                           <OptionDropdown
                             title={<>
                               {unreadCount > 0 ? (
@@ -653,7 +654,7 @@ export default function Layout({
                               </>
                             }
                           />
-                        </a>
+                        </div>
                       </TooltipHtml>
 
                     </>
