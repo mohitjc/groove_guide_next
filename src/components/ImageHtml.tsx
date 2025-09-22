@@ -8,8 +8,8 @@ type Props={
   id?:string;
   alt:string;
   title?:string;
-  height:number;
-  width:number;
+  height:any;
+  width:any;
 }
 
 export default function ImageHtml({
