@@ -7,17 +7,17 @@ type dateRangeType={
   
  className:String;
   data :any;
-  theme:string;
-  ListHtml:any;
-  rowClass :string;
+  theme?:string;
+  ListHtml?:any;
+  rowClass? :string;
   columns :any;
-  topHead :any;
+  topHead? :any;
   count : any;
   total :any;
   page :any;
   result : (e:any) =>void;
   nodata:any;
-  itemProps :Object;
+  itemProps? :Object;
 
 }
 const Table = ({
