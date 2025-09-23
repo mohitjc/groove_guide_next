@@ -116,8 +116,8 @@ function Product({ product, tags, onImageClick, selectedVariant, sub_products }:
                       <div className="flex gap-2 items-center">
                         <ImageHtml src={methodModel.noImg(itm.image)} className="h-10 w-10 lg:h-12 lg:w-12 rounded-full object-cover" alt="" 
 
-                                        height={''}
-                                        width={''}
+                                        height={20}
+                                        width={20}
                                         errSrc="/assets/img/placeholder.jpg"                                      
                                         id=""
                                         title=""
@@ -144,8 +144,8 @@ function Product({ product, tags, onImageClick, selectedVariant, sub_products }:
                   <Fragment key={itm.name}>
                     <TooltipHtml title={itm.description} placement="top" >
                       <div className="flex gap-2 items-center">
-                        <ImageHtml src={methodModel.noImg(itm.image)} className="h-10 w-10 lg:h-12 lg:w-12 rounded-full object-cover" alt=""  height={''}
-                                        width={''}
+                        <ImageHtml src={methodModel.noImg(itm.image)} className="h-10 w-10 lg:h-12 lg:w-12 rounded-full object-cover" alt=""  height={20}
+                                        width={20}
                                         errSrc="/assets/img/placeholder.jpg"                                      
                                         id=""
                                         title=""/>
@@ -176,8 +176,8 @@ function Product({ product, tags, onImageClick, selectedVariant, sub_products }:
                     <ImageHtml
                      src={methodModel.noImg(itm.image)} className="h-10 w-10 lg:h-12 lg:w-12 rounded-full object-cover" alt="" 
 
-                                        height={''}
-                                        width={''}
+                                        height={20}
+                                        width={20}
                                         errSrc="/assets/img/placeholder.jpg"                                      
                                         id=""
                                         title=""
