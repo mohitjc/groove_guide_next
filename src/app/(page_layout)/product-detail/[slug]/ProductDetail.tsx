@@ -928,8 +928,8 @@ export default function ProductDetail({
                                           "/assets/img/s1.png"
                                         )}
                                         className="h-12 w-12 md:h-20 md:w-20 mx-auto rounded-full object-contain mb-1"
-                                        height={''}
-                                        width={''}
+                                        height={20}
+                                        width={20}
                                         errSrc="/assets/img/placeholder.jpg"
                                         
                                         id=""
@@ -1076,8 +1076,8 @@ export default function ProductDetail({
                                     <ImageHtml
                                       src={methodModel.noImg(itm.image)}
                                       className="h-10 w-10 lg:h-16 lg:w-16 object-cover rounded-full"
-                                       height={''}
-                                        width={''}
+                                       height={20}
+                                        width={20}
                                         errSrc="/assets/img/placeholder.jpg"
                                         
                                         id=""
@@ -1124,8 +1124,8 @@ export default function ProductDetail({
                                     <ImageHtml
                                       src={methodModel.noImg(itm.image)}
                                       className="h-10 w-10 lg:h-16 lg:w-16 object-cover rounded-full"
-                                       height={''}
-                                        width={''}
+                                       height={20}
+                                        width={20}
                                         errSrc="/assets/img/placeholder.jpg"
                                         
                                         id=""
@@ -1161,8 +1161,8 @@ export default function ProductDetail({
                           <ImageHtml
                             src={methodModel.noImg("", "/assets/img/s1.png")}
                             className="h-10 w-10 lg:h-16 lg:w-16 object-cover rounded-full"
-                             height={''}
-                                        width={''}
+                             height={20}
+                                        width={20}
                                         errSrc="/assets/img/placeholder.jpg"
                                         
                                         id=""
