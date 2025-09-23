@@ -12,7 +12,7 @@ import SelectDropdown from "@/components/SelectDropdown/page";
 function RewardRequest() {
     const {get, post}=ApiClientB()
   const navigate = useRouter();
-  const user = useSelector((state:any) => state.user);
+  const user = useSelector((state:any) => state.user.data);
   const [total, setTotal] = useState(0);
   const [rewards, setRewards] = useState([]);
   const [rewardTypes, setRewardTypes] = useState([]);

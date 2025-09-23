@@ -248,7 +248,7 @@ function getYears(d1: string | Date = new Date(), d2: string | Date = new Date()
   return years;
 }
 
-const datepipeModel = {
+const datepipeModel:any = {
   utcToDate,
   DaysNo,
   addDays,

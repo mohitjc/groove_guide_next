@@ -453,7 +453,7 @@ const noImg = (img:any='', defaultImg = '/assets/img/placeholder.png') => {
 
 
 export default function PageContent() {
-   const user = useSelector((state:any) => state.user)
+   const user = useSelector((state:any) => state.user.data)
     const { content, slug } = useParams()
     const [isOpen3, setIsOpen3] = useState(false);
     const [weekLoader, setWeekLoader] = useState(true);

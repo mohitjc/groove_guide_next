@@ -176,6 +176,21 @@ const ApiClientB = (controllerRef: ControllerRef = { current: null }) => {
     return handleRequest<T>("post", url, formData, {}, "", false, true);
   };
 
+const postFormFileData = <T = any>(
+  url: string,
+  params: Record<string, string | Blob | File | null>
+) => {
+  const formData = new FormData();
+  Object.entries(params).forEach(([key, value]) => {
+    if (value !== null) {
+      formData.append(key, value);
+    }
+  });
+  return handleRequest<T>("post", url, formData, {
+    headers: { 'Content-Type': 'multipart/form-data' }
+  }, "", false, true);
+};
+
   const allApi = <T = any>(
     url: string,
     params: Record<string, any>,
@@ -193,6 +208,7 @@ const ApiClientB = (controllerRef: ControllerRef = { current: null }) => {
     allApi,
     multiImageUpload,
     postFormData,
+    postFormFileData,
     isLoading,
     controller: controllerRef.current,
   };
