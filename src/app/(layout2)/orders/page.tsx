@@ -268,8 +268,8 @@ const [recieptModal, setRecieptModal] = useState<any>()
                     <div className="col-span-12 text-center bg-gray-100 p-4 h-[300px] flex items-center justify-center">
                       <div className="flex flex-col gap-6">
                         <Image
-                        width={20}
-          height={20}
+                        width={230}
+          height={260}
                           src="/assets/img/noproducts.png"
                          alt={""}  
                           className="h-36 mx-auto"
@@ -563,8 +563,8 @@ const [recieptModal, setRecieptModal] = useState<any>()
                                         }}
                                       >
                                         <Image
-                                        width={20}
-          height={20}
+                                        width={230}
+          height={260}
                                           src={methodModel.noImg(tag.image)}
                                           className="h-16 w-16 object-cover rounded-full" alt={""}                                        />
                                       </label>
