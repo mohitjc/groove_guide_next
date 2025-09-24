@@ -28,7 +28,7 @@ const Profile = () => {
   const user = useSelector((state:any) => state.user.data);
   const dispatch = useDispatch()
   let [isOpen, setIsOpen] = useState(false);
-  const [data, setData] = useState<any>();
+  const [data, setData] = useState<any>([]);
   const [questions, setQuestions] = useState([]);
   const [detailLoader, setDetailLoadder] = useState(false);
   const [selectedValues, setSelectedValues] = useState<any>({});
@@ -242,7 +242,7 @@ const Profile = () => {
   };
 
   useEffect(() => {
-    if (user.loggedIn) {
+    if (user) {
       gallaryData();
       getQuestions();
     }
