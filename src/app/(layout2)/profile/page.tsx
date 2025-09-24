@@ -26,7 +26,7 @@ import Image from "next/image";
 const Profile = () => {
   const history = useRouter();
 
-  const user = useSelector((state:any) => state.user.data);
+  const user = useSelector((state:any) => state.user?.data);
   const dispatch = useDispatch()
   const [isOpen, setIsOpen] = useState(false);
   const [data, setData] = useState<any>([]);
@@ -40,7 +40,7 @@ const Profile = () => {
   const [isCapture, setIscapture] = useState(false);
   const [editModal, setEditModal] = useState<any>();
   const [stateId, setStateId] = useState({
-    stateId: user.stateId || "",
+    stateId: user?.stateId || "",
   });
 
   const {get,put,multiImageUpload}=ApiClientB()
@@ -70,7 +70,7 @@ const Profile = () => {
 
   const gallaryData = () => {
     setDetailLoadder(true);
-  get(`user/profile`, { id: user._id }).then((res) => {
+  get(`user/profile`, { id: user?._id }).then((res) => {
       setDetailLoadder(false);
       if (res.success) {
         setData(res.data);
@@ -85,7 +85,7 @@ const Profile = () => {
 
   const getQuestions = () => {
     const prm = {
-      type: (user.checkInType || "Groove Group").replace(
+      type: (user?.checkInType || "Groove Group").replace(
         "Groove Group",
         "Shroom Groove"
       ),
@@ -145,7 +145,7 @@ const Profile = () => {
   const handleUpdateAnswers = () => {
     const payload :any= {
       ...selectedValues,
-      id: user.id || user._id,
+      id: user?.id || user?._id,
     };
 
     payload.primary_interest =
@@ -268,7 +268,7 @@ const Profile = () => {
   }, [data]);
 
   const getMembershipDetail = () => {
-    getMembership("membership/detail", { user_id: (user.id || user._id) }).then((res) => {
+    getMembership("membership/detail", { user_id: (user?.id || user?._id) }).then((res) => {
       if (res.success) {
         const data = res.data;
         data.box_preference = data.box_preference?.replaceAll("N/A", "") || "";
@@ -347,7 +347,7 @@ const Profile = () => {
     if (!stateId.stateId) return;
     loaderHtml(true);
     put("user/profile", {
-      id: user._id || user.id,
+      id: user?._id || user?.id,
       stateId: stateId.stateId,
     }).then((res:any) => {
       loaderHtml(false);
@@ -359,7 +359,7 @@ const Profile = () => {
   const updateAddress = (e:any) => {
     if (e.event == 'submit') {
       const payload = {
-        user_id: (user.id || user._id),
+        user_id: (user?.id || user?._id),
         ...e.data
       }
       loaderHtml(true)
@@ -375,7 +375,7 @@ const Profile = () => {
   }
 
   const updateProfile = () => {
-    const userId = (user.id || user._id)
+    const userId = (user?.id || user?._id)
     const payload = {
       //   userId: userId,
       //  memberShip:{
@@ -386,11 +386,11 @@ const Profile = () => {
       //  },
       //  new_email:editModal?.email
       userId: userId,
-      email: user.email,
+      email: user?.email,
       new_email: editModal?.email
     }
 
-    if (editModal?.email == user.email) {
+    if (editModal?.email == user?.email) {
       toast.error("This Email is already exist")
       return
     }
@@ -538,7 +538,7 @@ const Profile = () => {
                       <h4 className="text-sm font-semibold">Email Address</h4>
                       <span
                         className="material-symbols-outlined text-[20px] text-primary cursor-pointer ml-auto"
-                        onClick={() => setEditModal({ email: user.email })}
+                        onClick={() => setEditModal({ email: user?.email })}
                       >
                         edit
                       </span>

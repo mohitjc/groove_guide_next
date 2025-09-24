@@ -27,7 +27,7 @@ import { FiCheckCircle } from "react-icons/fi";
 import BoxReceipt from "@/components/Membership/BoxReceipt";
 
 function BoxManagement() {
-  const user = useSelector((state:any) => state.user.data);
+  const user = useSelector((state:any) => state.user?.data);
   const {get,put}=ApiClientB()
   const navigate=useRouter()
   const [membershipStatus, setMembershipStatus] = useState<any>();
@@ -311,7 +311,7 @@ function BoxManagement() {
 
   const buyBox = () => {
     if (boxButtonText == "Join Club") {
-      window.open(`${environment.joinUrl}?q=${user.id||user._id}`, "_new");
+      window.open(`${environment.joinUrl}?q=${user?.id||user?._id}`, "_new");
     } else {
       setBuyModal(true);
     }

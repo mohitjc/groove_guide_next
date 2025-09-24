@@ -14,7 +14,7 @@ import ProductDetail from "./ProductDetail";
 
 function ViewProduct() {
     const {get,post}=ApiClientB()
-  const user = useSelector((state:any) => state.user.data);
+  const user = useSelector((state:any) => state.user?.data);
   const  id  = useParams();
   console.log(id.slug,'useParams');
   

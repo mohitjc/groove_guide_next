@@ -60,6 +60,9 @@ export const craftPlanPrice = envirnment.env == 'staging' ? 1 : 97
 export const friendsPlanPrice = envirnment.env == 'staging' ? 1 : 50
 export const shippingFee = envirnment.env == 'staging' ? 1 : 19.95
 
+export const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+
+
 export const getPlanPrice = (plan: string) => {
     let value = craftPlanPrice
 

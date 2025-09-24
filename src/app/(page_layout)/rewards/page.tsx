@@ -17,7 +17,7 @@ import Image from "next/image";
 
 function Rewards() {
  const {get}=ApiClientB()
-  const user = useSelector((state:any) => state.user.data);
+  const user = useSelector((state:any) => state.user?.data);
   const [total, setTotal] = useState(0);
   const [rewards, setRewards] = useState([]);
   const [totalPoints, setTotalPoints] = useState(null);
@@ -153,7 +153,7 @@ function Rewards() {
             </ul>
           </div>
           <div className="">
-            {user.is_extra_referd_product ? <>
+            {user?.is_extra_referd_product ? <>
               <p className="text-black mb-6 bg-yellow-100 text-sm  rounded-lg flex gap-2 items-center shadow-sm"><span className="h-full rounded-l-lg p-3 bg-primary text-lg text-white mr-2"><GrEmoji />        </span> Great! you are eligible for one complimentry product and you will get that in subscribed box. </p>
             </> : <></>}
             <div className="mt-4">

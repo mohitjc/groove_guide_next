@@ -49,7 +49,7 @@ function ProductsList({ title, products = [], isBox = false, setBoxes = () => { 
       category: categoryId,
       status: 'active',
       sortBy: 'name asc',
-      user_id: (user._id || user.id || '')
+      user_id: (user?._id || user?.id || '')
     }
 
     if (!f.isBox) {

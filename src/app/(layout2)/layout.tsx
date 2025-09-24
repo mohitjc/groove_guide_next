@@ -50,7 +50,7 @@ export default function Layout({
   const pathname = usePathname()
   const spathname = pathname.split('/')[1]
   const query = useSearchParams()
-  const user: any = useSelector((state: RootState) => state.user.data);
+  const user: any = useSelector((state: RootState) => state.user?.data);
 
 
   const isCancel = spathname == 'cs' ? true : false
@@ -58,7 +58,7 @@ export default function Layout({
 
     const userImg = {
     ...user,
-    image: user.image || "",
+    image: user?.image || "",
   };
 
 
@@ -97,7 +97,7 @@ export default function Layout({
     }`;
 
   const getUserDetail = () => {
-    get("user/profile", { id: (user._id || user.id) }).then(async (res) => {
+    get("user/profile", { id: (user?._id || user?.id) }).then(async (res) => {
       if (res.success) {
         const data = { ...user, ...res.data };
         dispatch(login(data));
@@ -506,7 +506,7 @@ export default function Layout({
 
   const handleChangeEmail = () => {
     loaderHtml(true);
-    put("user/profile", { email: changedEmail, id: user._id }).then(
+    put("user/profile", { email: changedEmail, id: user?._id }).then(
       async (res) => {
         if (res.success) {
           loaderHtml(false);
@@ -946,7 +946,7 @@ export default function Layout({
                     <Image
                     width={20} height={20}
                         src={userImg
-                          ? methodModel.userImg(user.image || "")
+                          ? methodModel.userImg(user?.image || "")
                           : "../assets/img/person.jpg"}
                         className="h-32 w-32 mx-auto rounded-full object-cover" alt={""}                    />
                   </Link>
@@ -960,9 +960,9 @@ export default function Layout({
                       {user?.email}
                     </h6>
 
-                    {user.mobileNo != "" && (
+                    {user?.mobileNo != "" && (
                       <h6 className="text-md font-medium  break-all text-center">
-                        {String(user.mobileNo ? "+" + user.mobileNo : "N/A")}
+                        {String(user?.mobileNo ? "+" + user?.mobileNo : "N/A")}
                       </h6>
                     )}
 

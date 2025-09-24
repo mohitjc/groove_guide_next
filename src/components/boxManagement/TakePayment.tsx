@@ -22,7 +22,7 @@ import { login as login_success} from "@/redux/slices/userSlice";
 export default function TakePayment({ membership, resultRes = () => { },user,isPaymentDue,paymentDue}:any) {
 
     const {get,post}=ApiClientB()
-    const detail1 = (useSelector((state:any) => state.user.data))
+    const detail1 = (useSelector((state:any) => state.user?.data))
 
     const detail = useMemo(() => {
         const data = user ? user : detail1

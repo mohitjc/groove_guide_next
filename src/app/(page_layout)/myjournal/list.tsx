@@ -118,7 +118,7 @@ const ListHtml=({row,itemProps}:listHtml)=>{
 }
 
 function Index() {
-  const user = useSelector((state:any) => state.user.data);
+  const user = useSelector((state:any) => state.user?.data);
   const query = useParams().product;
   const history = useRouter();
   const [journals, setMyJournals] = useState([]);
@@ -348,7 +348,7 @@ function Index() {
 
         post('menuAccess/page',{
           page:'share-experience',
-          userId:user.id||user._id,
+          userId:user?.id||user?._id,
           categoryId:form.category,
           productId:form.product_id
         }).then(res=>{ })

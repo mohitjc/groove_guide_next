@@ -454,7 +454,7 @@ const noImg = (img:any='', defaultImg = '/assets/img/placeholder.png') => {
 
 
 export default function PageContent() {
-   const user = useSelector((state:any) => state.user.data)
+   const user = useSelector((state:any) => state.user?.data)
     const { content, slug } = useParams()
     const [isOpen3, setIsOpen3] = useState(false);
     const [weekLoader, setWeekLoader] = useState(true);
@@ -495,7 +495,7 @@ export default function PageContent() {
         replaceUrl({ url: url })
         post('menuAccess/page', {
             page: 'info-content',
-            userId: user.id || user._id,
+            userId: user?.id || user?._id,
             contentId: e._id,
             type: e.type || '',
             content_type: e.content
@@ -546,10 +546,10 @@ export default function PageContent() {
             }
         })
 
-        if (user.loggedIn) {
+        if (user?.loggedIn) {
             post('menuAccess/page', {
                 page: 'info',
-                userId: user.id || user._id,
+                userId: user?.id || user?._id,
             })
             .then(() => { })
         }

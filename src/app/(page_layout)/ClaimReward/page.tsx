@@ -16,7 +16,7 @@ import Image from "next/image";
 function ClaimReward({ result = (e:any) => {console.log(e);
 } }) {
     const {get ,post,postFormData }=ApiClientB()
-  const user = useSelector((state:any) => state.user.data);
+  const user = useSelector((state:any) => state.user?.data);
   const navigate = useRouter();
   const [rewardModal, setRewardModal] = useState<any>();
   const [submitted, setSubmitted] = useState(false);
@@ -79,7 +79,7 @@ function ClaimReward({ result = (e:any) => {console.log(e);
   const getStatus = () => {
     loaderHtml(true);
     get("review/appliedClaimedReward", {
-      userId: user.id || user._id,
+      userId: user?.id || user?._id,
     }).then((res) => {
       loaderHtml(false);
       if (res.success) {

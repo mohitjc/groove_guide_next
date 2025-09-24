@@ -25,7 +25,7 @@ function classNames(...classes:any) {
 
 const Dashboard = () => {
   const history = useRouter()
-  const user = useSelector((state:any) => state.user.data);
+  const user = useSelector((state:any) => state.user?.data);
   const [total, setTotal] = useState(0);
   const [currentSubscription, setCurrentSubscription] = useState([]);
   const [, setActive] = useState("current");
@@ -62,7 +62,7 @@ const Dashboard = () => {
     const filter = {
       ...filters,
       ...p,
-      userId: user._id
+      userId: user?._id
     };
     get(`Subscription/all/Subscriptions`, filter).then(
       (res) => {
@@ -77,7 +77,7 @@ const Dashboard = () => {
 
   const getActiveSubscription = () => {
     const param = {
-      user_id: user.customerId || user?.id || user?._id
+      user_id: user?.customerId || user?.id || user?._id
     }
     setActiveLoading(true)
     get('Subscription/active/Subscriptions', param).then(res => {
@@ -153,7 +153,7 @@ const Dashboard = () => {
 
 
   useEffect(() => {
-    if (user.customerId || user?.id || user?._id) getActiveSubscription()
+    if (user?.customerId || user?.id || user?._id) getActiveSubscription()
     getCurrentSubscription()
     getMembershipDetail()
   }, [])
@@ -294,7 +294,7 @@ const Dashboard = () => {
   const [buyModal, setBuyModal] = useState(false);
   const buyBox = () => {
     if (boxButtonText == "Join Club") {
-      window.open(`${environment.joinUrl}?q=${user.id || user._id}`, "_new");
+      window.open(`${environment.joinUrl}?q=${user?.id || user?._id}`, "_new");
     } else {
       setBuyModal(true);
     }

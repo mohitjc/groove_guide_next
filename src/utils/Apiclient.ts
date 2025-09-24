@@ -31,7 +31,7 @@ interface ApiResponse<T = any> {
 type ControllerRef = { current: AbortController | null };
 
 const ApiClientB = (controllerRef: ControllerRef = { current: null }) => {
-  const user = useSelector((state: any) => state.user.data);
+  const user = useSelector((state: any) => state.user?.data);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const baseUrl = envirnment.api;
 

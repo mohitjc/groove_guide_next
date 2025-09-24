@@ -81,7 +81,7 @@ function SingleProduct({
     <>
       <div className={`imgtext border border-gray-300  hover:shadow-xl  ${outerdivClass}`}>
         <div className="overflow-hidden relative">
-          {user.loggedIn && !isBox && (
+          {user?.loggedIn && !isBox && (
             <a
               onClick={handleOnClick}
               className="h-10 w-10 bg-[#E0D5CE] rounded-full absolute right-5 top-3 flex items-center justify-center cursor-pointer shadow-md z-10"

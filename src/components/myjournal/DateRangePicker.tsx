@@ -28,7 +28,7 @@ const DateRangePicker = ({ value, onChange, dynamicStyle = false,
     showcustom = true,
     showRange = true,
 }:dateRangeType) => {
-    const user = useSelector((state:any) => state.user.data)
+    const user = useSelector((state:any) => state.user?.data)
     const [toggle, setToggle] = useState(false)
     const [range, setRange] = useState('')
 
@@ -274,21 +274,21 @@ const DateRangePicker = ({ value, onChange, dynamicStyle = false,
                                             <div className="px-1 py-1 ">
                                                 <Menu.Item>
                                                     {({ active }) => (
-                                                        <a className={`dropdown-item ${value.compare == 'Previous Month' ? 'active' : ''}`} onClick={e => compareChange('Previous Month')}>Previous Month ({datepipeModel.date(previousMonth().start, user.companyDateFormat)} - {datepipeModel.date(previousMonth().end, user.companyDateFormat)})</a>
+                                                        <a className={`dropdown-item ${value.compare == 'Previous Month' ? 'active' : ''}`} onClick={e => compareChange('Previous Month')}>Previous Month ({datepipeModel.date(previousMonth().start, user?.companyDateFormat)} - {datepipeModel.date(previousMonth().end, user?.companyDateFormat)})</a>
 
                                                     )}
                                                 </Menu.Item>
 
                                                 <Menu.Item>
                                                     {({ active }) => (
-                                                        <a className={`dropdown-item ${value.compare == 'Previous Year' ? 'active' : ''}`} onClick={e => compareChange('Previous Year')}>Previous Year(Same Date) ({datepipeModel.date(previousYear().start, user.companyDateFormat)} - {datepipeModel.date(previousYear().end, user.companyDateFormat)})</a>
+                                                        <a className={`dropdown-item ${value.compare == 'Previous Year' ? 'active' : ''}`} onClick={e => compareChange('Previous Year')}>Previous Year(Same Date) ({datepipeModel.date(previousYear().start, user?.companyDateFormat)} - {datepipeModel.date(previousYear().end, user?.companyDateFormat)})</a>
 
                                                     )}
                                                 </Menu.Item>
 
                                                 <Menu.Item>
                                                     {({ active }) => (
-                                                        <a className={`dropdown-item ${value.compare == 'Previous Period' ? 'active' : ''}`} onClick={e => compareChange('Previous Period')}>Previous Period(Custom Dates) ({datepipeModel.date(previousPeriod().start, user.companyDateFormat)} - {datepipeModel.date(previousPeriod().end, user.companyDateFormat)})</a>
+                                                        <a className={`dropdown-item ${value.compare == 'Previous Period' ? 'active' : ''}`} onClick={e => compareChange('Previous Period')}>Previous Period(Custom Dates) ({datepipeModel.date(previousPeriod().start, user?.companyDateFormat)} - {datepipeModel.date(previousPeriod().end, user?.companyDateFormat)})</a>
 
                                                     )}
                                                 </Menu.Item>

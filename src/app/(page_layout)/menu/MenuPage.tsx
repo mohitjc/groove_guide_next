@@ -405,7 +405,7 @@ function Discover() {
   const pathname = usePathname()||'/'
   const module1 = pathname.split('/')[1]
 const router=useRouter()
-  const   user: any = useSelector((state: RootState) => state.user.data);
+  const   user: any = useSelector((state: RootState) => state.user?.data);
 
   const query = useSearchParams();
   const prm = {

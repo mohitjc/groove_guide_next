@@ -44,7 +44,7 @@ export default function Layout({
   const pathname = usePathname()
   const spathname = pathname.split('/')[1]
   const query = useSearchParams()
-  const user: any = useSelector((state: RootState) => state.user.data);
+  const user: any = useSelector((state: RootState) => state.user?.data);
 
 
   const isCancel = spathname == 'cs' ? true : false
@@ -81,7 +81,7 @@ export default function Layout({
   const currentURL = `/${pathname}`;
 
   const getUserDetail = () => {
-    get("user/profile", { id: (user._id || user.id) }).then(async (res) => {
+    get("user/profile", { id: (user?._id || user?.id) }).then(async (res) => {
       if (res.success) {
         const data = { ...user, ...res.data };
         dispatch(login(data));
@@ -490,7 +490,7 @@ export default function Layout({
 
   const handleChangeEmail = () => {
     loaderHtml(true);
-    put("user/profile", { email: changedEmail, id: user._id }).then(
+    put("user/profile", { email: changedEmail, id: user?._id }).then(
       async (res) => {
         if (res.success) {
           loaderHtml(false);

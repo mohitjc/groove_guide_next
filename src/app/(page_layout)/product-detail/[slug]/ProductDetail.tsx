@@ -560,7 +560,7 @@ export default function ProductDetail({
         setImages(variant.image ? variant.images : data.images);
         post("menuAccess/page", {
           page: "menu-product",
-          userId: user.id || user._id,
+          userId: user?.id || user?._id,
           categoryId: data.category,
           productId: data._id,
         }).then(() => {});
@@ -669,7 +669,7 @@ export default function ProductDetail({
   useEffect(() => {
     if (product) {
       getProductReviews();
-      get("review/own", { user_id: user._id, product_id: product?.id }).then(
+      get("review/own", { user_id: user?._id, product_id: product?.id }).then(
         (res) => {
           if (res.success) {
             const data = res.data?.[0];

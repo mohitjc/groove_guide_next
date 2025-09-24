@@ -37,8 +37,8 @@ const [recieptModal, setRecieptModal] = useState('')
   const [membershipStatus, setMembershipStatus] = useState<any>();
 
   const {get,post,put}=ApiClientB()
-  const user = useSelector((state:any) => state.user.data);
-  const active=(user.id||user._id)
+  const user = useSelector((state:any) => state.user?.data);
+  const active=(user?.id||user?._id)
 
     const apiRef = useRef({
       membership: { current: null },
@@ -64,7 +64,7 @@ const [recieptModal, setRecieptModal] = useState('')
     const f = {
       ...filters,
       ...p,
-      email: user.email,
+      email: user?.email,
       search: search,
     };
     if(listController) listController.abort()
@@ -675,7 +675,7 @@ const filter = (p = {}) => {
             body={
               <>
                 <Notes
-                  userId={user.id || user._id}
+                  userId={user?.id || user?._id}
                   email={user?.email}
                   order_id={notesModal?.order_id}
                 />

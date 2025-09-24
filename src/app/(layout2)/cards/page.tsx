@@ -10,7 +10,7 @@ import Modal from "@/components/Modal";
 import EditAddress from "@/components/EditAddress";
 
 export default function Cards() {
-    const user = useSelector((state:any) => state.user.data)
+    const user = useSelector((state:any) => state.user?.data)
     const [membershipStatus, setMembershipStatus] = useState<any>();
     const [membership, setMembership] = useState<any>();
     const [showEditAddress, setShowEditAddress] = useState('');
@@ -260,7 +260,7 @@ export default function Cards() {
                 <h5 className="font-bold mb-3">Payments Detail</h5>
                 <div className="">
                     <CardDetails
-                        userId={user?._id || user.id}
+                        userId={user?._id || user?.id}
                         detail={user}
                         result={() => {
                         }}

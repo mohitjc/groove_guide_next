@@ -11,7 +11,7 @@ import Image from "next/image";
 function RewardRequest() {
     const {get}=ApiClientB()
   const navigate = useRouter();
-  const user = useSelector((state:any) => state.user.data);
+  const user = useSelector((state:any) => state.user?.data);
   const [total, setTotal] = useState(0);
   const [rewards, setRewards] = useState([]);
   const [rewardTypes, setRewardTypes] = useState([]);
@@ -87,7 +87,7 @@ function RewardRequest() {
     const filter = {
       ...filters,
       ...p,
-      userId: user.id || user._id,
+      userId: user?.id || user?._id,
     };
 
     get(`review/googleReviewList`, filter).then((res) => {

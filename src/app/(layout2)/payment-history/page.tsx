@@ -20,7 +20,7 @@ function PaymentHistory() {
   const [filters, setFilter] = useState<any>({ page: 1, count: 50 });
   const [notesModal, setNotesModal] = useState<any>();
   const [recieptModal, setRecieptModal] = useState<any>()
-  const user = useSelector((state:any) => state.user.data);
+  const user = useSelector((state:any) => state.user?.data);
   const {get}=ApiClientB()
 
   const apiRef = useRef({
@@ -39,7 +39,7 @@ function PaymentHistory() {
     const f = {
       ...filters,
       ...p,
-      userId: (user.id || user._id),
+      userId: (user?.id || user?._id),
     };
     if (listController) listController.abort()
     getList(`payments/list`, f).then((res) => {
@@ -356,7 +356,7 @@ function PaymentHistory() {
             body={
               <>
                 <Notes
-                  userId={user.id || user._id}
+                  userId={user?.id || user?._id}
                   email={user?.email}
                   order_id={notesModal?.order_id}
                 />
