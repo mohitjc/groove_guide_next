@@ -312,7 +312,7 @@ const FormControl = memo(function FormControl({
                         <input
                           type="radio"
                           checked={value == itm.id ? true : false}
-                          onChange={(e) => onChange(itm.id)}
+                          onChange={() => onChange(itm.id)}
                           className="mr-2"
                           name={name}
                           autoComplete="off"
@@ -335,7 +335,7 @@ const FormControl = memo(function FormControl({
                   <input
                     type="checkbox"
                     checked={value?.includes(itm.id) ? true : false}
-                    onChange={(e) => addItem(itm.id)}
+                    onChange={() => addItem(itm.id)}
                     className="mr-2"
                     autoComplete="off"
                   />

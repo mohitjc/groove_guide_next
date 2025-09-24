@@ -40,6 +40,7 @@ import { IoLogOutOutline } from "react-icons/io5";
 
 
 
+
 export default function Layout({
   children,
 }: Readonly<{
@@ -310,7 +311,7 @@ export default function Layout({
   }, [user]);
 
   const [isOpen1, setIsOpen1] = useState(false)
-  const [isOpen2, setIsOpen2] = useState(false)
+
   const [loginForm, setLoginForm] = useState<any>({ email: '', mobileNo: '', lastName: '', firstName: '', birthday: '' })
   const [isForgot, setForgot] = useState(false)
   const [signupModal, setSignupModal] = useState(false)
@@ -335,7 +336,7 @@ export default function Layout({
   function closeModal() {
     setIsOpen1(false)
     setIsOpen(false)
-    setIsOpen2(false)
+
   }
 
   function openModal() {
@@ -464,7 +465,6 @@ export default function Layout({
   useEffect(() => {
     if (user) {
       setIsOpen1(false)
-      setIsOpen2(false)
     }
   }, [user])
 
@@ -943,14 +943,11 @@ export default function Layout({
                 </div>
                 <div className="flex flex-col items-center border border-gray-200   w-full p-6 md:!p-10 2xl:!px-20 2xl:!pt-16 2xl:!pb-12 rounded-xl shadow ">
                   <Link href={"/profile"}>
-                    <img
-                      src={
-                        userImg
+                    <Image
+                        src={userImg
                           ? methodModel.userImg(user.image || "")
-                          : "../assets/img/person.jpg"
-                      }
-                      className="h-32 w-32 mx-auto rounded-full object-cover"
-                    />
+                          : "../assets/img/person.jpg"}
+                        className="h-32 w-32 mx-auto rounded-full object-cover" alt={""}                    />
                   </Link>
 
                   <div className="flex items-center justify-center gap-2 flex-col mt-4">

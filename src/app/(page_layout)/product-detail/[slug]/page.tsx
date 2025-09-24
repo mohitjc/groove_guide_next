@@ -35,7 +35,7 @@ function ViewProduct() {
    get("product/detail", { slug: id.slug, user_id: user?._id }).then(
       (res) => {
         if (res.success) {
-          let data=res.data
+          const data=res.data
           if(!data.id) data.id=data._id
           data.sub_products=data.sub_products.map((itm:any,i:any)=>{
             itm.id=itm.id||itm.randomId||String(i)
@@ -109,9 +109,10 @@ function ViewProduct() {
 
         <div className="">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-6">
-            {relatedProducts?.map((product) => {
+            {relatedProducts?.map((product,i) => {
               return (
                 <SingleProduct
+                key={i}
                   item={product}
                   onClick={(id:string) => {
                     handleFavClick(id);

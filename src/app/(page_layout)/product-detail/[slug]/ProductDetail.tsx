@@ -1,13 +1,11 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { MdKeyboardArrowLeft } from "react-icons/md";
-import { useRouter, useParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { useSelector } from "react-redux";
 import ApiClientB from "@/utils/Apiclient";
 import methodModel from "@/utils/methodModel";
-import moment from "moment";
-import { loaderHtml, noImg } from "@/utils/shared";
+import { loaderHtml } from "@/utils/shared";
 import FormControl from "@/components/FormControl";
 
 import Slider from "../../../../components/SlickSlider";
@@ -21,6 +19,7 @@ import speechModel from "../../../../utils/speech.model";
 import ImageHtml from "../../../../components/ImageHtml";
 import { TbMessageStar } from "react-icons/tb";
 import SpeachToText from "../../../../components/menu/SpeachToText";
+import Image from "next/image";
 
 const dietaryList = ["glutenFree", "nutFree", "dairyFree", "vegan"];
 
@@ -28,7 +27,7 @@ const ProductLabel = ({ product, pProduct, onImageClick = () => {} }: any) => {
   if (!product) return <></>;
 
   const flavourClick = (f: any) => {
-    let payload: any = {
+    const payload: any = {
       flavourId: f.id,
       ingredients: f.ingredient,
       description: f.description,
@@ -50,11 +49,11 @@ const ProductLabel = ({ product, pProduct, onImageClick = () => {} }: any) => {
       <div className="mt-2 shadow-lg bg-white rounded-xl">
         {/* <div className="flex justify-between imagesline">
           <div>
-            <img src="../assets/img/line.png" className="h-16" alt=""/>
+            <Image src="../assets/img/line.png" className="h-16" alt=""/>
           </div>
           <div className="rotate-180">
         
-            <img src="../assets/img/line.png" className="h-16" alt=""/>
+            <Image src="../assets/img/line.png" className="h-16" alt=""/>
           </div>
       </div> */}
         <div className="px-4 lg:px-6 py-6">
@@ -93,8 +92,9 @@ const ProductLabel = ({ product, pProduct, onImageClick = () => {} }: any) => {
                           Flavor(s):
                         </p>
                         <div className="flex flex-wrap gap-2 pl-3 mt-2">
-                          {product?.flavour?.map((item: any) => (
+                          {product?.flavour?.map((item: any,i:any) => (
                             <span
+                            key={i}
                               onClick={() => flavourClick(item)}
                               className={`capitalize inline-block rounded-lg py-1 px-2 cursor-pointer ${
                                 product?.flavourId == item.id
@@ -139,8 +139,9 @@ const ProductLabel = ({ product, pProduct, onImageClick = () => {} }: any) => {
                         Flavor(s):
                       </p>
                       <div className="flex flex-wrap gap-2 pl-3 mt-2">
-                        {product?.flavour?.map((item: any) => (
-                          <span
+                        {product?.flavour?.map((item: any,i:any) => (
+                            <span
+                            key={i}
                             onClick={() => flavourClick(item)}
                             className={`capitalize inline-block rounded-lg py-1 px-2 cursor-pointer ${
                               product?.flavourId == item.id
@@ -371,7 +372,7 @@ const ProductLabel = ({ product, pProduct, onImageClick = () => {} }: any) => {
           <div className="flex gap-2 lg:gap-6 flex-wrap mt-4">
             {product?.vegan ? (
               <>
-                <img
+                <Image
                   src="/assets/img/vegan.png"
                   className="h-12 md:h-16 "
                   title="Vegan"
@@ -383,7 +384,7 @@ const ProductLabel = ({ product, pProduct, onImageClick = () => {} }: any) => {
             )}
             {product?.dairyFree ? (
               <>
-                <img
+                <Image
                   src="/assets/img/dairyfree.png"
                   className="h-16  md:h-20"
                   title="Dairy Free"
@@ -395,7 +396,7 @@ const ProductLabel = ({ product, pProduct, onImageClick = () => {} }: any) => {
             )}
             {product?.glutenFree ? (
               <>
-                <img
+                <Image
                   src="/assets/img/glutenfree.png"
                   className="h-16  md:h-20"
                   title="Gluten Free"
@@ -407,7 +408,7 @@ const ProductLabel = ({ product, pProduct, onImageClick = () => {} }: any) => {
             )}
             {product?.nutFree ? (
               <>
-                <img
+                <Image
                   src="/assets/img/nutfree.png"
                   className="h-16  md:h-20"
                   title="Peanut Free"
@@ -422,7 +423,7 @@ const ProductLabel = ({ product, pProduct, onImageClick = () => {} }: any) => {
           <div className="md:flex hidden  gap-4 mt-1 justify-end">
             {/* <div className="barcode mt-2 w-full">
             <div className="flex items-end gap-2">
-              <img src="../assets/img/barcode.png" alt="" className="lg:h-12 h-28 w-full  object-cover" />
+              <Image src="../assets/img/barcode.png" alt="" className="lg:h-12 h-28 w-full  object-cover" />
               <p className="font-bold text-xl">{pipeModel.currency(product?.price)}</p>
             </div>
             <div className="text-center">
@@ -440,7 +441,7 @@ const ProductLabel = ({ product, pProduct, onImageClick = () => {} }: any) => {
                   <p className="lg:text-md text-lg text-primary font-medium">Scan for your </p>
                   <p className="lg:text-lg text-xl text-primary font-bold">GROOVE GUIDE:</p>
                 </div>
-                <img src={methodModel.noImg(product?.qr_image)} alt="" className="lg:h-24 h-40  object-contain" />
+                <Image src={methodModel.noImg(product?.qr_image)} alt="" className="lg:h-24 h-40  object-contain" />
             </div>
           
             
@@ -449,11 +450,11 @@ const ProductLabel = ({ product, pProduct, onImageClick = () => {} }: any) => {
         </div>
         {/* <div className="flex justify-between imagesline">
           <div>
-            <img src="../assets/img/line.png" className="h-16" alt=""/>
+            <Image src="../assets/img/line.png" className="h-16" alt=""/>
           </div>
           <div className="rotate-180">
         
-            <img src="../assets/img/line.png" className="h-16" alt=""/>
+            <Image src="../assets/img/line.png" className="h-16" alt=""/>
           </div>
       </div> */}
       </div>
@@ -492,7 +493,7 @@ export default function ProductDetail({
     get("product/detail", { slug: id, user_id: user?._id }).then((res) => {
       loaderHtml(false);
       if (res.success) {
-        let data = res.data;
+        const data = res.data;
         if (!data.id) data.id = data._id;
         // data.quantity_type=data.servingSize
         // data.quantity=data.servingperContainer
@@ -518,7 +519,7 @@ export default function ProductDetail({
         let payload: any = {};
         if (data?.flavour?.length) {
           let f = data?.flavour[0];
-          let ext = data?.flavour.find((item: any) => {
+          const ext = data?.flavour.find((item: any) => {
             let value = true;
             Object.keys(dietary).map((key) => {
               if (dietary[key] && !item.dietary?.includes(key)) {
@@ -541,7 +542,7 @@ export default function ProductDetail({
           });
         }
 
-        let variant = {
+        const variant = {
           ...data,
           ...payload,
         };
@@ -554,7 +555,7 @@ export default function ProductDetail({
           userId: user.id || user._id,
           categoryId: data.category,
           productId: data._id,
-        }).then((res) => {});
+        }).then(() => {});
 
         get("tag/list", {
           sortBy: "name asc",
@@ -639,7 +640,7 @@ export default function ProductDetail({
 
   const handleTagClick = (id: any) => {
     let arr: any = reviewForm.tags || [];
-    let ext = arr.find((itm: any) => itm.id == id);
+    const ext = arr.find((itm: any) => itm.id == id);
     if (ext) arr = arr.filter((itm: any) => itm.id != id);
     else arr.push({ id: id, value: true });
     setReviewForm((prev) => ({
@@ -663,7 +664,7 @@ export default function ProductDetail({
       get("review/own", { user_id: user._id, product_id: product?.id }).then(
         (res) => {
           if (res.success) {
-            let data = res.data?.[0];
+            const data = res.data?.[0];
             if (data) {
               setReviewForm({
                 personal_notes: data.personal_notes,
@@ -688,18 +689,7 @@ export default function ProductDetail({
     productReviews &&
     productReviews.sort((a: any, b: any) => b.count - a.count);
 
-  const highestValue = sorted[0]?.count;
 
-  const getHeightPercentage = (part: any, whole: any) => {
-    // Calculate the fraction
-    let fraction = part / whole;
-
-    // Convert fraction to percentage
-    let percentage = fraction * 100;
-
-    // Return the percentage
-    return percentage;
-  };
 
   const handleImageClick = (itm: any) => {
     setSelectedVariant(itm);
@@ -723,8 +713,8 @@ export default function ProductDetail({
     setSpeachStart(false);
   };
 
-  const voice = (p: any) => {
-    let voiceBtn = document.getElementById("voiceBtn");
+  const voice = () => {
+    const voiceBtn = document.getElementById("voiceBtn");
     if (speachStart) {
       stop();
       return;
@@ -744,7 +734,7 @@ export default function ProductDetail({
         .map((result) => result.transcript)
         .join("\n");
 
-      let el: any = document.getElementById("voicemessage");
+      const el: any = document.getElementById("voicemessage");
 
       let message = reviewForm.personal_notes;
 
@@ -901,7 +891,7 @@ export default function ProductDetail({
                       {productReviews?.length == 0 && (
                         <div className="text-center h-[300px] flex items-center justify-center">
                           <div className="flex flex-col gap-6">
-                            <img
+                            <Image
                               src="/assets/img/noproducts.png"
                               alt=""
                               className="h-36 mx-auto"
@@ -915,7 +905,7 @@ export default function ProductDetail({
                       {productReviews && productReviews?.length > 0 && (
                         <div className="flex justify-start gap-4 h-[450px] md:h-[500px]">
                           {productReviews?.map((item: any) => {
-                            let tag = item?.tag_detail;
+                            const tag = item?.tag_detail;
                             // if(!item.tag_detail&&item.other)tag={name:'Other'}
                             if (tag)
                               return (
@@ -985,10 +975,9 @@ export default function ProductDetail({
                                             <TooltipHtml title="Verified">
                                               <div className="bg-white flex  items-center justify-center rounded-[4px]  mb-3 ">
                                                 <div className="flex flex-col gap-1 py-1  items-center  ">
-                                                  <img
+                                                  <Image
                                                     src="/assets/img/veri.png"
-                                                    className="w-[20px] h-[20px] mx-auto"
-                                                  />
+                                                    className="w-[20px] h-[20px] mx-auto" alt={""}                                                  />
                                                   <span className="text-xs  text-center  relative px-1">
                                                     Verified{" "}
                                                   </span>
@@ -1010,10 +999,9 @@ export default function ProductDetail({
                                             <TooltipHtml title="Un-verified">
                                               <div className="bg-white flex  items-center justify-center rounded-[4px]  mb-3 ">
                                                 <div className="flex flex-col gap-1 py-1  items-center  ">
-                                                  <img
+                                                  <Image
                                                     src="/assets/img/inveri.png"
-                                                    className="w-[20px] h-[20px] mx-auto"
-                                                  />
+                                                    className="w-[20px] h-[20px] mx-auto" alt={""}                                                  />
                                                   <span className="text-xs  text-center  relative px-1">
                                                     Unverified{" "}
                                                   </span>

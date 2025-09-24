@@ -1,9 +1,8 @@
 'use client'
 import { useEffect, useRef } from "react";
-import { Dialog } from "@headlessui/react";
-import { Fragment, useState } from "react";
+import { useState } from "react";
 import Breadcrumb from "@/components/Breadcrumb";
-import { loaderHtml, noImg, replaceUrl, scrollId } from "@/utils/shared";
+import { loaderHtml, noImg } from "@/utils/shared";
 import ApiClientB from "@/utils/Apiclient";
 import FormControl from "../../../components/FormControl";
 import { toast } from "react-toastify";
@@ -12,7 +11,6 @@ import moment from "moment";
 import { Tab } from "@headlessui/react";
 import speechModel from "@/utils/speech.model";
 import NewQR from "../../../components/myjournal/NewQr";
-import { Transition } from "@headlessui/react";
 import { useSelector } from "react-redux";
 import DateRangePicker from "../../../components/myjournal/DateRangePicker";
 import Table from "../../../components/Table";
@@ -20,6 +18,7 @@ import { MdClose } from "react-icons/md";
 import Modal from "@/components/Modal";
 import { useParams } from 'next/navigation'
 import methodModel from "@/utils/methodModel";
+import Image from "next/image";
 
 
 function classNames(...classes:any) {
@@ -42,15 +41,15 @@ type listHtml={
 }
   
 const MyJournal = ({ images, comment, product, createdAt ,seeNote}:myJou) => {
-  let time = moment(createdAt).format("dddd, MMMM YYYY");
-  let date = moment(createdAt).format("DD");
+  const time = moment(createdAt).format("dddd, MMMM YYYY");
+  const date = moment(createdAt).format("DD");
   const history=useRouter()
-  const [showFullText, setShowFullText] = useState(false);
-  const maxLength = 25;
-  const truncatedText =
-    comment?.length > maxLength
-      ? comment?.slice(0, maxLength) + "..."
-      : comment;
+
+  // const maxLength = 25;
+  // const truncatedText =
+  //   comment?.length > maxLength
+  //     ? comment?.slice(0, maxLength) + "..."
+  //     : comment;
 
       const view=()=>{
         if(product.product_slug){
@@ -68,15 +67,12 @@ const MyJournal = ({ images, comment, product, createdAt ,seeNote}:myJou) => {
           <div className="flex flex-col lg:flex-row gap-4 items-center">
             <div className="drop-shadow-xl  lg:h-32 lg:w-32 xl:h-40 xl:w-40 shrink-0">
               {images && images?.length > 0 && (
-                <img
-                  src={
-                    images
-                      ? noImg(images[0])
-                      : "../assets/img/mush2.png"
-                  }
-                  onClick={()=>view()}
-                  className="  h-full w-full object-contain rounded-[38px] custom_shadow_small bg-gray-200 "
-                />
+                <Image
+                src={images
+                  ? noImg(images[0])
+                  : "../assets/img/mush2.png"}
+                onClick={() => view()}
+                className="  h-full w-full object-contain rounded-[38px] custom_shadow_small bg-gray-200 " alt={""}                />
               )}
             </div>
 
@@ -128,7 +124,7 @@ function Index() {
   const [personalNote, setPersonalNote] = useState('');
   const [loading, setLoader] = useState(false);
   const [submitted, setSubmitted] = useState(false);
-  const [product, setProduct] = useState();
+  // const [product, setProduct] = useState();
   const [categoryOptions, setCategoryOptions] = useState([]);
   const [subCategoryOptions, setSubcategory] = useState([]);
   const [productOptions, setProductOptions] = useState([]);
@@ -136,10 +132,10 @@ function Index() {
   const [reviewTags, setReviewTags] = useState<any>([]);
   const [filters, setFilter] = useState({startDate:'',endDate:'',page:1,count:12});
   const [speachStart, setSpeachStart] = useState(false);
-  const privacyOptions = [
-    { id: "public", name: "Public" },
-    { id: "private", name: "Private" },
-  ];
+  // const privacyOptions = [
+  //   { id: "public", name: "Public" },
+  //   { id: "private", name: "Private" },
+  // ];
 
   const theraTag=productTags?.filter((itm:any)=>itm.type=='Therapeutic Use')||[]
   const fucTag=productTags.filter((itm:any)=>itm.type!='Therapeutic Use')||[]
@@ -152,12 +148,12 @@ function Index() {
 
   const {get,post}=ApiClientB()
   const {get:getProduct,isLoading:isProductLoading,controller:productController}=ApiClientB(apiRef.current.product)
-  const {get:getTags,isLoading:isTagsLoading,controller:tagsController}=ApiClientB(apiRef.current.tags)
-  const {get:getProductDetail,isLoading:isProductDetailLoading,controller:productDetailController}=ApiClientB(apiRef.current.productDetail)
+  const {get:getTags,controller:tagsController}=ApiClientB(apiRef.current.tags)
+  const {get:getProductDetail,controller:productDetailController}=ApiClientB(apiRef.current.productDetail)
   const {get:getCategory,isLoading:isCategoryLoading,controller:catetgoryController}=ApiClientB(apiRef.current.category)
 
-  let [isOpen, setIsOpen] = useState(false);
-  let [form, setform] = useState<any>({
+  const [isOpen, setIsOpen] = useState(false);
+  const [form, setform] = useState<any>({
     id: "",
     category: "",
     sub_category: "",
@@ -202,7 +198,7 @@ function Index() {
     }).then((res) => {
       loaderHtml(false)
       if (res.success) {
-        setProduct(res?.data);
+        // setProduct(res?.data);
         openModal();
         setform({
           ...form,
@@ -235,7 +231,7 @@ function Index() {
   };
 
   const getCategories = (p = {}) => {
-    let f = {
+    const f = {
       ...p,
       type: "product",
       category_type: "master",
@@ -243,7 +239,7 @@ function Index() {
     };
    get("category/listing", f).then((res) => {
       if (res.success) {
-        let _options = res?.data?.map(({ id, name }:any) => {
+        const _options = res?.data?.map(({ id, name }:any) => {
           return { id: id, name: name };
         });
         setCategoryOptions(_options);
@@ -252,7 +248,7 @@ function Index() {
   };
 
   const getSubCategories = (p = {}) => {
-    let f = {
+    const f = {
       ...p,
       type: "product",
       status:'active',
@@ -264,7 +260,7 @@ function Index() {
     if(catetgoryController) catetgoryController.abort()
     getCategory("category/listing", f).then((res) => {
       if (res.success) {
-        let options = res?.data?.map(({ id, name }:any) => {
+        const options = res?.data?.map(({ id, name }:any) => {
           return { id: id, name: name };
         });
         setSubcategory(options);
@@ -273,7 +269,7 @@ function Index() {
   };
 
   const getProductsList = () => {
-    let f = {
+    const f = {
       category:form.category||'',
       sub_category: form.sub_category||'',
       status:'active'
@@ -281,7 +277,7 @@ function Index() {
     if(productController) productController.abort()
     getProduct("product/listing", f).then((res) => {
       if (res.success) {
-        let options = res?.data?.map(({ id, name,product_slug }:any) => {
+        const options = res?.data?.map(({ id, name,product_slug }:any) => {
           return { id: id, name: name,product_slug };
         });
         setProductOptions(options);
@@ -291,7 +287,7 @@ function Index() {
 
   const handleTagClick = (id:any) => {
     let arr:any=reviewTags||[]
-    let ext=arr.find((itm:any)=>itm.id==id)
+    const ext=arr.find((itm:any)=>itm.id==id)
     if(ext)arr=arr.filter((itm:any)=>itm.id!=id)
     else arr.push({ id: id, value: true})
 
@@ -326,7 +322,7 @@ function Index() {
   const handleSubmit = (e:any) => {
     e.preventDefault();
     setSubmitted(true);
-    let invalid = methodModel.getFormError(formValidation, form);
+    const invalid = methodModel.getFormError(formValidation, form);
 
     if (invalid || reviewTags?.length == 0) return;
     let payload;
@@ -340,7 +336,7 @@ function Index() {
     }
 
 
-    let slug=form?.product_slug||''
+    const slug=form?.product_slug||''
 
     loaderHtml(true);
     post("review/add", payload).then((res) => {
@@ -397,7 +393,7 @@ function Index() {
   }
 
   const clear=()=>{
-    let p={
+    const p={
       startDate:'',
       endDate:''
     }
@@ -419,7 +415,7 @@ function Index() {
   };
 
   const voice = () => {
-    let voiceBtn = document.getElementById("voiceBtn");
+    const voiceBtn = document.getElementById("voiceBtn");
     if (speachStart) {
       stop();
       return;
@@ -439,7 +435,7 @@ function Index() {
         .map((result) => result.transcript)
         .join("\n");
 
-      let el:any = document.getElementById("voicemessage");
+      const el:any = document.getElementById("voicemessage");
 
       let message = form.comment;
 
@@ -559,7 +555,7 @@ function Index() {
           nodata={<>
           <div className="col-span-12 text-center h-[300px] flex items-center justify-center">
               <div className="flex flex-col gap-6">
-                <img
+                <Image
                   src="/assets/img/noproducts.png"
                   alt=""
                   className="h-36 mx-auto"
@@ -716,10 +712,9 @@ function Index() {
                                                   handleTagClick(tag.id);
                                                 }}
                                               >
-                                                <img
+                                                <Image
                                                   src={methodModel.noImg(tag.image)}
-                                                  className="h-16 w-16 object-cover rounded-full"
-                                                />
+                                                  className="h-16 w-16 object-cover rounded-full" alt={""}                                                />
                                                 <div>{tag.name}</div>
                                               </label>
                                             </>
@@ -749,10 +744,9 @@ function Index() {
                                                   handleTagClick(tag.id);
                                                 }}
                                               >
-                                                <img
+                                                <Image
                                                   src={methodModel.noImg(tag.image)}
-                                                  className="h-16 w-16 object-cover rounded-full"
-                                                />
+                                                  className="h-16 w-16 object-cover rounded-full" alt={""}                                                />
                                                 <div>{tag.name}</div>
                                               </label>
                                             </>

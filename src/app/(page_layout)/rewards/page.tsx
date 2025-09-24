@@ -2,9 +2,7 @@
 
 import { useEffect, useState } from "react";
 import ApiClientB from "@/utils/Apiclient";
-import methodModel from "@/utils/methodModel";
-import { loaderHtml, noImg } from "@/utils/shared";
-import { useRouter, useParams } from "next/navigation";
+import { useParams } from "next/navigation";
 
 import FormControl from "@/components/FormControl";
 import Table from "../../../components/Table";
@@ -15,9 +13,10 @@ import pipeModel from "@/utils/pipeModel";
 
 import ClaimReward from "../ClaimReward/page";
 import RewardRequest from "./RewardRequest";
+import Image from "next/image";
 
 function Rewards() {
- const {get,post}=ApiClientB()
+ const {get}=ApiClientB()
   const user = useSelector((state:any) => state.user.data);
   const [total, setTotal] = useState(0);
   const [rewards, setRewards] = useState([]);
@@ -83,7 +82,7 @@ function Rewards() {
 
   const getRewards = (p = {}) => {
     setLoader(true);
-    let filter = {
+    const filter = {
       ...filters,
       email: user?.email,
     };
@@ -100,7 +99,7 @@ function Rewards() {
   };
 
   const getTypes = (p = {}) => {
-    let filter = {
+    const filter = {
       status: 'active'
     };
     get(`settings/list`, filter).then(
@@ -119,7 +118,7 @@ function Rewards() {
   }
 
   const clear = () => {
-    let f = {
+    const f = {
       page: 1,
       reward_type: '',
       type: ''
@@ -223,7 +222,7 @@ function Rewards() {
                                           nodata={<>
                                               <div className="col-span-12 text-center h-[300px] flex items-center justify-center">
                                                   <div className="flex flex-col gap-6">
-                                                      <img
+                                                      <Image
                                                           src="/assets/img/noproducts.png"
                                                           alt=""
                                                           className="h-36 mx-auto" />
@@ -253,7 +252,7 @@ function Rewards() {
               
             </div>
             {/* <div className="flex flex-col gap-6">
-              <img src="/assets/img/noproducts.png" alt="" className="h-36 mx-auto" />
+              <Image src="/assets/img/noproducts.png" alt="" className="h-36 mx-auto" />
               <p className="text-center text-gray-400 text-[18px] font-regular">
                 No Rewards.
               </p>

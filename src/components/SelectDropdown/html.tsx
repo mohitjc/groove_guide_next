@@ -12,9 +12,8 @@ const Html = ({
   dynamicStyle = false,
   onFocus = () => { },
   className = "",
-  inputValue = "",
   selectedValues,
-  onInputChange = (e: any) => { },
+  onInputChange = () => { },
   handleChange = () => { },
   displayValue,
   id = "",
@@ -32,7 +31,7 @@ const Html = ({
   // menuIsOpen=false
 }: any) => {
   const categoryVal = () => {
-    let ext = options && options.find((item: any) => item?.id == selectedValues);
+    const ext = options && options.find((item: any) => item?.id == selectedValues);
     return ext ? { value: ext.id, label: ext[displayValue] } : selectedValues ? {
       value: selectedValues,
       label: selectedValues
@@ -94,7 +93,7 @@ const Html = ({
               };
               handleChange(inputValue || "")
               setOptions((prev: any) => {
-                let data = prev || []
+                const data = prev || []
                 return ([...data, newOption])
               })
               // handleChange(inputValue); // or full newOption if needed
@@ -161,7 +160,7 @@ const Html = ({
                             <>
                               {noDefault ? (
                                 <Menu.Item disabled={disabled}>
-                                  {({ active }) => (
+                                  {() => (
                                     <a
                                       className={
                                         selectedValues == ""
@@ -176,7 +175,7 @@ const Html = ({
                                 </Menu.Item>
                               ) : (
                                 <Menu.Item>
-                                  {({ active }) => (
+                                  {() => (
                                     <a
                                       className={
                                         selectedValues == ""
@@ -193,10 +192,10 @@ const Html = ({
                             </>
                           )}
                           {options &&
-                            options.map((itm: any) => {
+                            options.map((itm: any,i:any) => {
                               return (
-                                <Menu.Item>
-                                  {({ active }) => (
+                                <Menu.Item key={i}>
+                                  {({  }) => (
                                     <a
                                       className={
                                         selectedValues == itm.id

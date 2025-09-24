@@ -5,7 +5,7 @@ import Pagination from 'react-paginate';
 
 type dateRangeType={
   
- className:String;
+ className:string;
   data :any;
   theme?:string;
   ListHtml?:any;
@@ -17,7 +17,7 @@ type dateRangeType={
   page :any;
   result : (e:any) =>void;
   nodata:any;
-  itemProps? :Object;
+  itemProps? :object;
 
 }
 const Table = ({
@@ -31,16 +31,12 @@ const Table = ({
   count = 50,
   total = 0,
   page = 1,
-  result = (e:any) => {},
+  result = () => {},
   nodata='',
   itemProps = {},
 }:dateRangeType) => {
-  const [pageSize, setPageSize] = useState(count);
 
-  const handlePageSizeChange = (e:any) => {
-    setPageSize(parseInt(e.target.value));
-    result({ event: "count", value: parseInt(e.target.value) });
-  };
+
 
   const handlePaginate = (e:any) => {
     result({ event: "page", value: e });
@@ -57,13 +53,6 @@ const Table = ({
   };
 
   // Generate options array based on the total value
-  const generateOptions = () => {
-    const options = [];
-    for (let i = 10; i <= total; i += 10) {
-      options.push(i);
-    }
-    return options;
-  };
 
   return (
     <>

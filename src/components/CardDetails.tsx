@@ -1,4 +1,4 @@
-import { Fragment, memo, useEffect, useMemo, useState } from "react";
+import { Fragment, useEffect, useMemo, useState } from "react";
 import ApiClientB from "@/utils/Apiclient";
 import Tabs from "./Tabs";
 import FormControl from "@/components/FormControl";
@@ -11,9 +11,10 @@ import { toast } from "react-toastify";
 import Table from "./Table";
 import TooltipHtml from "@/components/TooltipHtml";
 import { billingAddress } from "@/utils/shared.utils";
+import Image from "next/image";
 
-const CardDetails = memo(({ userId, detail, result = () => {} }:any) => {
-  const { get: getData, isLoading: loading,get,post,put } = ApiClientB();
+const CardDetails = (({ userId, detail, result = () => {} }:any) => {
+  const { get: getData, isLoading: loading,post,put } = ApiClientB();
   const [data, setData] = useState([]);
   const [tab, setTab] = useState("list");
   const [submitted, setSubmitted] = useState(false);
@@ -30,18 +31,18 @@ const CardDetails = memo(({ userId, detail, result = () => {} }:any) => {
   });
 
   const getCardDetail = () => {
-    let f = {
+    const f = {
       userId: userId,
     };
     getData("orders/cardDetails", f).then((res) => {
       if (res.success) {
-        let data = res.data.map((itm:any) => ({
+        const data = res.data.map((itm:any) => ({
           ...itm,
           _id: itm.token,
           isPrimary:
             JSON.parse(itm.isPrimary || "false") || itm.default || false,
         }));
-        let ext = data.find((itm:any) => itm.isPrimary);
+        const ext = data.find((itm:any) => itm.isPrimary);
         if (ext) {
           result({
             action: "primary",
@@ -96,7 +97,7 @@ const CardDetails = memo(({ userId, detail, result = () => {} }:any) => {
       return
     }
 
-    let payload = {
+    const payload = {
       email: detail?.email,
       userId: userId,
       card: {
@@ -127,10 +128,6 @@ const CardDetails = memo(({ userId, detail, result = () => {} }:any) => {
           // addCard()
         } else {
           loaderHtml(false);
-          let message =
-            res?.error?.message?.error?.message ||
-            res.error.message ||
-            res?.message;
           // toast.error(message);
         }
       }
@@ -165,7 +162,7 @@ const CardDetails = memo(({ userId, detail, result = () => {} }:any) => {
   ];
 
   const months = useMemo(() => {
-    let arr = datepipeModel.monthArray.map((itm:any) => ({
+    const arr = datepipeModel.monthArray.map((itm:any) => ({
       ...itm,
       id: itm.id + 1,
     }));
@@ -174,7 +171,7 @@ const CardDetails = memo(({ userId, detail, result = () => {} }:any) => {
 
 
   const setPrimary = (row:any) => {
-    let payload = {
+    const payload = {
       user_id: userId,
       card_token: row.token,
       isPrimary: true,
@@ -189,8 +186,8 @@ const CardDetails = memo(({ userId, detail, result = () => {} }:any) => {
   };
 
   const deleteCard = (itm:any) => {
-    let ext = data.find((ditm:any) => ditm.validate) || data?.[0]
-    let payload:any = {
+    const ext = data.find((ditm:any) => ditm.validate) || data?.[0]
+    const payload:any = {
       email: detail?.email,
       cardToken: itm.token,
       user_id: userId
@@ -223,10 +220,10 @@ const CardDetails = memo(({ userId, detail, result = () => {} }:any) => {
 
 
   const primaryCard = useMemo(() => {
-    let ext:any = data.find((itm:any) => itm.isPrimary)
+    const ext:any = data.find((itm:any) => itm.isPrimary)
     if (!ext) return null
 
-    let card:any = {
+    const card:any = {
       number: String(ext.card_number || ''),
       card_number:String(ext.card_number || ''),
       brand: ext.card_type,
@@ -251,7 +248,7 @@ const CardDetails = memo(({ userId, detail, result = () => {} }:any) => {
               <input
                 type="checkbox"
                 checked={row.isPrimary ? true : false}
-                onChange={(e) => {}}
+                onChange={() => {}}
                 className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
               />
             </label>
@@ -426,13 +423,13 @@ const CardDetails = memo(({ userId, detail, result = () => {} }:any) => {
                                   </div>
 
                                   <div className="absolute top-[5px] right-[20px] w-[60px] h-auto opacity-80">
-                                    <img
+                                    <Image
                                       src={`/assets/img/cards/${itm?.card_type?.toLowerCase()}.png`}
                                       alt={itm.card_type}
                                     />
                                   </div>
                                   <div className="absolute top-[65px] left-[20px] w-[40px] h-auto opacity-80">
-                                    <img
+                                    <Image
                                       src="../assets/img/cards/chip.png"
                                       alt="chip"
                                     />
@@ -476,7 +473,7 @@ const CardDetails = memo(({ userId, detail, result = () => {} }:any) => {
                                                   data={data}
                                                   columns={columns}
                                                   total={data?.length}
-                                                  nodata="No Cards." count={undefined} page={undefined} result={function (e: any): void {
+                                                  nodata="No Cards." count={undefined} page={undefined} result={function (): void {
                                                       throw new Error("Function not implemented.");
                                                   } }                    />
                   </>

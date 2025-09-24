@@ -10,7 +10,6 @@ import FormControl from "@/components/FormControl";
 import {
   boxPreferenceList,
   boxtrackUrl,
-  customizationList,
   receivingMethodList,
 } from "@/utils/shared.utils";
 
@@ -22,7 +21,6 @@ import Modal from "@/components/Modal";
 import OptionDropdown from "@/components/OptionDropdown";
 import pipeModel from "@/utils/pipeModel";
 
-import BoxSooner from "@/components/boxsnoor/page";
 import CardDetails from "@/components/CardDetails";
 import { toast } from "react-toastify";
 import { fire } from "@/components/Swal";
@@ -33,7 +31,7 @@ function BoxHistory() {
   const [data, setData] = useState([]);
   const [total, setTotal] = useState(0);
   const [filters, setFilter] = useState<any>({ page: 1, count: 50 });
-  const [search, setSearch] = useState("");
+  const search=''
   const [notesModal, setNotesModal] = useState<any>();
 const [recieptModal, setRecieptModal] = useState('')
   const [membershipStatus, setMembershipStatus] = useState<any>();
@@ -55,7 +53,7 @@ const [recieptModal, setRecieptModal] = useState('')
     const {
       get: getMembership,
       isLoading: membershipLoading,
-      controller: membershipController,
+      // controller: membershipController,
     } = ApiClientB(apiRef.current.membership);
 
   const [activeDropdown, setActiveDropdown] = useState<any>('');
@@ -63,7 +61,7 @@ const [recieptModal, setRecieptModal] = useState('')
   const shippingFee = 19.95;
 
   const getBoxList = (p = {}) => {
-    let f = {
+    const f = {
       ...filters,
       ...p,
       email: user.email,
@@ -72,7 +70,7 @@ const [recieptModal, setRecieptModal] = useState('')
     if(listController) listController.abort()
     getList(`membership/boxManagementList`, f).then((res) => {
       if (res?.success) {
-        let data = res.data;
+        const data = res.data;
         setData(data);
         setTotal(res.total || data.length);
       }
@@ -81,12 +79,12 @@ const [recieptModal, setRecieptModal] = useState('')
 
   useEffect(() => {
     getBoxList();
-  }, [search]);
+  }, []);
 
    const getMembershipDetail = () => {
     getMembership("membership/detail", { user_id: active }).then((res) => {
       if (res.success) {
-        let data = res.data;
+        const data = res.data;
         if (!data.craft_box?.length && data.box_preference) {
           data.craft_box = [
             {
@@ -143,7 +141,7 @@ const [recieptModal, setRecieptModal] = useState('')
       }
     }
 
-    let sortBy = `${key} ${sorder}`;
+    const sortBy = `${key} ${sorder}`;
     setFilter({ ...filters, sortBy, key, sorder });
     getBoxList({ sortBy, key, sorder });
   };
@@ -153,7 +151,7 @@ const [recieptModal, setRecieptModal] = useState('')
   };
 
 const filter = (p = {}) => {
-    let f = {
+    const f = {
       page: 1,
       ...p,
     };
@@ -161,7 +159,7 @@ const filter = (p = {}) => {
     getBoxList({ ...f });
   };
    const updateBox = async (e:any, key:any, order_id:any, id:any) => {
-    let value = e.target ? e.target.value : e;
+    const value = e.target ? e.target.value : e;
 
     let title='Are you sure you want to update this?'
     if(key=='box_preference') title=`Are you sure you want to update the box preference to '${value}'?`
@@ -207,7 +205,7 @@ const filter = (p = {}) => {
   };
 
     const updateValue = useCallback((row:any) => {
-    let payload = {
+    const payload = {
       ...row
     }
     loaderHtml(true)
@@ -334,7 +332,7 @@ const filter = (p = {}) => {
       className: "min-w-[250px]",
       sort: false,
       render: (row:any) => {
-        let formattedReceivingMethod =
+        const formattedReceivingMethod =
           row.receiving_method
             ?.toLowerCase()
             .replace(/\s+/g, "_")
@@ -354,7 +352,7 @@ const filter = (p = {}) => {
               onChange={(e:any) => {
                
                 if(e=='shipping'){
-                  let craft_box = [
+                  const craft_box = [
                       {
                         id: `craft_${getRandomCode(12)}`,
                         payment_type: "recurring",
@@ -536,7 +534,7 @@ const filter = (p = {}) => {
     setNotesModal(row);
   };
 
-   const takePaymentSubmit = (p:any) => {
+   const takePaymentSubmit = () => {
     setMembershipStatus((prev:any) => ({ ...prev, submitted: true }));
     if (!membershipStatus.postal_code) {
       toast.error("Postal Code is Required");
@@ -547,7 +545,7 @@ const filter = (p = {}) => {
       return;
     }
 
-    let invalid =
+    const invalid =
       !membershipStatus?.postal_code ||
         membershipStatus.craftBox?.find(
           (itm:any) => !itm.box_preference || !itm.shippingStatus
@@ -555,8 +553,8 @@ const filter = (p = {}) => {
         ? true
         : false;
     if (invalid) return;
-    let currentDate = new Date();
-    let end = new Date(currentDate).setMonth(currentDate.getMonth() + 1);
+    const currentDate = new Date();
+    const end = new Date(currentDate).setMonth(currentDate.getMonth() + 1);
     let endmonth = new Date(end).getMonth() + 1;
     let endyear = new Date(currentDate).getFullYear();
     if (membershipStatus?.nextBox && currentDate.getDate() < 10) {
@@ -608,7 +606,7 @@ const filter = (p = {}) => {
             (res) => {
               loaderHtml(false);
               if (res.success) {
-                let row=membershipStatus?.rowData
+                const row=membershipStatus?.rowData
                 toast.success("Shipping payment processed successfully");
                 updateValue({ id: row._id, receiving_method: 'shipping', order_id: row?.order_id || null })
                  setMembershipStatus('');
@@ -683,7 +681,7 @@ const filter = (p = {}) => {
                 />
               </>
             }
-            result={(e) => {
+            result={() => {
               setNotesModal('');
             }}
           />
@@ -784,7 +782,7 @@ const filter = (p = {}) => {
                                               disabled
                                               value={itm.box_preference}
                                               options={boxPreferenceList}
-                                              onChange={(e:any) => {
+                                              onChange={() => {
                                                
                                               }}
                                             />
@@ -811,7 +809,7 @@ const filter = (p = {}) => {
                                                   name: "Shipping Only",
                                                 },
                                               ]}
-                                              onChange={(e:any) => {
+                                              onChange={() => {
                                                 
                                               }}
                                             />
@@ -875,7 +873,7 @@ const filter = (p = {}) => {
                             disabled={membershipLoading}
                             className="inline-flex items-center gap-2 bg-primary px-6 py-2 rounded-lg text-white text-sm font-medium shadow hover:bg-opacity-90 transition-all"
                             onClick={() => {
-                              takePaymentSubmit("onetime");
+                              takePaymentSubmit();
                             }}
                           >
                             Pay
@@ -884,7 +882,7 @@ const filter = (p = {}) => {
                       </div>
                     </>
                   }
-                  result={(e) => {
+                  result={() => {
                     setMembershipStatus('');
                   }}
                 />

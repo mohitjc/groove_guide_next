@@ -238,7 +238,7 @@ const ThisMonthBox = ({ className = '', title = '', data = [], slideCount = 3, i
   </>
 }
 
-const Deals = ({ className = '', title = '', data = [], slideCount = 3, isSlider = false, itemClick = () => { } }) => {
+const Deals = ({ className = '', title = '', data = [], slideCount = 3, isSlider = false }) => {
   const [seeAll, setSeeAll] = useState(false);
   const [slider, setSlider] = useState(isSlider)
   const seeAllClick = () => {
@@ -450,9 +450,9 @@ const router=useRouter()
     early: { current: null }
   })
   const { get: getListApi, isLoading: loading, controller: controllerList } = ApiClientB(apiRef.current.list)
-  const { get: getListRecommended, isLoading: recommendedLoading, controller: controllerRecommended } = ApiClientB(apiRef.current.recommended)
-  const { get: getBoxList, isLoading: boxLoading, controller: controllerBox } = ApiClientB(apiRef.current.box)
-  const { get, post, isLoading: apiLoading } = ApiClientB()
+  const { get: getListRecommended, controller: controllerRecommended } = ApiClientB(apiRef.current.recommended)
+  const { get: getBoxList, controller: controllerBox } = ApiClientB(apiRef.current.box)
+  const { get, post } = ApiClientB()
 
 
   const getProductsList = (p = {}) => {
@@ -521,7 +521,7 @@ const router=useRouter()
     });
   };
 
-  const getBox = (p = {}) => {
+  const getBox = () => {
     if (controllerBox) controllerBox.abort()
     getBoxList("monthBox/list", { status: 'active', sortBy: 'order asc' }).then((res) => {
       if (res.success) {
@@ -548,7 +548,7 @@ const router=useRouter()
 
   const [deals, setDeals] = useState([]);
 
-  const getDeals = (p = {}) => {
+  const getDeals = () => {
     get("deal/list", { status: 'active' }).then((res) => {
       if (res.success) {
         const filtered = res?.data;
@@ -559,7 +559,7 @@ const router=useRouter()
     });
   };
 
-  const getMerch = (p = {}) => {
+  const getMerch = () => {
     get("mech/listing", { status: 'active' }).then((res) => {
       if (res.success) {
         const filtered = res?.data;
@@ -596,7 +596,6 @@ const router=useRouter()
   };
 
   const viewProduct = (id: any, ref: any, extra: any) => {
-    const catId = ref.replaceAll(' ', '_')
     setProductModal(id)
     setProductSlide({
       current: extra.current,
@@ -610,7 +609,8 @@ const router=useRouter()
   useEffect(() => {
     if (user) {
       getRecommended()
-      post('menuAccess/page', { page: 'menu', userId: (user?._id||user?.id) }).then(res => { })
+      post('menuAccess/page', { page: 'menu', userId: (user?._id||user?.id) }).then(res => {console.log(res);
+       })
     }
     getBox()
     getDeals()
@@ -850,7 +850,7 @@ const router=useRouter()
                 </div>
 
                 <div className="mb-6 md:mb-8 lg:mb-10 xl:mb-20">
-                  {data?.map(({ category_detail, products }: any) => {
+                  {data?.map(({ category_detail }: any) => {
                     return <Fragment key={category_detail?._id}>
                       <ProductsList
                         category_detail={category_detail}
@@ -925,7 +925,7 @@ const router=useRouter()
            
           </>}
 
-          result={e => {
+          result={() => {
             replaceUrl({ url: `/${module1}` })
             setProductModal('')
           }}

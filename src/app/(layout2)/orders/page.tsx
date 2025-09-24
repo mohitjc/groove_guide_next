@@ -2,17 +2,16 @@
 
 import { Fragment, useEffect, useState } from "react";
 import ApiClientB from "@/utils/Apiclient";
-import moment from "moment";
 import { loaderHtml } from "@/utils/shared";
 import Pagination from "react-paginate";
 import { Dialog, Disclosure, Transition, } from "@headlessui/react";
 import { ChevronUpIcon } from "@heroicons/react/20/solid";
 import methodModel from "@/utils/methodModel";
 import speechModel from "@/utils/speech.model";
-
+import Image from "next/image";
 import { Tab } from "@headlessui/react";
 import Dashboard from "@/components/mySubscription/page";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 import datepipeModel from "@/utils/datepipemodel";
 import Modal from "@/components/Modal";
 import BoxReceipt from "@/components/Membership/BoxReceipt";
@@ -23,7 +22,7 @@ function classNames(...classes:any) {
 }
 
 function Orders() {
-  const [tabs, setTabs] = useState(2);
+
   const Navigate=useRouter()
   const {get,post}=ApiClientB()
 
@@ -39,12 +38,12 @@ const [recieptModal, setRecieptModal] = useState<any>()
     search: "",
   });
 
-  const [users, setUsers] = useState([]);
+
   const [total, setTotal] = useState(0);
   const [OrderLoader,setOrderLoader]=useState(false);
 
   const getOrderDetails = (p = {}) => {
-    let f = {
+    const f = {
       ...filters,
       ...p,
       expand: 'credits,discounts,employee,lineItems,lineItems.discounts,lineItems.modifications,orderType,payments,refunds,serviceCharge,orderAdditionalCharges',
@@ -53,15 +52,15 @@ const [recieptModal, setRecieptModal] = useState<any>()
       offset: 0
     };
     setOrderLoader(true)
-    let off = (f.page - 1) * 10;
+    const off = (f.page - 1) * 10;
     f.offset = off
     f.limit = f.count
-    let url = "orders/get";
+    const url = "orders/get";
     // let url = "orders/getCustomerOrder";
 
     get(url, f).then((res) => {
       if (res.success) {
-        let data = res.data
+        const data = res.data
         if (data) {
           setOrders(res.data);
           setTotal(data.length);
@@ -79,17 +78,17 @@ const [recieptModal, setRecieptModal] = useState<any>()
     const parms = `Token=2f02f294-b57b-1783-2ef6-173f1fb628bb`;
     get(url + "?" + parms).then((res) => {
       if (res.success) {
-        setUsers(
-          res.data.elements?.map((item:any) => {
-            return { value: item?.id, label: item?.primaryDisplay };
-          })
-        );
+        // setUsers(
+        //   res.data.elements?.map((item:any) => {
+        //     return { value: item?.id, label: item?.primaryDisplay };
+        //   })
+        // );
       }
     });
   };
 
   const getUserCloverId = () => {
-    let url = "orders/clover-customer-id";
+    const url = "orders/clover-customer-id";
     loaderHtml(true);
     get(url).then((res) => {
       if (res.success) {
@@ -102,7 +101,7 @@ const [recieptModal, setRecieptModal] = useState<any>()
     if (!amount) {
       return 0;
     }
-    let price = amount / 100;
+    const price = amount / 100;
     return price;
   };
 
@@ -128,7 +127,7 @@ const [recieptModal, setRecieptModal] = useState<any>()
   const addReview = (itm:any, order:any) => {
     setIsOpen(true)
 
-    let prm = {
+    const prm = {
       orderId: order.id,
       itemId: itm.id
     }
@@ -144,7 +143,7 @@ const [recieptModal, setRecieptModal] = useState<any>()
           product_id: res.data?.id,
           itemId: itm.id
         })
-        let tags = res?.data?.tags?.map((itm:any) => {
+        const tags = res?.data?.tags?.map((itm:any) => {
           itm.id = itm._id
           return itm
         }) || []
@@ -166,7 +165,7 @@ const [recieptModal, setRecieptModal] = useState<any>()
   };
 
   const voice = () => {
-    let voiceBtn = document.getElementById("voiceBtn");
+    const voiceBtn = document.getElementById("voiceBtn");
     if (speachStart) {
       stop();
       return;
@@ -187,7 +186,7 @@ const [recieptModal, setRecieptModal] = useState<any>()
         .join("\n");
 
 
-      let el:any = document.getElementById("voicemessage");
+      const el:any = document.getElementById("voicemessage");
       let message = form.comment;
       message = `${message}\n${transcript}`;
       setform({ ...form, comment: message });
@@ -206,7 +205,7 @@ const [recieptModal, setRecieptModal] = useState<any>()
   };
 
   const handleSubmit = () => {
-    let payload = {
+    const payload = {
       orderId: form.orderId,
       itemId: form.itemId,
       tags: form.tag ? [form.tag] : [],
@@ -238,7 +237,6 @@ const [recieptModal, setRecieptModal] = useState<any>()
             <div className="inline-flex bg-[#3a3a3a] rounded-xl py-3 px-4">
               <Tab.List className="flex gap-2 text-white font-semibold text-[16px]">
                 <Tab
-                  onClick={(e) => setTabs(1)}
                   className={({ selected }) =>
                     classNames(
                       "border-r border-white/40 pr-2 focus:outline-none",
@@ -250,7 +248,6 @@ const [recieptModal, setRecieptModal] = useState<any>()
                   Product Orders
                 </Tab>
                 <Tab
-                  onClick={(e) => setTabs(2)}
                   id="OrderClick"
                   className={({ selected }) =>
                     classNames(
@@ -270,11 +267,13 @@ const [recieptModal, setRecieptModal] = useState<any>()
                   {myOrders.length == 0 && !OrderLoader && (
                     <div className="col-span-12 text-center bg-gray-100 p-4 h-[300px] flex items-center justify-center">
                       <div className="flex flex-col gap-6">
-                        <img
+                        <Image
                           src="/assets/img/noproducts.png"
-                          alt=""
+                         alt={""}  
                           className="h-36 mx-auto"
                         />
+
+                      
                         <p className="text-gray-400 text-[18px] font-regular">
                           No Order.
                         </p>
@@ -561,10 +560,9 @@ const [recieptModal, setRecieptModal] = useState<any>()
                                           });
                                         }}
                                       >
-                                        <img
+                                        <Image
                                           src={methodModel.noImg(tag.image)}
-                                          className="h-16 w-16 object-cover rounded-full"
-                                        />
+                                          className="h-16 w-16 object-cover rounded-full" alt={""}                                        />
                                       </label>
                                     </>
                                   );

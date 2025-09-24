@@ -1,11 +1,11 @@
-import { memo, useEffect, useMemo, useState } from "react"
+import { useEffect, useState } from "react"
 import FormControl from "@/components/FormControl";
 import countryStateModel from "../utils/countryStae"
 import ApiClientB from "@/utils/Apiclient";
 import GooglePlaceAutoComplete from "@/components/GooglePlaceAutoComplete/page"
 
-const EditAddress = memo(({ atype='primary',membership,result=()=>{}}:any) => {
-    let type=atype
+const EditAddress = (({ atype='primary',membership,result=()=>{}}:any) => {
+    const type=atype
     const [GetPrimaryCities, setPrimaryCities] = useState([]);
     const [PrimaryPinOptions, setPrimaryPinOptions] = useState([]);
 
@@ -50,20 +50,20 @@ const EditAddress = memo(({ atype='primary',membership,result=()=>{}}:any) => {
 
 
     useEffect(()=>{
-        let state=form?.[`${type}_state`]
+        const state=form?.[`${type}_state`]
         if(state) GetCitiesOptions({ countryCode:form[`${type}_country`], stateCode: state })
         else setPrimaryCities([])
     },[form?.[`${type}_state`]])
 
     useEffect(()=>{
-        let city=form?.[`${type}_city`]
+        const city=form?.[`${type}_city`]
         if(city) GetPrimaryPinOptions({ state: form[`${type}_state`], city: city })
         else setPrimaryPinOptions([])
     },[form?.[`${type}_city`]])
 
 
     useEffect(() => {
-        let payload = {
+        const payload = {
             [`${type}_address_1`]: membership?.[`${type}_address_1`],
             [`${type}_address_2`]: membership?.[`${type}_address_2`],
             [`${type}_country`]: membership?.[`${type}_country`] || 'US',
@@ -72,11 +72,11 @@ const EditAddress = memo(({ atype='primary',membership,result=()=>{}}:any) => {
             [`${type}_postcode`]: membership?.[`${type}_postcode`],
         };
 
-        let state = membership?.[`${type}_state`]
+        const state = membership?.[`${type}_state`]
 
         if (state) {
-            let states = countryStateModel.getStates(form[`${type}_country`])
-            let ext = states.find((item:any) => item.id.toLowerCase() == state.toLowerCase().trim() || item.name.toLowerCase() == state.toLowerCase().trim())
+            const states = countryStateModel.getStates(form[`${type}_country`])
+            const ext = states.find((item:any) => item.id.toLowerCase() == state.toLowerCase().trim() || item.name.toLowerCase() == state.toLowerCase().trim())
             if (ext){
                 payload[`${type}_state`] = ext.id
             }
@@ -99,7 +99,7 @@ const EditAddress = memo(({ atype='primary',membership,result=()=>{}}:any) => {
                 result={(e:any)=>{
                     let keys={}
                     if(e.formattedAddress){
-                        let address=e.formattedAddress
+                        const address=e.formattedAddress
                         keys={
                             [`${type}_address_1`]: address.address1,
                             [`${type}_country`]: address.country_code || 'US',

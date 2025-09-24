@@ -5,15 +5,17 @@ import ApiClientB from "@/utils/Apiclient";
 import Modal from "@/components/Modal";
 import FormControl from "@/components/FormControl";
 import ImageUpload from "@/components/ImageUpload/page";
-import { isNumber, loaderHtml, noImg } from "@/utils/shared";
-import { useRouter, useParams } from "next/navigation";
+import {  loaderHtml } from "@/utils/shared";
+import { useRouter } from "next/navigation";
 import VideoRecorder from "@/components/VideoRecording";
 import { useSelector } from "react-redux";
 import AudoRecording from "@/components/AudoRecording";
 import { getRandomCode } from "@/utils/shared";
+import Image from "next/image";
 
-function ClaimReward({ result = (e:any) => {} }) {
-    let {get ,post,postFormData }=ApiClientB()
+function ClaimReward({ result = (e:any) => {console.log(e);
+} }) {
+    const {get ,post,postFormData }=ApiClientB()
   const user = useSelector((state:any) => state.user.data);
   const navigate = useRouter();
   const [rewardModal, setRewardModal] = useState<any>();
@@ -81,7 +83,7 @@ function ClaimReward({ result = (e:any) => {} }) {
     }).then((res) => {
       loaderHtml(false);
       if (res.success) {
-        let data = res.data;
+        const data = res.data;
         data.groove = true;
         setStatus(res.data);
       }
@@ -89,7 +91,7 @@ function ClaimReward({ result = (e:any) => {} }) {
   };
 
   const addReward = (type:any) => {
-    let ext:any = rewardTypes.find((itm) => itm.id == type);
+    const ext:any = rewardTypes.find((itm) => itm.id == type);
 
     if (status[ext?.key]) return;
 
@@ -116,7 +118,7 @@ function ClaimReward({ result = (e:any) => {} }) {
     setSubmitted(true);
     const filename = `share_journey_${getRandomCode(10)}.webm`;
 
-    let payload = {
+    const payload = {
       ...rewardModal,
     };
 
@@ -147,10 +149,9 @@ function ClaimReward({ result = (e:any) => {} }) {
   return (
     <>
       <div className="max-w-lg mx-auto bg-white shadow-xl p-4 mt-6 rounded-xl">
-        <img
+        <Image
           src="/assets/img/logo.png"
-          className="object-contain h-24 w-full"
-        />
+          className="object-contain h-24 w-full" alt={""}        />
 
         <div className="text-xl font-[600] text-center leading-8 mt-6">
           <p>
@@ -171,10 +172,9 @@ function ClaimReward({ result = (e:any) => {} }) {
                 key={type}
                 onClick={() => addReward(type.id)}
               >
-                <img
+                <Image
                   src="/assets/img/cliam/circle.png"
-                  className="object-contain h-28 w-full"
-                />
+                  className="object-contain h-28 w-full" alt={""}                />
                 <div className="absolute inset-0 flex items-center justify-center">
                   <div className="text-center text-xs sm:text-sm lg:text-lg leading-6">
                     {/* {type.split(' ').map(itm=>{

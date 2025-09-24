@@ -41,7 +41,7 @@ const DateRangePicker = ({ value, onChange, dynamicStyle = false,
     ]
 
     const blockDateChange = (e:any) => {
-        let v={
+        const v={
             ...value, ...e, compare: '' 
         }
 
@@ -59,7 +59,7 @@ const DateRangePicker = ({ value, onChange, dynamicStyle = false,
     }
 
     const getBlockValue = () => {
-        let v = {
+        const v = {
             startDate: value['startDate'] ? new Date(value['startDate']) : new Date(),
             endDate: value['endDate'] ? new Date(value['endDate']) : new Date(),
             key: 'selection'
@@ -73,31 +73,31 @@ const DateRangePicker = ({ value, onChange, dynamicStyle = false,
         let endDate = ''
 
         if (e == 'Last Month') {
-            let current = new Date()
+            const current = new Date()
             let monthdate:any = current.setDate(0)
             monthdate = datepipeModel.datetostring(monthdate)
             startDate = `${monthdate.split('-')[0]}-${monthdate.split('-')[1]}-01`
             endDate = monthdate
 
         } else if (e == 'This Month') {
-            let current = datepipeModel.datetostring(new Date())
+            const current = datepipeModel.datetostring(new Date())
             startDate = `${current.split('-')[0]}-${current.split('-')[1]}-01`
 
-            let month2 = new Date(new Date().getFullYear(), new Date().getMonth() + 1, 0)
+            const month2 = new Date(new Date().getFullYear(), new Date().getMonth() + 1, 0)
             endDate = datepipeModel.datetostring(month2)
         }
 
         else if (e == 'This Year') {
-            let current = datepipeModel.datetostring(new Date())
+            const current = datepipeModel.datetostring(new Date())
             startDate = `${current.split('-')[0]}-01-01`
 
-            let month2 = new Date(new Date().getFullYear() + 1, 0, 0)
+            const month2 = new Date(new Date().getFullYear() + 1, 0, 0)
             endDate = datepipeModel.datetostring(month2)
         }
         else if (e == 'Last Year') {
-            let current = new Date()
+            const current = new Date()
             startDate = `${current.getFullYear() - 1}-01-01`
-            let month2 = new Date(current.getFullYear(), 0, 0)
+            const month2 = new Date(current.getFullYear(), 0, 0)
             endDate = datepipeModel.datetostring(month2)
         }
         setRange(e)
@@ -122,15 +122,15 @@ const DateRangePicker = ({ value, onChange, dynamicStyle = false,
         let start = ''
         let end = ''
         if (value.startDate && value.endDate) {
-            let ssplit = value.startDate.split('-')
-            let esplit = value.endDate.split('-')
-            let year = Number(ssplit[0])
-            let eyear = Number(esplit[0])
+            const ssplit = value.startDate.split('-')
+            const esplit = value.endDate.split('-')
+            const year = Number(ssplit[0])
+            const eyear = Number(esplit[0])
 
-            let d = new Date(`${year - 1}-${ssplit[1]}-${ssplit[2]}`)
+            const d = new Date(`${year - 1}-${ssplit[1]}-${ssplit[2]}`)
             start = datepipeModel.datetostring(d)
 
-            let ed = new Date(`${eyear - 1}-${esplit[1]}-${esplit[2]}`)
+            const ed = new Date(`${eyear - 1}-${esplit[1]}-${esplit[2]}`)
             end = datepipeModel.datetostring(ed)
         }
         return { start, end }
@@ -148,7 +148,7 @@ const DateRangePicker = ({ value, onChange, dynamicStyle = false,
             // end=new Date(value.endDate).setMonth(eMonth-1)
             // end=datepipeModel.datetostring(end)
 
-            let current = new Date(value.startDate)
+            const current = new Date(value.startDate)
             let monthdate:any = current.setDate(0)
             monthdate = datepipeModel.datetostring(monthdate)
             start = `${monthdate.split('-')[0]}-${monthdate.split('-')[1]}-01`
@@ -161,13 +161,13 @@ const DateRangePicker = ({ value, onChange, dynamicStyle = false,
         let start = ''
         let end = ''
         if (value.startDate && value.endDate) {
-            let days = getDays(value.startDate, value.endDate) + 1
+            const days = getDays(value.startDate, value.endDate) + 1
 
-            let d = new Date(value.startDate)
+            const d = new Date(value.startDate)
             d.setDate(d.getDate() - days)
             start = datepipeModel.datetostring(d)
 
-            let ed = new Date(value.startDate)
+            const ed = new Date(value.startDate)
             ed.setDate(ed.getDate() - 1)
             end = datepipeModel.datetostring(ed)
         }
@@ -188,7 +188,7 @@ const DateRangePicker = ({ value, onChange, dynamicStyle = false,
             end = previousMonth().end
         }
 
-        let v = {
+        const v = {
             ...value,
             compareStart: start,
             compareEnd: end,

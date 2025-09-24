@@ -11,7 +11,6 @@ function SingleProduct({
   item,
   outerdivClass,
   imgClass,
-  imgHeight,
   tagsToDisplay=3,
   onClick=(_:any)=>{},
   viewProduct=(_:any)=>{},
@@ -28,7 +27,7 @@ function SingleProduct({
 
   const categoryName = item?.categoryName?.trim()?.toLowerCase()
   let price = item.price
-  let gram = item.gram
+  // let gram = item.gram
 
   const view = (id: any) => {
     // if (isBox) return
@@ -44,7 +43,7 @@ function SingleProduct({
     const ext = variants.find((itm: any) => itm.gram == '3.5')
     if (ext) {
       price = ext.price
-      gram = ext.gram
+      // gram = ext.gram
     }
   }
 
@@ -73,7 +72,7 @@ function SingleProduct({
 
     if (ext) {
       price = ext.price
-      gram = ext.gram
+      // gram = ext.gram
     }
   }
 

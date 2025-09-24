@@ -3,6 +3,7 @@ import Webcam from "react-webcam";
 import { loaderHtml } from "@/utils/shared";
 import ApiClientB from "@/utils/Apiclient";
 import { getRandomCode } from "@/utils/shared";
+import Image from "next/image";
 
 const CapturePhoto = ({result=(e:any)=>{}}) => {
   const webcamRef:any = useRef(null);
@@ -18,13 +19,13 @@ const CapturePhoto = ({result=(e:any)=>{}}) => {
     fetch(imageSrc)
       .then((res) => res.blob())
       .then((blob) => {
-        let body = new FormData();
+        const body = new FormData();
         body.append('file',blob,`image_${getRandomCode(6)}.png`)
-        let file=body.get('file')
+        const file=body.get('file')
         // result({value:blob})
         postFormFileData('upload/multiple-images',{files:file}).then(res=>{
             if (res.success) {
-                let file=res.files?.[0]?.fileName
+                const file=res.files?.[0]?.fileName
               result({value:file})
             }
             loaderHtml(false);
@@ -38,7 +39,7 @@ const CapturePhoto = ({result=(e:any)=>{}}) => {
       <div className="w-96">
         <div className="p-4">
           {image ? (
-            <img src={image} alt="Captured" className="rounded-lg w-[200px]" />
+            <Image src={image} alt="Captured" className="rounded-lg w-[200px]" />
           ) : (
             <Webcam
               audio={false}

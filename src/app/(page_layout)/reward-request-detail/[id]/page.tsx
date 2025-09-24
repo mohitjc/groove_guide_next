@@ -6,6 +6,7 @@ import { useParams } from "next/navigation";
 import methodModel from "@/utils/methodModel";
 import AudioHtml from"@/components/AudioHtml";
 import VideoHtml from "@/components/VideoHtml";
+import Image from "next/image";
 
 
 function RewardRequest() {
@@ -16,8 +17,10 @@ function RewardRequest() {
 
 
   const getRewards = (p = {}) => {
+    console.log(p);
+    
     setLoader(true);
-    let filter = {
+    const filter = {
       id: id
     };
 
@@ -106,7 +109,7 @@ function RewardRequest() {
                           controls
                         />
                       ) : (
-                        <img
+                        <Image
                           src={methodModel.noImg(rewardDetail?.image)}
                           className="w-64 max-w-64 rounded-lg border"
                           alt="Reward"

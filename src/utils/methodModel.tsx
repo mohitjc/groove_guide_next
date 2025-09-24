@@ -1,3 +1,4 @@
+import Image from "next/image";
 import environment from "../envirnment";
 
 
@@ -9,13 +10,13 @@ type replaceUrl={
 }
 const isTranslatePage = () => {
   let value = false;
-  let url = window.location.href;
+  const url = window.location.href;
   if (url.includes("translation")) value = true;
   return value;
 };
 
 const generatekeysArr = (arr:any, key = "typeofresult") => {
-  let keys:any= {};
+  const keys:any= {};
   if (!arr) return { keys, arr: [] };
   arr.map((itm:any) => {
     if (keys[itm[key]]) {
@@ -54,10 +55,10 @@ const getPrams = (p:any) => {
 };
 
 const isNumber = (e:any) => {
-  let key = e.target;
-  let maxlength = key.maxLength ? key.maxLength : 1;
+  const key = e.target;
+  const maxlength = key.maxLength ? key.maxLength : 1;
 
-  let max = Number(key.max ? key.max : key.value);
+  const max = Number(key.max ? key.max : key.value);
   if (Number(key.value) > max) key.value = max;
 
   // let min = key.min;
@@ -70,10 +71,10 @@ const isNumber = (e:any) => {
 };
 
 const isRatio = (e:any) => {
-  let key = e.target;
-  let maxlength = key.maxLength ? key.maxLength : 1;
+  const key = e.target;
+  const maxlength = key.maxLength ? key.maxLength : 1;
 
-  let max = Number(key.max ? key.max : key.value);
+  const max = Number(key.max ? key.max : key.value);
   if (Number(key.value) > max) key.value = max;
 
   // let min = key.min;
@@ -86,7 +87,7 @@ const isRatio = (e:any) => {
 };
 
 const find = (arr:any, value:any, key = "key") => {
-  let ext = arr?.find((itm:any) => itm[key] == value);
+  const ext = arr?.find((itm:any) => itm[key] == value);
   return ext;
 };
 
@@ -94,8 +95,8 @@ const find = (arr:any, value:any, key = "key") => {
 
 // get Single field error
 const getError = (key:any, fvalue:any, formValidation:any) => {
-  let ext = find(formValidation, key);
-  let res = matchError(ext, fvalue);
+  const ext = find(formValidation, key);
+  const res = matchError(ext, fvalue);
   return res;
 };
 
@@ -136,8 +137,8 @@ const emailvalidation = (val:any) => {
 // match errors for fields
 const matchError = (ext:any, fValue:any) => {
   let invalid = false;
-  let kValue = fValue[ext.key];
-  let value = {
+  const kValue = fValue[ext.key];
+  const value = {
     minLength: false,
     maxLength: false,
     confirmMatch: false,
@@ -201,7 +202,7 @@ vArr.map((itm) => {
   if (value[itm]) invalid = true;
 });
 
-  let res = { invalid: invalid, err: value, message };
+  const res = { invalid: invalid, err: value, message };
   return res;
 };
 
@@ -221,7 +222,7 @@ const getFormError = (formValidation:any, fvalue:any) => {
 
 const route = (route:any) => {
   localStorage.setItem("route", route);
-  let el = document.getElementById("routerDiv");
+  const el = document.getElementById("routerDiv");
   setTimeout(() => {
     if (el) el.click();
   });
@@ -233,31 +234,32 @@ const flagIcon = (icon = "", width = 50) => {
   };
   return (
     <>
-      <img
+      <Image
         src={`https://flagsapi.com/${icon?.toUpperCase()}/flat/64.png`}
         width={width}
-        onError={imageErr}
-      />
+        onError={imageErr} alt={""}      />
     </>
   );
 };
 
 const msToTime = (milliseconds:any, ago = true) => {
   //get hours from milliseconds
-  var hours = milliseconds / (1000 * 60 * 60);
-  var absoluteHours = Math.floor(hours);
-  var h:any = absoluteHours;
+  const hours = milliseconds / (1000 * 60 * 60);
+  const absoluteHours = Math.floor(hours);
+  const h:any = absoluteHours;
   //get remainder from hours and convert to minutes
-  var minutes = (hours - absoluteHours) * 60;
-  var absoluteminutes = Math.floor(minutes);
-  var m:any = absoluteminutes;
+  const minutes = (hours - absoluteHours) * 60;
+  const absoluteminutes = Math.floor(minutes);
+  const m:any = absoluteminutes;
 
   //get remainder from minutes and convert to seconds
-  var seconds = (minutes - absoluteminutes) * 60;
-  var absoluteseconds = Math.floor(seconds);
-  var s = absoluteseconds;
+  const seconds = (minutes - absoluteminutes) * 60;
+  const absoluteseconds = Math.floor(seconds);
+  const s = absoluteseconds;
+  console.log(s);
+  
 
-  var time = "";
+  let time:any = "";
   if (h > 0) {
     time += `${h}h`;
   }
@@ -274,13 +276,12 @@ const msToTime = (milliseconds:any, ago = true) => {
   return time;
 };
 
-const scrollId = (id:any) => {
-  let element = document.getElementById(id);
-  var headerOffset = 85;
+const scrollId = (id: any) => {
+  const element = document.getElementById(id);
+  const headerOffset = 85;
   if (element) {
-    var elementPosition = element.getBoundingClientRect().top;
-    var offsetPosition = elementPosition - headerOffset;
-    var offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+    const elementPosition = element.getBoundingClientRect().top;
+    const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
     window.scrollTo({ top: offsetPosition, behavior: "instant" });
   } else {
     console.log("id", id);
@@ -308,12 +309,12 @@ const replaceUrl = ({
   description = "",
 }:replaceUrl) => {
   const params = new URLSearchParams();
-  let dazhHomeUrl = "";
+  const dazhHomeUrl = "";
   Object.keys(parm).map((key) => {
     params.append(key, parm[key]);
   });
 
-  let u = `${dazhHomeUrl}${url}` + params.toString();
+  const u = `${dazhHomeUrl}${url}` + params.toString();
   const nextTitle = title;
   const nextState = { additionalInformation: description };
   window.history.replaceState(nextState, nextTitle, u);

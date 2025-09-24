@@ -1,7 +1,7 @@
 import GooglePlacesAutocomplete, { geocodeByAddress } from "react-google-places-autocomplete";
 import environment from "@/envirnment";
 
-const Html = ({ searchText, required, placeholder, editAddress = () => { }, placeChange, disabled = false }:any) => {
+const Html = ({ searchText, required, placeholder, placeChange, disabled = false }:any) => {
 
     const selectProps:any={
             placeholder: placeholder,
@@ -22,7 +22,7 @@ const Html = ({ searchText, required, placeholder, editAddress = () => { }, plac
                   }
                 })
                 .catch((err) => {
-                  let arr = e.value.terms.map((itm:any, i:any) => {
+                  const arr = e.value.terms.map((itm:any, i:any) => {
                     return {
                       long_name: itm.value,
                       types: [e.value.types[i]],
@@ -65,7 +65,7 @@ const Html = ({ searchText, required, placeholder, editAddress = () => { }, plac
             },
           }}
         />
-        <div className="mt-1 text-sm text-blue-500">We'll auto-fill all address fields when you select a suggestion</div>
+        <div className="mt-1 text-sm text-blue-500">We&apos;ll auto-fill all address fields when you select a suggestion</div>
       </div>
 
     </>

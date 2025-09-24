@@ -1,5 +1,5 @@
 'use client'
-import { useEffect, useRef, useState ,useMemo} from "react";
+import { useEffect, useState ,useMemo} from "react";
 import ApiClientB from "@/utils/Apiclient";
 import { toast } from "react-toastify";
 import { useRouter } from 'next/navigation';
@@ -16,6 +16,7 @@ import TakePayment from "../boxManagement/TakePayment";
 import { getRandomCode } from "@/utils/shared";
 import environment from "@/envirnment";
 import Table from "../Table";
+import Image from "next/image";
 
 
 function classNames(...classes:any) {
@@ -27,7 +28,7 @@ const Dashboard = () => {
   const user = useSelector((state:any) => state.user.data);
   const [total, setTotal] = useState(0);
   const [currentSubscription, setCurrentSubscription] = useState([]);
-  const [active, setActive] = useState("current");
+  const [, setActive] = useState("current");
   const [filters, setFilter] = useState<any>({ page: 1, count: 10 });
   const [activeSubscription, setActiveSubscription] = useState<any>();
   const [activeLoading, setActiveLoading] = useState(true);
@@ -58,7 +59,7 @@ const Dashboard = () => {
 
   const getCurrentSubscription = (p = {}) => {
     setListLoading(true);
-    let filter = {
+    const filter = {
       ...filters,
       ...p,
       userId: user._id
@@ -75,7 +76,7 @@ const Dashboard = () => {
   };
 
   const getActiveSubscription = () => {
-    let param = {
+    const param = {
       user_id: user.customerId || user?.id || user?._id
     }
     setActiveLoading(true)
@@ -90,7 +91,7 @@ const Dashboard = () => {
   const getMembershipDetail = () => {
     getMembership("membership/detail", { user_id: (user?.id || user?._id) }).then((res) => {
       if (res.success) {
-        let data = res.data;
+        const data = res.data;
         data.box_preference = data.box_preference?.replaceAll("N/A", "") || "";
         data.shippingStatus =
           data.shippingStatus
@@ -253,7 +254,7 @@ const Dashboard = () => {
       }
     }
 
-    let sortBy = `${key} ${sorder}`;
+    const sortBy = `${key} ${sorder}`;
     setFilter({ ...filters, sortBy, key, sorder });
     getCurrentSubscription({ sortBy, key, sorder });
   };
@@ -272,9 +273,9 @@ const Dashboard = () => {
 
 
   const ispaid = useMemo(() => {
-    let m = (membership?.membership||user?.membership)?.toLowerCase() || ''
+    const m = (membership?.membership||user?.membership)?.toLowerCase() || ''
     let value = true
-    let arr = ['groove group', 'craft club', 'craft group', 'guest', 'idle', 'N/A']
+    const arr = ['groove group', 'craft club', 'craft group', 'guest', 'idle', 'N/A']
     arr.map(itm => {
       if (m?.includes(itm) || !m) value = false
     })
@@ -442,7 +443,7 @@ const Dashboard = () => {
                   nodata={<>
                     <div className="col-span-12 text-center h-[300px] flex items-center justify-center">
                       <div className="flex flex-col gap-6">
-                        <img
+                        <Image
                           src="/assets/img/noproducts.png"
                           alt=""
                           className="h-36 mx-auto"
@@ -487,7 +488,7 @@ const Dashboard = () => {
                 />
               </>
             }
-            result={(e) => {
+            result={() => {
               setBuyModal(false);
             }}
           />

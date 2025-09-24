@@ -136,7 +136,7 @@ const Modal: React.FC<
 
         {cfg.imageUrl?<>
         <div className="text-center">
-          <img alt="Swal Image" width="auto" src={cfg.imageUrl} height={cfg.imageHeight} />
+          <Image alt="Swal Image" width="auto" src={cfg.imageUrl} height={cfg.imageHeight} />
         </div>
         </>:<></>}
         <div className="mt-4">

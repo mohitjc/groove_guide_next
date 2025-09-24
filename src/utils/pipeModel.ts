@@ -1,4 +1,4 @@
-function currency(num:number,c='',cf=',') {
+function currency(num:number,cf=',') {
    // let currency=c
    const currency=''
     let value='0'

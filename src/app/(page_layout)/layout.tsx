@@ -295,7 +295,6 @@ export default function Layout({
   }, [user]);
 
   const [isOpen1, setIsOpen1] = useState(false)
-  const [isOpen2, setIsOpen2] = useState(false)
   const [loginForm, setLoginForm] = useState<any>({ email: '', mobileNo: '', lastName: '', firstName: '', birthday: '' })
   const [isForgot, setForgot] = useState(false)
   const [signupModal, setSignupModal] = useState(false)
@@ -320,7 +319,6 @@ export default function Layout({
   function closeModal() {
     setIsOpen1(false)
     setIsOpen(false)
-    setIsOpen2(false)
   }
 
   function openModal() {
@@ -449,7 +447,6 @@ export default function Layout({
   useEffect(() => {
     if (user) {
       setIsOpen1(false)
-      setIsOpen2(false)
     }
   }, [user])
 
@@ -485,6 +482,8 @@ export default function Layout({
     const f = { ...p };
     loaderHtml(true);
     post("user/vertication-otp", f).then((res) => {
+      console.log(res);
+      
       loaderHtml(false);
     });
   };

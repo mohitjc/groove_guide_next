@@ -1,16 +1,15 @@
 import { useEffect, useState } from "react";
 import ApiClientB from "@/utils/Apiclient";
-import methodModel from "@/utils/methodModel";
-import { loaderHtml, noImg } from "@/utils/shared";
-import { useRouter, useParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 import Table from "@/components/Table";
 import { useSelector } from "react-redux";
 import TooltipHtml from "@/components/TooltipHtml";
 import { PiEyeLight } from "react-icons/pi";
 import SelectDropdown from "@/components/SelectDropdown/page";
+import Image from "next/image";
 
 function RewardRequest() {
-    const {get, post}=ApiClientB()
+    const {get}=ApiClientB()
   const navigate = useRouter();
   const user = useSelector((state:any) => state.user.data);
   const [total, setTotal] = useState(0);
@@ -72,7 +71,7 @@ function RewardRequest() {
             <TooltipHtml placement="top" title="View">
               <a
                 className="border cursor-pointer  hover:opacity-70 rounded-lg bg-[#540C0F14] w-10 h-10 !text-primary flex items-center justify-center text-lg"
-                onClick={(e) => view(row.id)}
+                onClick={() => view(row.id)}
               >
                 <PiEyeLight />
               </a>
@@ -85,7 +84,7 @@ function RewardRequest() {
 
   const getRewards = (p = {}) => {
     setLoader(true);
-    let filter = {
+    const filter = {
       ...filters,
       ...p,
       userId: user.id || user._id,
@@ -115,7 +114,7 @@ function RewardRequest() {
   };
 
   const filter = (p = {}) => {
-    let f = {
+    const f = {
       page: 1,
       isApproved: "",
       type: "",
@@ -126,7 +125,7 @@ function RewardRequest() {
   };
 
   const clear = () => {
-    let f = {
+    const f = {
       // search: "",
       type: "",
       isApproved: "",
@@ -213,7 +212,7 @@ function RewardRequest() {
               total={total}
               nodata={
                 <div className="flex flex-col gap-6">
-                  <img
+                  <Image
                     src="/assets/img/noproducts.png"
                     alt=""
                     className="h-36 mx-auto"

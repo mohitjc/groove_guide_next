@@ -11,7 +11,7 @@ const SelectDropdown = ({
   onFocus,
   className = "",
   inputValue = "",
-  onInputChange = (e: any) => { },
+  onInputChange = () => { },
   result,
   onBlur = () => { },
   displayValue = "name",

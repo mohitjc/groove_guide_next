@@ -1,4 +1,4 @@
-import { memo, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import ApiClientB from "@/utils/Apiclient";
 import Table from "./Table";
 import { fire } from "@/components/Swal";
@@ -6,12 +6,12 @@ import { toast } from "react-toastify";
 import datepipeModel from "@/utils/datepipemodel";
 import FormControl from "@/components/FormControl";
 import { loaderHtml } from "@/utils/shared";
-import { boxPreferenceList, customizationList } from "@/utils/shared.utils";
+import {  customizationList } from "@/utils/shared.utils";
 
-const Notes = memo(({ boxId, order_id, email, userId, isDeleted = false }:any) => {
+const Notes = (({ boxId, order_id, email, userId, isDeleted = false }:any) => {
   const { get: getData, isLoading: loading } = ApiClientB();
   const [data, setData] = useState([]);
-  const {get,post,put,deleteApi}=ApiClientB()
+  const {post,deleteApi}=ApiClientB()
   const [filters, setFilter] = useState<any>({
     page: 1,
     count: 20,
@@ -145,7 +145,7 @@ const Notes = memo(({ boxId, order_id, email, userId, isDeleted = false }:any) =
       toast.error("This user is archived, you can't update this");
       return;
     }
-    let payload:any = {
+    const payload:any = {
       boxId,
       order_id,
       email,

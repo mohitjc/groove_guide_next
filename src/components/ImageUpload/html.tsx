@@ -3,6 +3,7 @@ import methodModel from "@/utils/methodModel";
 import { FiPlus } from "react-icons/fi";
 import AudioHtml from "../AudioHtml";
 import VideoHtml from "../VideoHtml";
+import Image from "next/image";
 
 const Html = ({
   inputElement,
@@ -63,10 +64,9 @@ const Html = ({
                     {content == "image" ? (
                       <>
                         <div className="imagethumbWrapper">
-                          <img
+                          <Image
                             src={methodModel.noImg(itm, model)}
-                            className={`thumbnail ${className}`}
-                          />
+                            className={`thumbnail ${className}`} alt={""}                          />
                           <i
                             className="fa fa-times"
                             title="Remove"
@@ -107,14 +107,15 @@ const Html = ({
                     ) : (
                       <>
                         <div className="imagethumbWrapper">
-                          <img
+                          <Image
+                          alt={""}
                             src="/assets/img/ic_asc.png"
                             className={`thumbnail ${className}`}
                           />
                           <i
                             className="fa fa-times"
                             title="Remove"
-                            onClick={(e) => remove(i)}
+                            onClick={() => remove(i)}
                           ></i>
                         </div>
                       </>
@@ -131,7 +132,8 @@ const Html = ({
               <div className="imagethumbWrapper">
                 {content == "image" ? (
                   <>
-                    <img
+                    <Image
+                    alt={""}
                       src={methodModel.noImg(img, model)}
                       className={`thumbnail ${className}`}
                     />
@@ -154,10 +156,9 @@ const Html = ({
                   </>
                 ) : (
                   <>
-                    <img
-                      src="/assets/img/ic_asc.png"
-                      className={`thumbnail ${className}`}
-                    />
+                    <Image
+                              src="/assets/img/ic_asc.png"
+                              className={`thumbnail ${className}`} alt={""}                    />
                   </>
                 )}
                 <i

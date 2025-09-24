@@ -9,7 +9,7 @@ type Props = {
     onClick?: (e?: any) => void;
 }
 
-export function LinkHtml({ className = '', children, target = '', href = '', to = '', onClick = (e) => { } }:Props) {
+export function LinkHtml({ className = '', children, target = '', href = '', to = '', onClick = () => { } }:Props) {
     return <>
         {to ? <>
             <Link

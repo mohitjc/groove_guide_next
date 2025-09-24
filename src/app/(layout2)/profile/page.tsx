@@ -1,7 +1,7 @@
 "use client";
 
 import { Fragment, useState, useEffect, useRef } from "react";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 import ApiClientB from "@/utils/Apiclient";
 import { loaderHtml } from "@/utils/shared";
 // import "./profile.scss";
@@ -21,13 +21,14 @@ import EditAddress from "@/components/EditAddress";
 import FormControl from "@/components/FormControl";
 import { toast } from "react-toastify";
 import { login as login_success} from "@/redux/slices/userSlice";
+import Image from "next/image";
 
 const Profile = () => {
   const history = useRouter();
 
   const user = useSelector((state:any) => state.user.data);
   const dispatch = useDispatch()
-  let [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
   const [data, setData] = useState<any>([]);
   const [questions, setQuestions] = useState([]);
   const [detailLoader, setDetailLoadder] = useState(false);
@@ -42,10 +43,10 @@ const Profile = () => {
     stateId: user.stateId || "",
   });
 
-  const {get,post,put,multiImageUpload}=ApiClientB()
+  const {get,put,multiImageUpload}=ApiClientB()
   const [membership, setMembership] = useState<any>();
   const [showEditAddress, setShowEditAddress] = useState('');
-  const [detail, setDetail] = useState({ ...user });
+  const detail = user ;
 
 
   const apiRef = useRef({
@@ -55,7 +56,7 @@ const Profile = () => {
   const {
     get: getMembership,
     isLoading: membershipLoading,
-    controller: membershipController,
+    // controller: membershipController,
   } = ApiClientB(apiRef.current.membership);
 
 
@@ -83,7 +84,7 @@ const Profile = () => {
   );
 
   const getQuestions = () => {
-    let prm = {
+    const prm = {
       type: (user.checkInType || "Groove Group").replace(
         "Groove Group",
         "Shroom Groove"
@@ -100,7 +101,7 @@ const Profile = () => {
 
   const handleCheckboxChange = (type:any, option:any, key:any) => {
     setSelectedValues((prevValues:any) => {
-      let currentValues = prevValues[key] || [];
+      const currentValues = prevValues[key] || [];
       if (currentValues.includes(option)) {
         return {
           ...prevValues,
@@ -142,7 +143,7 @@ const Profile = () => {
   };
 
   const handleUpdateAnswers = () => {
-    let payload :any= {
+    const payload :any= {
       ...selectedValues,
       id: user.id || user._id,
     };
@@ -195,7 +196,7 @@ const Profile = () => {
   };
 
   const voice = (p:any) => {
-    let voiceBtn = document.getElementById("voiceBtn");
+    const voiceBtn = document.getElementById("voiceBtn");
     if (speachStart) {
       stop();
       return;
@@ -215,7 +216,7 @@ const Profile = () => {
         .map((result) => result.transcript)
         .join("\n");
 
-      let el:any = document.getElementById("voicemessage");
+      const el:any = document.getElementById("voicemessage");
 
       let message = comment;
       if (p == "medication") message = currentMedication;
@@ -249,7 +250,7 @@ const Profile = () => {
   }, []);
 
   useEffect(() => {
-    let payload:any = {};
+    const payload:any = {};
         Object.keys(questionsKeys).map((_key) => {
             payload[questionsKeys[_key]] = data?.[questionsKeys[_key]]
         })
@@ -269,7 +270,7 @@ const Profile = () => {
   const getMembershipDetail = () => {
     getMembership("membership/detail", { user_id: (user.id || user._id) }).then((res) => {
       if (res.success) {
-        let data = res.data;
+        const data = res.data;
         data.box_preference = data.box_preference?.replaceAll("N/A", "") || "";
         data.shippingStatus =
           data.shippingStatus
@@ -325,7 +326,7 @@ const Profile = () => {
   }, []);
 
   const uploadStateId = (e:any) => {
-    let files = e.target.files;
+    const files = e.target.files;
     if (!files.length) return;
     loaderHtml(true);
     multiImageUpload(
@@ -335,7 +336,7 @@ const Profile = () => {
       "files"
     ).then((res) => {
       if (res.success) {
-        let file = res.files?.[0]?.fileName;
+        const file = res.files?.[0]?.fileName;
         setStateId((prev) => ({ ...prev, stateId: file }));
       }
       loaderHtml(false);
@@ -357,7 +358,7 @@ const Profile = () => {
 
   const updateAddress = (e:any) => {
     if (e.event == 'submit') {
-      let payload = {
+      const payload = {
         user_id: (user.id || user._id),
         ...e.data
       }
@@ -374,8 +375,8 @@ const Profile = () => {
   }
 
   const updateProfile = () => {
-    let userId = (user.id || user._id)
-    let payload = {
+    const userId = (user.id || user._id)
+    const payload = {
       //   userId: userId,
       //  memberShip:{
       //   ...editModal
@@ -398,7 +399,7 @@ const Profile = () => {
     put('user/updateUserEmail', payload).then(res => {
       if (res.success) {
         setMembership((prev:any) => ({ ...prev, email: payload.new_email }))
-        let login:any={ email: payload.new_email }
+        const login:any={ email: payload.new_email }
         dispatch(login_success(login))
         setEditModal('')
       }
@@ -570,7 +571,7 @@ const Profile = () => {
                       <IoClose /> Remove State Id
                     </button>
                   </div>
-                  <img
+                  <Image
                     src={methodModel.noImg(stateId.stateId)}
                     className="w-[120px] mx-auto block mb-3"
                     alt=""
@@ -658,7 +659,7 @@ const Profile = () => {
               <>
                 <div className="grid grid-cols-1 md:grid-cols-1 gap-4 lg:px-4">
                   {sortedQuestions?.map((item:any, index:any) => {
-                    let key = item.answereKey || questionsKeys[item.title] || questionsKeys[item.question];
+                    const key = item.answereKey || questionsKeys[item.title] || questionsKeys[item.question];
                     let answer = data?.[key];
                     if (data?.[key] === true || data?.[key] === false) {
                       answer = data?.[key] == true ? "Yes" : "No";
@@ -667,7 +668,7 @@ const Profile = () => {
                         answer = <span className="text-red-500">Not selected any Option</span>
                       }
                     }
-                    let isArray = Array.isArray(answer)
+                    const isArray = Array.isArray(answer)
                     if (isArray) {
                       answer = answer.join(", ");
                     }
@@ -738,7 +739,7 @@ const Profile = () => {
                     Update Answers
                   </Dialog.Title>
                   {sortedQuestions?.map((item:any, index:any) => {
-                    let key =
+                    const key =
                       item.answereKey ||
                       questionsKeys[item.title] ||
                       questionsKeys[item.question];
@@ -780,7 +781,7 @@ const Profile = () => {
                                         />
 
                                         <div className="w-10 h-10 shrink-0 bg-transparent border border-black rounded-full overflow-hidden flex items-center justify-center transition duration-300 ease-in-out peer-checked:opacity-100 peer-checked:grayscale-0 opacity-50 grayscale">
-                                            <img
+                                            <Image
                                                 src="/assets/img/coin/c1.svg"
                                                 className="h-full w-full object-cover"
                                                 alt="Coin Image"
@@ -792,7 +793,7 @@ const Profile = () => {
                             )}
 
                             {item.options.map((option:any, index:any) => {
-                                let type = item.question_type;
+                                const type = item.question_type;
 
                                 let option_name=option.name
                                 if(key=='current_medications'||key=='previous_experience'||key=='personalize_recommendation'||key=='privacy_consent') option_name=option_name.toLowerCase()
@@ -850,7 +851,7 @@ const Profile = () => {
                                             )}
 
                                             <div className="w-10 h-10 shrink-0 bg-transparent border border-black rounded-full overflow-hidden flex items-center justify-center transition duration-300 ease-in-out peer-checked:opacity-100 peer-checked:grayscale-0 opacity-50 grayscale">
-                                                <img
+                                                <Image
                                                     src={methodModel.noImg(option.image)}
                                                     className="h-full w-full object-cover"
                                                     alt="Coin Image"
@@ -868,7 +869,7 @@ const Profile = () => {
                             (selectedValues["current_medications"] === "yes") && (
                                 <div className="mt-2">
                                     <span className="text-black font-medium text-[15px]">
-                                        If "Yes", please explain
+                                        If &quot;Yes&quot;, please explain
                                     </span>
                                     <textarea
                                         rows={4}
@@ -899,7 +900,7 @@ const Profile = () => {
                             (selectedValues["previous_experience"] == "yes") && (
                                 <div className="mt-2">
                                     <span className="text-black font-medium text-[15px]">
-                                        If "Yes", please explain
+                                        If &quot;Yes&quot;, please explain
                                     </span>
                                     <textarea
                                         rows={4}
@@ -1012,6 +1013,8 @@ const Profile = () => {
             <EditAddress atype={showEditAddress} membership={membership} result={updateAddress} />
           </>}
           result={e => {
+            console.log(e);
+            
             setShowEditAddress('')
           }}
         />
@@ -1042,6 +1045,8 @@ const Profile = () => {
             </form>
           </>}
           result={e => {
+            console.log(e);
+            
             setEditModal('')
           }}
         />

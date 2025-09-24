@@ -7,7 +7,7 @@ function NewQR() {
   const [content,setContent]=useState()
   const handleScan = (data:any) => {
     if (data) {
-      let value=data[0]?.rawValue;
+      const value=data[0]?.rawValue;
       setContent(value)
       window.open(value);
     }

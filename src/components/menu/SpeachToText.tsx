@@ -8,7 +8,8 @@ type Props={
   inputId?:string
 }
 
-export default function SpeachToText({text='',setText=(e:any)=>{},inputId='voicemessage'}:Props){
+export default function SpeachToText({text='',setText=(e:any)=>{console.log(e);
+},inputId='voicemessage'}:Props){
       const [speachStart, setSpeachStart] = useState(false);
       const stop = () => {
         const recognition = speechModel.recognition;

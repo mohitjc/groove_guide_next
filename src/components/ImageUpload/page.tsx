@@ -25,10 +25,10 @@ const ImageUpload = ({
   console.log(img, "img");
 
   const uploadImage = async (e:any) => {
-    let files = e.target.files;
+    const files = e.target.files;
     let i = 0;
-    let imgfile = [];
-    for (let item of files) {
+    const imgfile = [];
+    for (const item of files) {
       imgfile.push(item);
     }
 
@@ -46,8 +46,10 @@ const ImageUpload = ({
       validTypes = ["video/mp4", "video/webm", "video/ogg"];
     }
 
-    for await (let item of imgfile) {
-      let file = files.item(i);
+    for await (const item of imgfile) {
+      console.log(item);
+      
+      const file = files.item(i);
       if (file) {
         const fileType = file.type;
         if (!validTypes.includes(fileType)) {
@@ -67,7 +69,7 @@ const ImageUpload = ({
         }
         const res = await multiImageUpload(apiUrl, files);
         if (res.fileName) {
-          let image = res.fileName;
+          const image = res.fileName;
           if (!multiple) {
             setImg(image);
             result({ event: "value", value: image });
@@ -87,7 +89,7 @@ const ImageUpload = ({
 
   const remove = (index:any) => {
     if (multiple) {
-      let images = img.filter((itm:any, idx:any) => idx !== index);
+      const images = img.filter((itm:any, idx:any) => idx !== index);
       result({ event: "remove", value: images });
       setImg(images);
     } else {

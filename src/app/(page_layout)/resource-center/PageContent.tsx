@@ -27,6 +27,7 @@ import "swiper/css/effect-fade";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 import 'swiper/css/grid';
+import Image from "next/image";
 
 type FiltersType={
   search?:string;
@@ -50,7 +51,7 @@ type ContentListType={
   showAnotherSlider?:boolean;
 }
 
-const ResourceItem=({item,onClick = (e:any) => { }}:any)=>{
+const ResourceItem=({item,onClick = () => { }}:any)=>{
     
     const scrollRef = useRef(null);
 
@@ -71,7 +72,7 @@ const noImg = (img:any='', defaultImg = '/assets/img/placeholder.png') => {
                         className="w-full cursor-pointer"
                         onClick={() => onClick(item)} /> */}
 
-                        <img src={noImg(item.thumbnail || item.image)} alt="" className="w-full cursor-pointer" onClick={() => onClick(item)}/>
+                        <Image src={noImg(item.thumbnail || item.image)} alt="" className="w-full cursor-pointer" onClick={() => onClick(item)}/>
                     {/* <button className="absolute top-3 right-3 bg-white p-2 rounded-full shadow-md">
                         <IoMdHeart className="text-red-500 text-lg" />
                     </button> */}
@@ -112,7 +113,7 @@ const noImg = (img:any='', defaultImg = '/assets/img/placeholder.png') => {
                     {/* Engagement */}
                     <div className="flex items-center text-gray-600 text-[12px] 2xl:text-sm gap-2">
                         <div className="flex gap-1 items-center">
-                            <img
+                            <Image
                                 src="/assets/img/v2/2.svg"
                                 alt="Author"
                                 className=" h-4 "
@@ -140,7 +141,7 @@ const noImg = (img:any='', defaultImg = '/assets/img/placeholder.png') => {
                     {/* Author Info */}
                     <div className="flex justify-between items-center mt-3 text-gray-500 text-sm gap-2 ">
                         <div className="flex text-left items-center gap-2">
-                            {/* <img
+                            {/* <Image
                                 src="/assets/img/v2/123.png"
                                 alt="Author"
                                 className="w-6 h-6 2xl:w-8 2xl:h-8 rounded-full"
@@ -305,7 +306,6 @@ const noImg = (img:any='', defaultImg = '/assets/img/placeholder.png') => {
                         >
 
                             {listData.map((itm, i) => {
-                                const key=i
                                 return  <SwiperSlide key={i}>
                                         <ResourceItem item={itm} isMobile={isMobile} onClick={onClick} />
                                     </SwiperSlide>
@@ -498,7 +498,7 @@ export default function PageContent() {
             contentId: e._id,
             type: e.type || '',
             content_type: e.content
-        }).then(res => { })
+        }).then(() => { })
     }
 
     const contentchange = (e:any) => {
@@ -550,7 +550,7 @@ export default function PageContent() {
                 page: 'info',
                 userId: user.id || user._id,
             })
-            .then(res => { })
+            .then(() => { })
         }
     }, [])
 
@@ -659,7 +659,7 @@ export default function PageContent() {
                     <div className="xl:container mx-auto px-4 py-6 lg:py-2  flex flex-col lg:flex-row items-center justify-between gap-8 xl:gap-8 2xl:gap-10">
 
                         <div className="flex flex-col items-center lg:flex-row gap-4 xl:gap-8">
-                            <img src="/assets/img/v2/res.svg" className="h-20 w-fit" />
+                            <Image src="/assets/img/v2/res.svg" className="h-20 w-fit" alt={""} />
                             <div className="flex flex-col lg:flex-row gap-8 xl:gap-14 2xl:gap-16 items-center">
                                 <h2 className="text-3xl lg:text-3xl xl:text-3xl 2xl:text-5xl text-center lg:text-left font-bold tracking-[-2.24px] text-[#E0EBD4] md:w-[305px] xl:w-[380px] 2xl:w-[605px]">
                                     Craft Therapy Network
@@ -740,7 +740,7 @@ export default function PageContent() {
                             key={i}>
                                 {/* Image with Favorite Icon */}
                                 <div className="relative">
-                                    <img
+                                    <Image
                                         src={item.image}
                                         alt="Workout"
                                         className="w-full h-82 object-cover"
@@ -790,7 +790,7 @@ export default function PageContent() {
                                     <label className="text-[#061522] font-inter text-[14px] xl:text-[16px] font-bold leading-[28px] uppercase flex gap-2 items-center">
                                         <input type="checkbox" className="h-3 w-3 cursor-pointer custom-input"
                                             checked={allContentCategorySelect}
-                                            onChange={(e) => {
+                                            onChange={() => {
                                                 allContentCategoryClick()
                                             }}
                                         />
@@ -904,7 +904,7 @@ export default function PageContent() {
                                         </div>
 
                                         <div onClick={() => setIsOpen3(true)} className="bg-[#F9F7F5] border border-[#E8E8EA] cursor-pointer flex items-center justify-center px-4 py-1 rounded-lg">
-                                            <img alt="filter" src="/assets/img/v2/filter.svg" className="h-8" />
+                                            <Image alt="filter" src="/assets/img/v2/filter.svg" className="h-8" />
                                         </div>
                                     </div>
 
@@ -932,7 +932,6 @@ export default function PageContent() {
 
                         {contentCategory.map((item, i) => {
                             let url = 'audio/list'
-                             const key=item.id
                             if (item.id == 'video') url = 'video/list'
                             if (item.id == 'guide') url = 'resource/listing'
                             if (contents.includes(item.id) || !contents.length)
@@ -983,7 +982,7 @@ export default function PageContent() {
                         {/* Author Info */}
                         <div className="flex gap-4 items-center mt-2 sm:mt-3 text-gray-500 text-[10px] sm:text-sm flex-wrap">
                             <div className="flex items-center gap-1 sm:gap-2">
-                                <img
+                                <Image
                                     src="/assets/img/v2/123.png"
                                     alt="Author"
                                     className="w-6 sm:w-8 h-6 sm:h-8 rounded-full"
@@ -993,7 +992,7 @@ export default function PageContent() {
                             <span className="text-[12px]">{datepipeModel.date(detailModal?.createdAt)}</span>
 
                             {/* <div className="flex gap-1 items-center ">
-                                                    <img src="/assets/img/v2/3.svg" alt="Comment" className="h-3 sm:h-4" />
+                                                    <Image src="/assets/img/v2/3.svg" alt="Comment" className="h-3 sm:h-4" />
                                                 </div> */}
                             <div className="">
                                 <SocialShare shareUrl={`${envirnment.frontUrl}resource-center/${detailModal?.content}/${detailModal?.id}`} />

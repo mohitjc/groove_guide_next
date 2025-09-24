@@ -1,4 +1,4 @@
-import { memo, useEffect, useMemo } from "react"
+import {  useEffect, useMemo } from "react"
 import datepipeModel from "@/utils/datepipemodel";
 
 type BoxSoonerProps = {
@@ -8,7 +8,7 @@ type BoxSoonerProps = {
     boxLength?: number,
     membershipStatus?: string
 }
-const BoxSooner = memo(({ nextBox = false, nextPaymentDate = '', setNextBox = () => { }, boxLength = 1, membershipStatus = '' }: BoxSoonerProps) => {
+const BoxSooner = (({ nextBox = false, nextPaymentDate = '', setNextBox = () => { }, boxLength = 1, membershipStatus = '' }: BoxSoonerProps) => {
     const currentDate = new Date()
     const currentDateNo = currentDate.getDate()
     const current = useMemo(() => {
@@ -36,16 +36,16 @@ const BoxSooner = memo(({ nextBox = false, nextPaymentDate = '', setNextBox = ()
         const tenthOfMonth = new Date(baseDate.getFullYear(), baseDate.getMonth(), 10);
         // If today > 10th, move to same date in next month
         if (today.getTime() > tenthOfMonth.getTime()) {
-            let value1 = new Date(baseDate.setMonth(baseDate.getMonth() + 1));
+            const value1 = new Date(baseDate.setMonth(baseDate.getMonth() + 1));
             value = datepipeModel.datetostring(`${value1.getFullYear()}-${value1.getMonth() + 1}-10`)
         }
         return value
     }, [current])
 
     const shiftDate = useMemo(() => {
-        let shift_date = new Date(current).setMonth(current.getMonth() + boxLength)
-        let shift_month = new Date(shift_date).getMonth() + 1
-        let shift_year = new Date(shift_date).getFullYear()
+        const shift_date = new Date(current).setMonth(current.getMonth() + boxLength)
+        const shift_month = new Date(shift_date).getMonth() + 1
+        const shift_year = new Date(shift_date).getFullYear()
         return datepipeModel.datetostring(`${shift_year}-${shift_month}-10`)
     }, [current, boxLength])
 
@@ -112,7 +112,7 @@ const BoxSooner = memo(({ nextBox = false, nextPaymentDate = '', setNextBox = ()
                             type="checkbox"
                             checked={nextBox}
                             style={{ accentColor: "#540C0F" }}
-                            onChange={(e) => setNextBox({ next: true, date: nextDate })}
+                            onChange={() => setNextBox({ next: true, date: nextDate })}
                             className="w-5 h-5 text-red-600 bg-gray-100 border-gray-300 rounded-md focus:ring-2 focus:ring-red-500"
                         />
                         <span className="text-sm font-medium text-gray-800">
@@ -125,7 +125,7 @@ const BoxSooner = memo(({ nextBox = false, nextPaymentDate = '', setNextBox = ()
                             type="checkbox"
                             checked={!nextBox}
                             style={{ accentColor: "#540C0F" }}
-                            onChange={(e) => setNextBox({ next: false, date: shiftDate })}
+                            onChange={() => setNextBox({ next: false, date: shiftDate })}
                             className="w-5 h-5 text-red-600 bg-gray-100 border-gray-300 rounded-md focus:ring-2 focus:ring-red-500"
                         />
                         <span className="text-sm font-medium text-gray-800">

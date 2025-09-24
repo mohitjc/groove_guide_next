@@ -1,7 +1,6 @@
-import { AnyCaaRecord } from 'node:dns';
 import React, { useState, useRef } from 'react';
 
-const VideoRecorder = ({result=(e:any)=>{}}) => {
+const VideoRecorder = ({result=()=>{}}:any) => {
   const [isRecording, setIsRecording] = useState(false);
   const [videoUrl, setVideoUrl] = useState<any>(null);
   const [err, setErr] = useState('');

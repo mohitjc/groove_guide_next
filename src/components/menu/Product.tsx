@@ -115,7 +115,7 @@ function Product({ product, tags, onImageClick, selectedVariant, sub_products }:
             <div
               className={`grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 2xl:grid-cols-3 gap-4`}
             >
-              {theraTag?.slice(0, 3)?.map((itm: any, i: any) => {
+              {theraTag?.slice(0, 3)?.map((itm: any) => {
                 return (
                   <Fragment key={itm.name}>
                     <TooltipHtml title={itm.description} placement="top">
@@ -141,7 +141,7 @@ function Product({ product, tags, onImageClick, selectedVariant, sub_products }:
               className={`grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 2xl:grid-cols-3 gap-4`}
             >
 
-              {fucTag?.slice(0, 3)?.map((itm: any, i: any) => {
+              {fucTag?.slice(0, 3)?.map((itm: any) => {
                 return (
                   <Fragment key={itm.name}>
                     <TooltipHtml title={itm.description} placement="top">

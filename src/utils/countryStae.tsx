@@ -21273,19 +21273,18 @@ const list = [
     }
 ]
 
-const allStates = list.flatMap(country => country.states.map(itm=>({id:itm.state_code,country:country.iso2,name:itm.name})));
 
 const getStates=(ciso:any)=>{
-    let ext=list.find(itm=>itm.iso2==ciso)
+    const ext=list.find(itm=>itm.iso2==ciso)
     // if(!ciso) return allStates
     return ext?ext.states.map(itm=>({name:itm.name,id:itm.state_code,country:ciso})):[]
 }
 
 const stateIso=(cname:any,sname:any)=>{
     let value=''
-    let ext=list.find(itm=>itm.name.includes(cname))
+    const ext=list.find(itm=>itm.name.includes(cname))
     if(ext){
-      let sext:any=ext.states.find(sitm=>sitm.name==sname)
+      const sext:any=ext.states.find(sitm=>sitm.name==sname)
       value=sext?sext.state_code.toLowerCase():''
     }
     return value

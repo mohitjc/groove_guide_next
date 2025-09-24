@@ -25,7 +25,7 @@ export default function TakePayment({ membership, resultRes = () => { },user,isP
     const detail1 = (useSelector((state:any) => state.user.data))
 
     const detail = useMemo(() => {
-        let data = user ? user : detail1
+        const data = user ? user : detail1
         data.nextPaymentDate = data.nextPaymentDate == '0' ? '' : data.nextPaymentDate
 
         return data
@@ -48,7 +48,7 @@ export default function TakePayment({ membership, resultRes = () => { },user,isP
     const getPlans = () => {
         get(`subscriptionPlans/list`).then((res) => {
             if (res.success) {
-                let data = res.data.map((itm:any) => {
+                const data = res.data.map((itm:any) => {
                     if (itm.planId) itm.id = itm.planId
                     return itm
                 })
@@ -97,8 +97,8 @@ export default function TakePayment({ membership, resultRes = () => { },user,isP
 
     const addCraft = () => {
         setMembershipStatus((prev:any) => {
-            let payload = { ...prev }
-            let arr = [...(prev?.craftBox || [])]
+            const payload = { ...prev }
+            const arr = [...(prev?.craftBox || [])]
             arr.push({
                 id: `craft_${getRandomCode(12)}`,
                 payment_type: 'one_time',
@@ -112,8 +112,8 @@ export default function TakePayment({ membership, resultRes = () => { },user,isP
 
     const updateCraft = (i:any, values:any) => {
         setMembershipStatus((prev:any) => {
-            let payload = { ...prev }
-            let arr = membershipStatus.craftBox
+            const payload = { ...prev }
+            const arr = membershipStatus.craftBox
             arr[i] = {
                 ...arr[i],
                 ...values,
@@ -126,7 +126,7 @@ export default function TakePayment({ membership, resultRes = () => { },user,isP
 
     const removeCraft = (i:any) => {
         setMembershipStatus((prev:any) => {
-            let payload = { ...prev }
+            const payload = { ...prev }
             let arr = membershipStatus.craftBox || []
             arr = arr.filter((itm:any, index:any) => index != i)
             arr = arr.filter((itm:any, index:any) => index != i)
@@ -172,12 +172,12 @@ export default function TakePayment({ membership, resultRes = () => { },user,isP
             return
         }
 
-        let invalid = (!membershipStatus?.postal_code || membershipStatus.craftBox?.find((itm:any) => !itm.box_preference || !itm.shippingStatus)) ? true : false
+        const invalid = (!membershipStatus?.postal_code || membershipStatus.craftBox?.find((itm:any) => !itm.box_preference || !itm.shippingStatus)) ? true : false
         if (invalid) return
 
-        let currentDate = new Date(detail?.nextPaymentDate ? detail?.nextPaymentDate : new Date().toISOString())
-        let boxLength = (membershipStatus.craftBox?.length || 1)
-        let end = new Date(currentDate).setMonth(currentDate.getMonth() + boxLength)
+        const currentDate = new Date(detail?.nextPaymentDate ? detail?.nextPaymentDate : new Date().toISOString())
+        const boxLength = (membershipStatus.craftBox?.length || 1)
+        const end = new Date(currentDate).setMonth(currentDate.getMonth() + boxLength)
         let endmonth = new Date(end).getMonth() + 1
         let endyear = new Date(end).getFullYear()
         if (membershipStatus?.nextBox) {
@@ -186,8 +186,8 @@ export default function TakePayment({ membership, resultRes = () => { },user,isP
         }
 
         // Original flow for other shipping methods
-        let title = 'Make Payment?'
-        let text = 'Are you sure you want to make one time payment?'
+        const title = 'Make Payment?'
+        const text = 'Are you sure you want to make one time payment?'
 
         fire({
             title: title,
@@ -197,9 +197,9 @@ export default function TakePayment({ membership, resultRes = () => { },user,isP
         }).then((result) => {
             /* Read more about isConfirmed, isDenied below */
             if (result.isConfirmed) {
-                let craftBox = [...membershipStatus.craftBox]
+                const craftBox = [...membershipStatus.craftBox]
 
-                let payload = {
+                const payload = {
                     "collectionMethod": "CHARGE_AUTOMATICALLY",
                     userId: active,
                     email: detail?.email,

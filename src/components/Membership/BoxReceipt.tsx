@@ -1,18 +1,18 @@
 import { MdOutlinePayments } from "react-icons/md";
 import { RiUser3Line } from "react-icons/ri";
 import { useMemo } from "react";
-import { AiFillPrinter } from "react-icons/ai";
 import { PiCheckCircleFill } from "react-icons/pi";
 import datepipeModel from "@/utils/datepipemodel";
 import pipeModel from "@/utils/pipeModel";
+import Image from "next/image";
 
 export default function BoxReceipt({ data, detail }:any) {
 
   const getDicount = (row:any) => {
-    let arr = row?.lineItems?.elements || []
+    const arr = row?.lineItems?.elements || []
     let itemtotal = 0;
     if (arr.length) itemtotal = arr.reduce((sum:any, itm:any) => sum + (itm.price / 100), 0);
-    let discounts = row?.discounts?.elements
+    const discounts = row?.discounts?.elements
     let value = 0
     if (discounts?.length) {
       value = discounts?.reduce((acc:any, item:any) => {
@@ -30,19 +30,19 @@ export default function BoxReceipt({ data, detail }:any) {
   }
 
   const subTotal = (row:any) => {
-    let arr = row?.lineItems?.elements || []
+    const arr = row?.lineItems?.elements || []
     let total = 0;
     if (arr.length) total = arr.reduce((sum:any, itm:any) => sum + (itm.price / 100), 0);
-    let discount = getDicount(row)
+    const discount = getDicount(row)
     return total - discount
   }
 
 
 
   const taxTotal = (row:any) => {
-    let arr = row?.payments?.elements || []
+    const arr = row?.payments?.elements || []
     let total = 0
-    let subtotal = subTotal(row)
+    const subtotal = subTotal(row)
     if (arr.length) total = arr.reduce((sum:any, itm:any) => sum + (itm.taxAmount / 100), 0);
     if (!total) {
       total = (row?.total / 100) - subtotal
@@ -51,7 +51,7 @@ export default function BoxReceipt({ data, detail }:any) {
   }
 
   const itemtotal = useMemo(() => {
-    let arr = data?.lineItems?.elements || []
+    const arr = data?.lineItems?.elements || []
     let total = 0;
     if (arr.length) total = arr.reduce((sum:any, itm:any) => sum + (itm.price / 100), 0);
     return total
@@ -67,9 +67,9 @@ export default function BoxReceipt({ data, detail }:any) {
 
 
   function printElementById(id:any) {
-    let doc:any=document
-    var content:any = doc.getElementById(id).innerHTML;
-    var printWindow:any = window.open('', '', 'width=600,height=600');
+    const doc:any=document
+    const content:any = doc.getElementById(id).innerHTML;
+    const printWindow:any = window.open('', '', 'width=600,height=600');
     printWindow.document.open();
     printWindow.document.write(`<html><head>
     <title>Groove Guide Receipt</title>
@@ -100,7 +100,7 @@ export default function BoxReceipt({ data, detail }:any) {
 
 
  const refund_amount = useMemo(() => {
-    let arr = data?.refunds?.elements || []
+    const arr = data?.refunds?.elements || []
     let total = 0;
     if (arr.length) total = arr.reduce((sum:any, itm:any) => sum + (itm.amount), 0);
     if(data.row?.refundId) total=data?.total
@@ -128,7 +128,7 @@ export default function BoxReceipt({ data, detail }:any) {
           <div className="">
             <div className="flex flex-col gap-4 items-center justify-center">
               <div className="w-20 bg-black shadow-md h-20 mx-auto rounded-full border-4 border-white p-2 flex items-center justify-center">
-                <img src="/assets/img/shops.png" alt="company-logo" className="h-10" />
+                <Image src="/assets/img/shops.png" alt="company-logo" className="h-10" />
               </div>
 
               <div className="flex flex-col items-center text-white gap-2 text-base">
