@@ -432,7 +432,7 @@ const CardDetails = (({ userId, detail, result = () => {} }:any) => {
                                   <div className="absolute top-[65px] left-[20px] w-[40px] h-auto opacity-80">
                                     <Image
                                     width={20} height={20}
-                                      src="../assets/img/cards/chip.png"
+                                      src="/assets/img/cards/chip.png"
                                       alt="chip"
                                     />
                                   </div>
