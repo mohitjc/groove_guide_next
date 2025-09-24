@@ -11,6 +11,7 @@
   "dependencies": {
     "@headlessui/react": "^2.2.8",
     "@heroicons/react": "^2.2.0",
+    "@react-google-maps/api": "^2.20.7",
     "@react-oauth/google": "^0.12.2",
     "@reduxjs/toolkit": "^2.9.0",
     "@yudiel/react-qr-scanner": "^2.3.1",
@@ -22,7 +23,6 @@
     "react": "19.1.0",
     "react-date-range": "^2.0.1",
     "react-dom": "19.1.0",
-    "react-google-places-autocomplete": "^4.0.1",
     "react-icons": "^5.5.0",
     "react-paginate": "^8.3.0",
     "react-pagination-js": "^2.0.0",

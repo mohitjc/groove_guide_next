@@ -1,74 +1,53 @@
-import GooglePlacesAutocomplete, { geocodeByAddress } from "react-google-places-autocomplete";
+import { useRef } from "react";
+import { Autocomplete, LoadScript } from "@react-google-maps/api";
 import environment from "@/envirnment";
 
-const Html = ({ searchText, required, placeholder, placeChange, disabled = false }:any) => {
+const Html = ({ searchText, required, placeholder, placeChange, editAddress, disabled = false }:any) => {
+  const autocompleteRef:any = useRef(null);
 
-    const selectProps:any={
-            placeholder: placeholder,
-            required: required,
-            noOptionsMessage: (e:any) => {
-              return e.inputValue ? 'No Address found' : 'Start typing an address...'
-            },
-            value: searchText ? {
-              label: searchText,
-              value: { description: searchText }
-            } : null,
-            onChange: (e:any) => {
-              if (!e) return;
-              geocodeByAddress(e.label)
-                .then((results) => {
-                  if (results.length) {
-                    placeChange(results[0]);
-                  }
-                })
-                .catch((err) => {
-                  const arr = e.value.terms.map((itm:any, i:any) => {
-                    return {
-                      long_name: itm.value,
-                      types: [e.value.types[i]],
-                    };
-                  });
-                  placeChange({ formatted_address: e.label, address_components: arr });
-                  console.error("error2", err);
-                });
-            },
-            isDisabled: disabled,
-            styles: {
-              menu: (provided:any) => ({
-                ...provided, // You can customize the menu styles her
-              }),
-              control: (provided:any) => ({
-                ...provided, // Hide the dropdown arrow
-                background: 'white',
-                border: '1px solid #ccc',
-                boxShadow: 'none',
-                '&:hover': {
-                  border: '1px solid #aaa',
-                },
-              }),
-              dropdownIndicator: (provided:any) => ({
-                ...provided,
-                display: 'none',
-              }),
-            },
-          }
+  const handlePlaceChanged = () => {
+    if (autocompleteRef.current) {
+      const place = autocompleteRef.current.getPlace();
+      if (place?.geometry?.location) {
+        placeChange(place);
+      } else {
+        // If no valid place is selected, treat as manual input
+        editAddress(searchText || '');
+      }
+    }
+  };
+
+  const libraries:any = ['places'];
 
   return (
-    <>
-      <div>
-        <GooglePlacesAutocomplete
-          apiKey={environment.googleClientId}
-          selectProps={selectProps}
-          autocompletionRequest={{
-            componentRestrictions: {
-              country: ["us", "ca"], // restricts to USA and Canada
-            },
+    <div>
+      <LoadScript
+        googleMapsApiKey={environment.googleapi} // Ensure this is a valid API key
+        libraries={libraries}
+      >
+        <Autocomplete
+          onLoad={(autocomplete) => (autocompleteRef.current = autocomplete)}
+          onPlaceChanged={handlePlaceChanged}
+          restrictions={{ country: ["us", "ca"] }}
+          options={{
+            fields: ['address_components', 'geometry', 'name', 'formatted_address'],
           }}
-        />
-        <div className="mt-1 text-sm text-blue-500">We&apos;ll auto-fill all address fields when you select a suggestion</div>
+        >
+          <input
+            type="text"
+            placeholder={placeholder}
+            value={searchText}
+            onChange={(e) => editAddress(e.target.value)} // Use editAddress for manual input
+            disabled={disabled}
+            required={required}
+            className="w-full p-2 border border-gray-300 rounded hover:border-gray-400 focus:outline-none focus:border-blue-500"
+          />
+        </Autocomplete>
+      </LoadScript>
+      <div className="mt-1 text-sm text-blue-500">
+        We&apos;ll auto-fill all address fields when you select a suggestion
       </div>
-
-    </>
+    </div>
   );
 };
 
