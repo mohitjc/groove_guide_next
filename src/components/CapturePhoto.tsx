@@ -39,7 +39,7 @@ const CapturePhoto = ({result=(e:any)=>{}}) => {
       <div className="w-96">
         <div className="p-4">
           {image ? (
-            <Image src={image} alt="Captured" className="rounded-lg w-[200px]" />
+            <Image src={image} alt="Captured" className="rounded-lg w-[200px]" width={20} height={20}/>
           ) : (
             <Webcam
               audio={false}

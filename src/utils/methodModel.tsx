@@ -237,7 +237,7 @@ const flagIcon = (icon = "", width = 50) => {
       <Image
         src={`https://flagsapi.com/${icon?.toUpperCase()}/flat/64.png`}
         width={width}
-        onError={imageErr} alt={""}      />
+        onError={imageErr} alt={""} height={20}  />
     </>
   );
 };

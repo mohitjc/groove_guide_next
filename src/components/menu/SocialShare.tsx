@@ -38,7 +38,7 @@ const SocialShare = ({ shareUrl }: Props) => {
                   separator=":: "
                 >
                   <div className={`flex items-center space-x-1 text-[12px] px-4 w-full py-1 ${active ? 'bg-gray-100' : ''} cursor-pointer`}>
-                    <Image src="/assets/img/Social Icons1.png" alt="Whatsapp" width="16" />
+                    <Image src="/assets/img/Social Icons1.png" alt="Whatsapp" width={20} height={20} />
                     <span>Whatsapp</span>
                   </div>
                 </WhatsappShareButton>
@@ -54,7 +54,7 @@ const SocialShare = ({ shareUrl }: Props) => {
                   title={title}
                 >
                   <div className={`flex items-center space-x-1 text-[12px] px-4 w-full py-1 ${active ? 'bg-gray-100' : ''} cursor-pointer`}>
-                    <Image src="/assets/img/Social Icons2.png" alt="Facebook" width="16" />
+                    <Image src="/assets/img/Social Icons2.png" alt="Facebook" width={20} height={20} />
                     <span>Facebook</span>
                   </div>
                 </FacebookShareButton>
@@ -70,7 +70,7 @@ const SocialShare = ({ shareUrl }: Props) => {
                   title={title}
                 >
                   <div className={`flex items-center space-x-1 text-[12px] px-4 w-full py-1 ${active ? 'bg-gray-100' : ''} cursor-pointer`}>
-                    <Image src="/assets/img/Social Icons3.png" alt="Twitter" width="16" />
+                    <Image src="/assets/img/Social Icons3.png" alt="Twitter" width={20} height={20} />
                     <span>Twitter</span>
                   </div>
                 </TwitterShareButton>
@@ -81,7 +81,8 @@ const SocialShare = ({ shareUrl }: Props) => {
             <Menu.Item>
               {({ active }) => (
                 <div className={`flex items-center space-x-1 text-[12px] px-4 w-full py-1 ${active ? 'bg-gray-100' : ''} cursor-pointer`}>
-                  <Image src="/assets/img/Social Icons6.png" alt="Email" width="16" />
+                  <Image src="/assets/img/Social Icons6.png" alt="Email"   width={20}
+                    height={20} />
                   <a href={`mailto:?subject=Share URL&body=${title} ${shareUrl}`} className="text-gray-800">Email</a>
                 </div>
               )}
@@ -94,7 +95,7 @@ const SocialShare = ({ shareUrl }: Props) => {
                   onClick={() => window.open(`https://www.instagram.com/?url=${shareUrl}`, "_blank")}
                   className={`flex items-center space-x-1 text-[12px] px-4 w-full py-1 ${active ? 'bg-gray-100' : ''} cursor-pointer`}
                 >
-                  <Image src="/assets/img/3.svg" alt="Instagram" width="16" />
+                  <Image  width={20} height={20} src="/assets/img/3.svg" alt="Instagram" />
                   <span>Instagram</span>
                 </div>
               )}
@@ -109,7 +110,8 @@ const SocialShare = ({ shareUrl }: Props) => {
                   title={title}
                 >
                   <div className={`flex items-center space-x-1 text-[12px] px-4 w-full py-1 ${active ? 'bg-gray-100' : ''} cursor-pointer`}>
-                    <Image src="/assets/img/2.svg" alt="Twitter" width="16" />
+                    <Image src="/assets/img/2.svg" alt="Twitter"   width={20}
+                                                    height={20} />
                     <span>Linkedin</span>
                   </div>
                 </LinkedinShareButton>
@@ -123,7 +125,9 @@ const SocialShare = ({ shareUrl }: Props) => {
                   onClick={copyToClipboard}
                   className={`flex items-center space-x-1 text-[12px] px-4 w-full py-1 ${active ? 'bg-gray-100' : ''} cursor-pointer`}
                 >
-                  <Image src="/assets/img/copy.png" alt="Copy Link" width="16" />
+                  <Image src="/assets/img/copy.png" alt="Copy Link" 
+                                                                      width={20}
+                                                    height={20}/>
                   <span className="text-gray-800">Copy Link</span>
                 </div>
               )}

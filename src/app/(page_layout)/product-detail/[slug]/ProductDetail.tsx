@@ -377,6 +377,8 @@ const ProductLabel = ({ product, pProduct, onImageClick = () => {} }: any) => {
                   className="h-12 md:h-16 "
                   title="Vegan"
                   alt="vegan"
+                                  width={20}
+                 height={20}
                 />
               </>
             ) : (
@@ -389,6 +391,8 @@ const ProductLabel = ({ product, pProduct, onImageClick = () => {} }: any) => {
                   className="h-16  md:h-20"
                   title="Dairy Free"
                   alt="dairyfree"
+                                  width={20}
+                 height={20}
                 />
               </>
             ) : (
@@ -401,6 +405,8 @@ const ProductLabel = ({ product, pProduct, onImageClick = () => {} }: any) => {
                   className="h-16  md:h-20"
                   title="Gluten Free"
                   alt="glutenfree"
+                                  width={20}
+                 height={20}
                 />
               </>
             ) : (
@@ -413,6 +419,8 @@ const ProductLabel = ({ product, pProduct, onImageClick = () => {} }: any) => {
                   className="h-16  md:h-20"
                   title="Peanut Free"
                   alt="peanutfree"
+                                  width={20}
+                 height={20}
                 />
               </>
             ) : (
@@ -892,6 +900,7 @@ export default function ProductDetail({
                         <div className="text-center h-[300px] flex items-center justify-center">
                           <div className="flex flex-col gap-6">
                             <Image
+                            width={20} height={20}
                               src="/assets/img/noproducts.png"
                               alt=""
                               className="h-36 mx-auto"
@@ -976,6 +985,7 @@ export default function ProductDetail({
                                               <div className="bg-white flex  items-center justify-center rounded-[4px]  mb-3 ">
                                                 <div className="flex flex-col gap-1 py-1  items-center  ">
                                                   <Image
+                                                  width={20} height={20}
                                                     src="/assets/img/veri.png"
                                                     className="w-[20px] h-[20px] mx-auto" alt={""}                                                  />
                                                   <span className="text-xs  text-center  relative px-1">
@@ -1000,6 +1010,7 @@ export default function ProductDetail({
                                               <div className="bg-white flex  items-center justify-center rounded-[4px]  mb-3 ">
                                                 <div className="flex flex-col gap-1 py-1  items-center  ">
                                                   <Image
+                                                  width={20} height={20}
                                                     src="/assets/img/inveri.png"
                                                     className="w-[20px] h-[20px] mx-auto" alt={""}                                                  />
                                                   <span className="text-xs  text-center  relative px-1">

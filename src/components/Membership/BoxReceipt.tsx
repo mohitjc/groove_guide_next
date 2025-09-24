@@ -128,7 +128,7 @@ export default function BoxReceipt({ data, detail }:any) {
           <div className="">
             <div className="flex flex-col gap-4 items-center justify-center">
               <div className="w-20 bg-black shadow-md h-20 mx-auto rounded-full border-4 border-white p-2 flex items-center justify-center">
-                <Image src="/assets/img/shops.png" alt="company-logo" className="h-10" />
+                <Image width={20} height={20} src="/assets/img/shops.png" alt="company-logo" className="h-10" />
               </div>
 
               <div className="flex flex-col items-center text-white gap-2 text-base">

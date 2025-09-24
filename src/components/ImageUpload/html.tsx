@@ -65,6 +65,7 @@ const Html = ({
                       <>
                         <div className="imagethumbWrapper">
                           <Image
+                          width={20} height={20}
                             src={methodModel.noImg(itm, model)}
                             className={`thumbnail ${className}`} alt={""}                          />
                           <i
@@ -108,6 +109,7 @@ const Html = ({
                       <>
                         <div className="imagethumbWrapper">
                           <Image
+                          width={20} height={20}
                           alt={""}
                             src="/assets/img/ic_asc.png"
                             className={`thumbnail ${className}`}
@@ -134,6 +136,7 @@ const Html = ({
                   <>
                     <Image
                     alt={""}
+                    width={20} height={20}
                       src={methodModel.noImg(img, model)}
                       className={`thumbnail ${className}`}
                     />
@@ -156,7 +159,7 @@ const Html = ({
                   </>
                 ) : (
                   <>
-                    <Image
+                    <Image width={20} height={20}
                               src="/assets/img/ic_asc.png"
                               className={`thumbnail ${className}`} alt={""}                    />
                   </>

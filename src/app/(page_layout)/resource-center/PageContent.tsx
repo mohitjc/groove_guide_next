@@ -72,7 +72,7 @@ const noImg = (img:any='', defaultImg = '/assets/img/placeholder.png') => {
                         className="w-full cursor-pointer"
                         onClick={() => onClick(item)} /> */}
 
-                        <Image src={noImg(item.thumbnail || item.image)} alt="" className="w-full cursor-pointer" onClick={() => onClick(item)}/>
+                        <Image width={20} height={20} src={noImg(item.thumbnail || item.image)} alt="" className="w-full cursor-pointer" onClick={() => onClick(item)}/>
                     {/* <button className="absolute top-3 right-3 bg-white p-2 rounded-full shadow-md">
                         <IoMdHeart className="text-red-500 text-lg" />
                     </button> */}
@@ -114,6 +114,7 @@ const noImg = (img:any='', defaultImg = '/assets/img/placeholder.png') => {
                     <div className="flex items-center text-gray-600 text-[12px] 2xl:text-sm gap-2">
                         <div className="flex gap-1 items-center">
                             <Image
+                            width={20} height={20}
                                 src="/assets/img/v2/2.svg"
                                 alt="Author"
                                 className=" h-4 "
@@ -659,7 +660,7 @@ export default function PageContent() {
                     <div className="xl:container mx-auto px-4 py-6 lg:py-2  flex flex-col lg:flex-row items-center justify-between gap-8 xl:gap-8 2xl:gap-10">
 
                         <div className="flex flex-col items-center lg:flex-row gap-4 xl:gap-8">
-                            <Image src="/assets/img/v2/res.svg" className="h-20 w-fit" alt={""} />
+                            <Image width={20} height={20} src="/assets/img/v2/res.svg" className="h-20 w-fit" alt={""} />
                             <div className="flex flex-col lg:flex-row gap-8 xl:gap-14 2xl:gap-16 items-center">
                                 <h2 className="text-3xl lg:text-3xl xl:text-3xl 2xl:text-5xl text-center lg:text-left font-bold tracking-[-2.24px] text-[#E0EBD4] md:w-[305px] xl:w-[380px] 2xl:w-[605px]">
                                     Craft Therapy Network
@@ -741,6 +742,7 @@ export default function PageContent() {
                                 {/* Image with Favorite Icon */}
                                 <div className="relative">
                                     <Image
+                                    width={20} height={20}
                                         src={item.image}
                                         alt="Workout"
                                         className="w-full h-82 object-cover"
@@ -904,7 +906,7 @@ export default function PageContent() {
                                         </div>
 
                                         <div onClick={() => setIsOpen3(true)} className="bg-[#F9F7F5] border border-[#E8E8EA] cursor-pointer flex items-center justify-center px-4 py-1 rounded-lg">
-                                            <Image alt="filter" src="/assets/img/v2/filter.svg" className="h-8" />
+                                            <Image width={20} height={20} alt="filter" src="/assets/img/v2/filter.svg" className="h-8" />
                                         </div>
                                     </div>
 
@@ -983,6 +985,7 @@ export default function PageContent() {
                         <div className="flex gap-4 items-center mt-2 sm:mt-3 text-gray-500 text-[10px] sm:text-sm flex-wrap">
                             <div className="flex items-center gap-1 sm:gap-2">
                                 <Image
+                                width={20} height={20}
                                     src="/assets/img/v2/123.png"
                                     alt="Author"
                                     className="w-6 sm:w-8 h-6 sm:h-8 rounded-full"

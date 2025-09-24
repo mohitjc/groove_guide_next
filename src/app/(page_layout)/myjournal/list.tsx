@@ -72,6 +72,8 @@ const MyJournal = ({ images, comment, product, createdAt ,seeNote}:myJou) => {
                   ? noImg(images[0])
                   : "../assets/img/mush2.png"}
                 onClick={() => view()}
+                width={20}
+                 height={20}
                 className="  h-full w-full object-contain rounded-[38px] custom_shadow_small bg-gray-200 " alt={""}                />
               )}
             </div>
@@ -556,6 +558,8 @@ function Index() {
           <div className="col-span-12 text-center h-[300px] flex items-center justify-center">
               <div className="flex flex-col gap-6">
                 <Image
+                width={20}
+                 height={20}
                   src="/assets/img/noproducts.png"
                   alt=""
                   className="h-36 mx-auto"
@@ -713,6 +717,8 @@ function Index() {
                                                 }}
                                               >
                                                 <Image
+                                                  width={20}
+                                                  height={20}     
                                                   src={methodModel.noImg(tag.image)}
                                                   className="h-16 w-16 object-cover rounded-full" alt={""}                                                />
                                                 <div>{tag.name}</div>
@@ -746,7 +752,9 @@ function Index() {
                                               >
                                                 <Image
                                                   src={methodModel.noImg(tag.image)}
-                                                  className="h-16 w-16 object-cover rounded-full" alt={""}                                                />
+                                                  className="h-16 w-16 object-cover rounded-full" alt={""}   
+                                                                  width={20}
+                 height={20}                                             />
                                                 <div>{tag.name}</div>
                                               </label>
                                             </>

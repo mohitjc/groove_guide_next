@@ -213,6 +213,7 @@ function RewardRequest() {
               nodata={
                 <div className="flex flex-col gap-6">
                   <Image
+                  width={20} height={20}
                     src="/assets/img/noproducts.png"
                     alt=""
                     className="h-36 mx-auto"

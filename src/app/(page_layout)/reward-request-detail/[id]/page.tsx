@@ -110,6 +110,7 @@ function RewardRequest() {
                         />
                       ) : (
                         <Image
+                        width={20} height={20}
                           src={methodModel.noImg(rewardDetail?.image)}
                           className="w-64 max-w-64 rounded-lg border"
                           alt="Reward"

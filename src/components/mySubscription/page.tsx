@@ -447,6 +447,8 @@ const Dashboard = () => {
                           src="/assets/img/noproducts.png"
                           alt=""
                           className="h-36 mx-auto"
+                           width={20}
+                            height={20}
                         />
                         <p className="text-gray-400 text-[18px] font-regular">
                           No Subscription.

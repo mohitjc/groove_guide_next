@@ -261,7 +261,7 @@ function MenuFilters({
             <>
               <div className={`flex items-center !justify-start md:!justify-between gap-4 mb-0 border-gray-200 md:border-none md:pb-0  `}>
                 <div className="hidden max-md:flex  items-center gap-2">
-                  <Image src="/assets/img/filter.svg" alt={""} />
+                  <Image width={20} height={20} src="/assets/img/filter.svg" alt={""} />
                   <h5 className="text-black font-semibold text-[16px] lg:text-[20px]">
                     {" "}
                     Filter
@@ -393,7 +393,7 @@ function MenuFilters({
               </div>
 
               <div onClick={() => setIsOpen3(true)} className="bg-[#F9F7F5] border border-[#E8E8EA] cursor-pointer flex items-center justify-center px-4 py-1 rounded-lg">
-                <Image alt="filter" src="/assets/img/v2/filter.svg" className="h-8" />
+                <Image width={20} height={20} alt="filter" src="/assets/img/v2/filter.svg" className="h-8" />
               </div>
             </div>
 

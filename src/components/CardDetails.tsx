@@ -424,12 +424,14 @@ const CardDetails = (({ userId, detail, result = () => {} }:any) => {
 
                                   <div className="absolute top-[5px] right-[20px] w-[60px] h-auto opacity-80">
                                     <Image
+                                    width={20} height={20}
                                       src={`/assets/img/cards/${itm?.card_type?.toLowerCase()}.png`}
                                       alt={itm.card_type}
                                     />
                                   </div>
                                   <div className="absolute top-[65px] left-[20px] w-[40px] h-auto opacity-80">
                                     <Image
+                                    width={20} height={20}
                                       src="../assets/img/cards/chip.png"
                                       alt="chip"
                                     />

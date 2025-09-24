@@ -29,6 +29,8 @@ const Loading = ({ id = '', className = '' }) => {
       <div>
         <Image
           src="/img/loader.gif"
+          width={20}
+          height={20}
           alt="logo"
           className="w-[50px]"
         />

@@ -575,6 +575,8 @@ const Profile = () => {
                     src={methodModel.noImg(stateId.stateId)}
                     className="w-[120px] mx-auto block mb-3"
                     alt=""
+                    width={20}
+          height={20}
                   />
                 </div>
               </>
@@ -782,6 +784,8 @@ const Profile = () => {
 
                                         <div className="w-10 h-10 shrink-0 bg-transparent border border-black rounded-full overflow-hidden flex items-center justify-center transition duration-300 ease-in-out peer-checked:opacity-100 peer-checked:grayscale-0 opacity-50 grayscale">
                                             <Image
+                                            width={20}
+          height={20}
                                                 src="/assets/img/coin/c1.svg"
                                                 className="h-full w-full object-cover"
                                                 alt="Coin Image"
@@ -855,6 +859,8 @@ const Profile = () => {
                                                     src={methodModel.noImg(option.image)}
                                                     className="h-full w-full object-cover"
                                                     alt="Coin Image"
+                                                    width={20}
+                                                    height={20}
                                                 />
                                             </div>
                                             <span className="ml-3 text-black">

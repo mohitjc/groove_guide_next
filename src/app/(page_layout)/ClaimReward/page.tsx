@@ -151,7 +151,9 @@ function ClaimReward({ result = (e:any) => {console.log(e);
       <div className="max-w-lg mx-auto bg-white shadow-xl p-4 mt-6 rounded-xl">
         <Image
           src="/assets/img/logo.png"
-          className="object-contain h-24 w-full" alt={""}        />
+          className="object-contain h-24 w-full" alt={""} 
+          width={20}
+          height={20}       />
 
         <div className="text-xl font-[600] text-center leading-8 mt-6">
           <p>
@@ -174,7 +176,9 @@ function ClaimReward({ result = (e:any) => {console.log(e);
               >
                 <Image
                   src="/assets/img/cliam/circle.png"
-                  className="object-contain h-28 w-full" alt={""}                />
+                  className="object-contain h-28 w-full" alt={""}              
+                  width={20}
+                                                    height={20}  />
                 <div className="absolute inset-0 flex items-center justify-center">
                   <div className="text-center text-xs sm:text-sm lg:text-lg leading-6">
                     {/* {type.split(' ').map(itm=>{
