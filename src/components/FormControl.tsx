@@ -4,6 +4,7 @@ import OptionDropdown from "./OptionDropdown";
 import {fire} from "./Swal";
 import datepipeModel from "@/utils/datepipemodel";
 import { isNumber } from "@/utils/shared";
+import MultiSelectDropdown from "./MultiSelectDropdown/page";
 
 const FormControl = memo(function FormControl({
   join = "",
@@ -167,8 +168,8 @@ const FormControl = memo(function FormControl({
         )}
 
         {type == "multiselect" ? (<>
-        MultiSelectDropdown
-         {/* <MultiSelectDropdown
+        {/* MultiSelectDropdown */}
+         <MultiSelectDropdown
             id={`statusDropdown_${id}`}
             displayValue={displayValue}
             intialValue={value}
@@ -179,7 +180,7 @@ const FormControl = memo(function FormControl({
             }}
             options={options}
             disabled={disabled}
-          /> */}
+          />
         </>
          
         ): type == 'dob' ? <>
