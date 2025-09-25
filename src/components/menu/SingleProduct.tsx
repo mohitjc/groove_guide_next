@@ -16,7 +16,7 @@ function SingleProduct({
   viewProduct=(_:any)=>{},
   filter = {}
 }: any) {
-  const user = useSelector((state: any) => state.user);
+  const user = useSelector((state: any) => state.user.data);
   const router=useRouter()
   const history = (p = '') => {
     router.push(p)

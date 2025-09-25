@@ -8,7 +8,7 @@ import SingleProduct from "./SingleProduct";
 import Link from "next/link";
 import Image from "next/image";
 function ProductsList({ title, products = [], isBox = false, setBoxes = () => { }, boxExclusive = false, link, onSuccess, seeMore = false, viewProduct, category_detail = null, categoryId = '', pfilter = {}, isSlider = false, productCount = 3 }: any) {
-  const user = useSelector((state: any) => state.user)
+  const user = useSelector((state: any) => state.user.data)
   const {post}=ApiClientB()
   const handleFavClick = (id: any) => {
     post("fav/add-remove", { product_id: id }).then((res) => {

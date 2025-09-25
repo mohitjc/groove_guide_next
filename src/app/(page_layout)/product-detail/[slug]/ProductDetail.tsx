@@ -476,7 +476,7 @@ export default function ProductDetail({
   dietary = {},
 }: any) {
   const { get, post, put } = ApiClientB();
-  const user = useSelector((state: any) => state.user);
+  const user = useSelector((state: any) => state.user.data);
   const [submitted, setSubmitted] = useState(false);
   const history = useRouter();
   const [product, setProduct] = useState<any>("");
