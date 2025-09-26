@@ -190,8 +190,9 @@ const OptionDropdown: React.FC<OptionDropdownProps> = ({
       <div
         ref={buttonRef}
         aria-expanded={isOpen?'true':'false'}
-        role="div" 
+        role="combobox"
          aria-label="select"
+         aria-controls="type-list"
         onClick={() => !disabled?setIsOpen((prev) => !prev):{}}
         title={selected[displayValue]}
         className={`relative ${disabled?'bg-gray-200':''} cursor-pointer border border-[#e5e7eb] px-4 shadow-box bg-white text-[#333] rounded-lg h-10 flex items-center text-left text-sm gap-2 z-9 overflow-hidden px-2 ${className} ${isOpen?openClass:closeClass}`}
