@@ -943,11 +943,11 @@ console.log(user,'useruser');
                   </TooltipHtml>
                 </div>
                 <div className="flex flex-col items-center border border-gray-200   w-full p-6 md:!p-10 2xl:!px-20 2xl:!pt-16 2xl:!pb-12 rounded-xl shadow ">
-                  <Link href={"/profile"}>
+                  <Link href={"/profile"} aria-label="Profile">
                     <Image
                     width={300} height={200}
                         src={noImg(user?.image || "")}
-                        className="h-32 w-32 mx-auto rounded-full object-cover" alt={""}                    />
+                        className="h-32 w-32 mx-auto rounded-full object-cover" alt={"profile image"}                    />
                   </Link>
 
                   <div className="flex items-center justify-center gap-2 flex-col mt-4">
