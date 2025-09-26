@@ -66,18 +66,8 @@ const noImg = (img:any='', defaultImg = '/assets/img/placeholder.png') => {
     <div className="w-full rounded-xl overflow-hidden  border bg-white">
                 {/* Image with Favorite Icon */}
                 <div className="relative">
-                    {/* <ImageHtml src={noImg((item.thumbnail || item.image), `/assets/img/thumbnail/${item.type}.jpg`)}
-                        alt="Workout"
-                        // className="w-full h-[185px] object-cover object-top"
-                        className="w-full cursor-pointer"
-                        onClick={() => onClick(item)} /> */}
-
                         <Image width={351} height={398} src={noImg(item.thumbnail || item.image)} alt="" className="w-full cursor-pointer" onClick={() => onClick(item)}/>
-                    {/* <button className="absolute top-3 right-3 bg-white p-2 rounded-full shadow-md">
-                        <IoMdHeart className="text-red-500 text-lg" />
-                    </button> */}
                 </div>
-
                 {/* Content */}
                 <div className="p-4 flex flex-col gap-2">
                     {/* Tags */}
@@ -125,11 +115,8 @@ const noImg = (img:any='', defaultImg = '/assets/img/placeholder.png') => {
                             <span className="material-symbols-outlined">visibility</span>
                             <span className="font-semibold">{item.views}</span>
                         </div>
-                        <SocialShare  shareUrl={`${envirnment.frontUrl}resource-center/${item?.content}/${item?.id}`} />
-                   
-                
+                        <SocialShare  shareUrl={`${envirnment.frontUrl}resource-center/${item?.content}/${item?.id}`} />               
                     </div>
-
                     {/* Title */}
                     <h3
                         // onClick={() => onclick(item)}
@@ -138,17 +125,10 @@ const noImg = (img:any='', defaultImg = '/assets/img/placeholder.png') => {
                     >
                         {item?.title || ''}
                     </h3>
-
-
-
                     {/* Author Info */}
                     <div className="flex justify-between items-center mt-3 text-gray-500 text-sm gap-2 ">
                         <div className="flex text-left items-center gap-2">
-                            {/* <Image
-                                src="/assets/img/v2/123.png"
-                                alt="Author"
-                                className="w-6 h-6 2xl:w-8 2xl:h-8 rounded-full"
-                            /> */}
+                          
                             <span className="text-[12px] 2xl:text-[16px] font-[500] text-[#97989F] worksans max-w-40 line-clamp-1">{contentTypes.find(itm => itm.id == item.content)?.name}</span>
                         </div>
 
@@ -156,15 +136,12 @@ const noImg = (img:any='', defaultImg = '/assets/img/placeholder.png') => {
                     </div>
                 </div>
             </div>
-  
-  
   </>
 }
 
     const ContentList = ({ list = [], api = '', content = '', onClick, pfilter = {}, title = '', slideCount = 4, isLoading = false, noData = '', showAnotherSlider = false }:ContentListType) => {
     const width = document.body.offsetWidth
     const isMobile = width < 769 ? true : false
-
     const [data, setData] = useState([])
     const [loading, setLoading] = useState(api ? true : false)
     const [slider, setSlider] = useState(true)
@@ -270,41 +247,24 @@ const noImg = (img:any='', defaultImg = '/assets/img/placeholder.png') => {
                             className="container centers_style px-2 mx-auto "
                             breakpoints={{
                                 200: {
-                                    slidesPerView: 1, // 1 slide per view on screens smaller than 640px
-                                    // grid: {
-                                    //   rows: 1, // Optionally, reduce rows to 1 on mobile
-                                    // },
+                                    slidesPerView: 1, 
                                     spaceBetween: 10,
                                 },
 
                                 550: {
-                                    slidesPerView: 2, // 1 slide per view on screens smaller than 640px
-                                    // grid: {
-                                    //   rows: 1, // Optionally, reduce rows to 1 on mobile
-                                    // },
+                                    slidesPerView: 2, 
                                 },
 
                                 1099: {
-                                    slidesPerView: 3, // 1 slide per view on screens smaller than 640px
-                                    // grid: {
-                                    //   rows: 1, // Optionally, reduce rows to 1 on mobile
-                                    // },
+                                    slidesPerView: 3, 
                                 },
 
                                 1280: {
-                                    slidesPerView: 4, // 1 slide per view on screens smaller than 640px
-                                    // grid: {
-                                    //   rows: 1, // Optionally, reduce rows to 1 on mobile
-                                    // },
+                                    slidesPerView: 4, 
                                 },
                                 1380: {
-                                    slidesPerView: slideCount, // 1 slide per view on screens smaller than 640px
-                                    // grid: {
-                                    //   rows: 1, // Optionally, reduce rows to 1 on mobile
-                                    // },
+                                    slidesPerView: slideCount,
                                 },
-
-
                             }}
                         >
 
