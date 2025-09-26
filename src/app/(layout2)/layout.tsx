@@ -744,7 +744,7 @@ export default function Layout({
                           </div>
                         </TooltipHtml>
                         <TooltipHtml placement="top" title="Messages">
-                          <a className="relative notif">
+                          <span className="relative notif">
                             <OptionDropdown
                               title={<>
                                 {unreadCount > 0 ? (
@@ -783,7 +783,7 @@ export default function Layout({
                                 </>
                               }
                             />
-                          </a>
+                          </span>
                         </TooltipHtml>
 
                       </>
