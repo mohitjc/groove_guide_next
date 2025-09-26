@@ -8,6 +8,7 @@ const Html = ({disabled, options, selectedValues, handleChange, displayValue, pl
       <div className="selectDropdown">
         <Select
           aria-label="select"
+
           defaultValue={displayValue}
           isMulti
           value={selectedValues || []}

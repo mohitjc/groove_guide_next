@@ -190,6 +190,7 @@ const OptionDropdown: React.FC<OptionDropdownProps> = ({
       <div
         ref={buttonRef}
         aria-expanded={isOpen?'true':'false'}
+        role="div" 
          aria-label="select"
         onClick={() => !disabled?setIsOpen((prev) => !prev):{}}
         title={selected[displayValue]}
