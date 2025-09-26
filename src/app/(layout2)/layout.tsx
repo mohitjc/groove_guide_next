@@ -1007,7 +1007,7 @@ export default function Layout({
         <PiUserSwitchLight />
         Referrals
       </Link>
-      <a
+      <span
         className="flex items-center gap-2 px-2 py-1 rounded-md hover:bg-gray-100 text-gray-500 cursor-pointer"
         onClick={() => {
           Logout();
@@ -1015,7 +1015,7 @@ export default function Layout({
       >
         <IoLogOutOutline />
         Logout
-      </a>
+      </span>
     </div>
 
                   </div>
