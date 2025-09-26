@@ -1,5 +1,4 @@
 'use client';
-
 import AudioHtml from "@/components/AudioHtml";
 import DebouncedInput from "@/components/DebouncedInput";
 import FormControl from "@/components/FormControl";
@@ -267,7 +266,6 @@ const noImg = (img:any='', defaultImg = '/assets/img/placeholder.png') => {
                                 },
                             }}
                         >
-
                             {listData.map((itm, i) => {
                                 return  <SwiperSlide key={i}>
                                         <ResourceItem item={itm} isMobile={isMobile} onClick={onClick} />
@@ -292,48 +290,27 @@ const noImg = (img:any='', defaultImg = '/assets/img/placeholder.png') => {
                     // }}
                     breakpoints={{
                         200: {
-                            slidesPerView: 1, // 1 slide per view on screens smaller than 640px
-                            // grid: {
-                            //   rows: 1, // Optionally, reduce rows to 1 on mobile
-                            // },
+                            slidesPerView: 1,
                             spaceBetween: 10,
                         },
-
                         769: {
-                            slidesPerView: 1, // 1 slide per view on screens smaller than 640px
-                            // grid: {
-                            //   rows: 1, // Optionally, reduce rows to 1 on mobile
-                            // },
+                            slidesPerView: 1, 
                         },
 
                         770: {
-                            slidesPerView: 2, // 1 slide per view on screens smaller than 640px
-                            // grid: {
-                            //   rows: 1, // Optionally, reduce rows to 1 on mobile
-                            // },
+                            slidesPerView: 2, 
                         },
 
                         1099: {
-                            slidesPerView: 3, // 1 slide per view on screens smaller than 640px
-                            // grid: {
-                            //   rows: 1, // Optionally, reduce rows to 1 on mobile
-                            // },
+                            slidesPerView: 3,
                         },
 
                         1280: {
-                            slidesPerView: 4, // 1 slide per view on screens smaller than 640px
-                            // grid: {
-                            //   rows: 1, // Optionally, reduce rows to 1 on mobile
-                            // },
+                            slidesPerView: 4,
                         },
                         1380: {
-                            slidesPerView: slideCount, // 1 slide per view on screens smaller than 640px
-                            // grid: {
-                            //   rows: 1, // Optionally, reduce rows to 1 on mobile
-                            // },
+                            slidesPerView: slideCount, 
                         },
-
-
                     }}
                     autoplay={{
                         delay: 1000, // delay between slides in ms
@@ -343,9 +320,7 @@ const noImg = (img:any='', defaultImg = '/assets/img/placeholder.png') => {
                     navigation={true}
                     pagination={false}
                     spaceBetween={10}
-                    // pagination={{
-                    //   clickable: true,
-                    // }}
+                   
                     modules={[Grid, Pagination, Navigation]}
                     className="gridstowslide forarrows"
                 >
@@ -389,31 +364,23 @@ const noImg = (img:any='', defaultImg = '/assets/img/placeholder.png') => {
                             <GoArrowRight />
                         </> : <>
                             <GoArrowRight />
-                            {/* <span className="material-symbols-outlined h-auto w-auto inline-block my-auto text-[16px]">keyboard_arrow_up</span> */}
+                           
                         </>}
                     </span>
 
                 </> : <></>}
-
             </div>
-
-
             {noData ? <>
                 <div>
                     {noData}
                 </div>
             </> : <></>}
-
         </>}
-
         {title && (listData?.length || load) ? <>
             <div className="h-[30px]"></div>
         </> : <></>}
-
     </>
 }
-
-
 
 export default function PageContent() {
    const user = useSelector((state:any) => state.user?.data)
@@ -450,7 +417,6 @@ export default function PageContent() {
     }
 
     const openModal = (e:any) => {
-        console.log('openmodal');
         
         setDetailModal(e)
         const url = `/resource-center/${e.content}/${e.id}`
@@ -475,7 +441,6 @@ export default function PageContent() {
         }
         setContent([...arr])
     }
-
 
     const getThisweekData = async () => {
         setWeekLoader(true)
@@ -616,7 +581,6 @@ export default function PageContent() {
   return <>
   
         <div className="bg-[#f9f7f5]">
-
             <section className="resoureceone">
                 <div className="bg-[#1E8F72] border-t border-gray-300">
                     <div className="xl:container mx-auto px-4 py-6 lg:py-2  flex flex-col lg:flex-row items-center justify-between gap-8 xl:gap-8 2xl:gap-10">
@@ -628,15 +592,11 @@ export default function PageContent() {
                                     Craft Therapy Network
                                     Resource Center
                                 </h2>
-
-
                                 <p className="text-base 2xl:text-lg  text-[#E0EBD4] text-center lg:text-left font-bold sm:max-w-[385px]  ">
                                     Your trusted hub for knowledge, education, and community-driven wellness—powered by the Craft Therapy Network.
                                 </p>
-
                             </div>
                         </div>
-
 
                         <div className="flex flex-col gap-2">
                             <button className="flex items-center gap-2 ">
@@ -656,14 +616,9 @@ export default function PageContent() {
                                 </span>
                             </button>
                         </div>
-
                     </div>
                 </div>
-
             </section>
-
-
-
 
             <section className="resourecetwo sliders_news px-4 sm:px-6 2xl:px-10 py-6 lg:py-16 border-b-2 border-gray-200">
                 <div className="hidden md:block lg:container mx-auto px-6">
@@ -674,7 +629,6 @@ export default function PageContent() {
                         <ContentList list={weekData} onClick={openModal} isLoading={weekLoader} showAnotherSlider={true} />
                     </div>
                 </div>
-
                 <div className="block md:hidden lg:container mx-auto">
                     <div className="text-center">
                         <h6 className="uppercase text-3xl xl:text-4xl 2xl:text-5xl text-[#1B1B1F] font-bold mb-6 tracking-[-2.24px] mb-8">What’s Fresh in Wellness</h6>
@@ -684,17 +638,12 @@ export default function PageContent() {
                     </div>
                 </div>
             </section>
-
-
             <section className="resourecethree  px-4 2xl:px-10 py-6 lg:py-16">
                 <div className="lg:container mx-auto">
                     <div className="text-center">
                         <h3 className="uppercase text-3xl xl:text-4xl 2xl:text-5xl text-[#1B1B1F] font-bold tracking-[-2.24px] mb-10">Choose Category</h3>
                     </div>
-
-
                     <div className=" grid max-[480px]:!grid-cols-1 grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 gap-4 mt-8">
-
                         {topCategory.map((item,i) => {
                             return <div onClick={() => {
                                 filter({ main_category: item.id, types: '' })
@@ -710,10 +659,8 @@ export default function PageContent() {
                                         className="w-full h-82 object-cover"
                                     />
                                 </div>
-
                                 {/* Content */}
                                 <div className="p-4 flex flex-col gap-1">
-
                                     {/* Title */}
                                     <h3 className="text-[20px] xl:text-[22px] 2xl:text-[24px] line-clamp-2 font-[700] leading-[26px] sm:leading-[27px] md:leading-[28px] text-[#181A2A]">
                                         {item.name}
@@ -726,9 +673,6 @@ export default function PageContent() {
                     </div>
                 </div>
             </section>
-
-
-
             <section className="resourecetwo ">
                 <div className="hidden md:grid grid-cols-12  gap-4 xl:gap-8 px-4 2xl:px-16 py-16">
                     <div className="col-span-12 md:col-span-4 xl:col-span-3">
@@ -746,10 +690,7 @@ export default function PageContent() {
                                     />
                                 </div>
                             </div>
-
                             <div className="flex flex-col gap-2">
-
-
                                 <div className="flex gap-2 items-center">
                                     <label className="text-[#061522] font-inter text-[14px] xl:text-[16px] font-bold leading-[28px] uppercase flex gap-2 items-center">
                                         <input type="checkbox" className="h-3 w-3 cursor-pointer custom-input"
@@ -761,7 +702,6 @@ export default function PageContent() {
                                         All
                                     </label>
                                 </div>
-
                                 {contentCategory.map((item, i) => {
                                     // const key=item.id
                                     return <div className="flex gap-2 items-center" key={i}>
@@ -779,7 +719,6 @@ export default function PageContent() {
                                 })}
 
                             </div>
-
                             {tagsLoading ? <>
                                 <div className="flex flex-wrap gap-2">
                                     <p className="h-[38px] w-[100px] rounded-full shine"></p>
@@ -835,10 +774,7 @@ export default function PageContent() {
                                 </Fragment>
                         })}
                     </div>
-
-
                 </div>
-
 
                 <div className="grid md:hidden grid-cols-12  gap-4 xl:gap-8 px-4 py-6  lg:py-16">
 
@@ -858,21 +794,15 @@ export default function PageContent() {
                                                 onChange={e => {
                                                     filter({ search: e })
                                                 }} />
-                                            {/* {search && search.length > 0 && (
-                                    <div className="-translate-y-1/2 top-1/2 text-[12px] xl:text-[18px] right-3 cursor-pointer hover:text-[#540C0F] absolute">
-                                        <MdOutlineClose onClick={handleClearSearch} />
-                                    </div>
-                                )} */}
+                                          
                                             <IoIosSearch
                                                 className="text-black text-[14px] 2xl:text-[18px]"
                                             />
                                         </div>
-
                                         <div onClick={() => setIsOpen3(true)} className="bg-[#F9F7F5] border border-[#E8E8EA] cursor-pointer flex items-center justify-center px-4 py-1 rounded-lg">
                                             <Image width={157} height={80} alt="filter" src="/assets/img/v2/filter.svg" className="h-8" />
                                         </div>
                                     </div>
-
                                     <div className="flex flex-wrap gap-2">
                                         <p className={`capitalize px-3 ${allTagSelected ? 'text-white bg-primary font-semibold text-[#540C0F]' : 'text-black '} py-1 rounded-full border-[#1a604c] border text-xs italic`}
                                             onClick={() => {
@@ -894,7 +824,6 @@ export default function PageContent() {
                                 </div>
                             </div>
                         </div>
-
                         {contentCategory.map((item, i) => {
                             let url = 'audio/list'
                             if (item.id == 'video') url = 'video/list'
@@ -908,7 +837,6 @@ export default function PageContent() {
                 </div>
             </section>
         </div>
-
         {detailModal ? <>
             <Modal
                 title="Details"
@@ -957,9 +885,7 @@ export default function PageContent() {
                             </div>
                             <span className="text-[12px]">{datepipeModel.date(detailModal?.createdAt)}</span>
 
-                            {/* <div className="flex gap-1 items-center ">
-                                                    <Image src="/assets/img/v2/3.svg" alt="Comment" className="h-3 sm:h-4" />
-                                                </div> */}
+                           
                             <div className="">
                                 <SocialShare shareUrl={`${envirnment.frontUrl}resource-center/${detailModal?.content}/${detailModal?.id}`} />
                             </div>
@@ -976,7 +902,6 @@ export default function PageContent() {
                                 </span>
                             })}
                         </div>
-
 
                         <div>
                             <div className="text-[16px] text-[#6D6E76]" dangerouslySetInnerHTML={{ __html: detailModal?.description }}></div>
@@ -996,9 +921,6 @@ export default function PageContent() {
                 }}
             />
         </> : <></>}
-
-       
-
         {/* sidebar modals */}
         {isOpen3?<>
          <div className="rightheader_modals">
@@ -1023,13 +945,7 @@ export default function PageContent() {
                             <div className="">
                                 <p className="font-bold text-lg mb-2">Content Type:</p>
                             </div>
-                            {/* <div className="flex gap-1 items-center">
-                                <p className="text-[13px] font-bold  text-[#000] capitalize flex items-center gap-2">
-                                    <input type="checkbox" className="h-4 w-4 cursor-pointer" />
-                                    All
-                                </p>
-                            </div> */}
-
+                          
                             {contentCategory.map((item, i) => {
                                 return <div className="flex gap-2 items-center" key={i}>
                                     <label className="text-[#061522] font-inter text-[14px] xl:text-[16px] font-bold leading-[28px] uppercase flex gap-2 items-center">
@@ -1062,8 +978,6 @@ export default function PageContent() {
                     onClick={() => setIsOpen3(false)}
                 ></div>
             )}
-
-           
         </div>
         </>:<></>}
         {tagModal ? <>
@@ -1101,7 +1015,5 @@ export default function PageContent() {
                     }}
                 />
             </> : <></>}
-
-
   </>
 }
