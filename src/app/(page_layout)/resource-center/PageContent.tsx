@@ -587,15 +587,15 @@ export default function PageContent() {
 
                         <div className="flex flex-col items-center lg:flex-row gap-4 xl:gap-8">
                             <Image width={157} height={80} src="/assets/img/v2/res.svg" className="h-20 w-fit" alt={""} />
-                            <div className="flex flex-col lg:flex-row gap-8 xl:gap-14 2xl:gap-16 items-center">
-                                <h2 className="text-3xl lg:text-3xl xl:text-3xl 2xl:text-5xl text-center lg:text-left font-bold tracking-[-2.24px] text-[#E0EBD4] md:w-[305px] xl:w-[380px] 2xl:w-[605px]">
-                                    Craft Therapy Network
-                                    Resource Center
-                                </h2>
-                                <p className="text-base 2xl:text-lg  text-[#E0EBD4] text-center lg:text-left font-bold sm:max-w-[385px]  ">
-                                    Your trusted hub for knowledge, education, and community-driven wellness—powered by the Craft Therapy Network.
-                                </p>
-                            </div>
+                           <div className="flex flex-col lg:flex-row gap-8 xl:gap-14 2xl:gap-16 items-center">
+  <h2 className="text-3xl lg:text-3xl xl:text-3xl 2xl:text-5xl text-center lg:text-left font-bold tracking-[-2.24px] text-[#E0EBD4] md:w-[305px] xl:w-[380px] 2xl:w-[605px]">
+    Craft Therapy Network
+    Resource Center
+  </h2>
+  <p className="text-base 2xl:text-lg text-[#E0EBD4] text-center lg:text-left font-bold sm:max-w-[385px]">
+    Your trusted hub for knowledge, education, and community-driven wellness—powered by the Craft Therapy Network.
+  </p>
+</div>
                         </div>
 
                         <div className="flex flex-col gap-2">
