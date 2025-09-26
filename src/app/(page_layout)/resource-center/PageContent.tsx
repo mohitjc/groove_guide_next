@@ -126,6 +126,8 @@ const noImg = (img:any='', defaultImg = '/assets/img/placeholder.png') => {
                             <span className="font-semibold">{item.views}</span>
                         </div>
                         <SocialShare  shareUrl={`${envirnment.frontUrl}resource-center/${item?.content}/${item?.id}`} />
+                   
+                
                     </div>
 
                     {/* Title */}
@@ -706,7 +708,7 @@ export default function PageContent() {
             <section className="resourecetwo sliders_news px-4 sm:px-6 2xl:px-10 py-6 lg:py-16 border-b-2 border-gray-200">
                 <div className="hidden md:block lg:container mx-auto px-6">
                     <div className="text-center">
-                        <h6 className="uppercase text-3xl xl:text-4xl 2xl:text-5xl text-[#1B1B1F] font-bold mb-6 tracking-[-2.24px] mb-8" id="newThisWeek">What’s Fresh in Wellness</h6>
+                        <h3 className="uppercase text-3xl xl:text-4xl 2xl:text-5xl text-[#1B1B1F] font-bold mb-6 tracking-[-2.24px] mb-8" id="newThisWeek">What’s Fresh in Wellness</h3>
                     </div>
                     <div className="relative">
                         <ContentList list={weekData} onClick={openModal} isLoading={weekLoader} showAnotherSlider={true} />
@@ -727,7 +729,7 @@ export default function PageContent() {
             <section className="resourecethree  px-4 2xl:px-10 py-6 lg:py-16">
                 <div className="lg:container mx-auto">
                     <div className="text-center">
-                        <h6 className="uppercase text-3xl xl:text-4xl 2xl:text-5xl text-[#1B1B1F] font-bold tracking-[-2.24px] mb-10">Choose Category</h6>
+                        <h3 className="uppercase text-3xl xl:text-4xl 2xl:text-5xl text-[#1B1B1F] font-bold tracking-[-2.24px] mb-10">Choose Category</h3>
                     </div>
 
 
@@ -845,11 +847,11 @@ export default function PageContent() {
                     <div className="col-span-12 md:col-span-8 xl:col-span-9" id="contentGrid">
                         <div className="flex flex-col gap-2 mb-4">
                             <div className="">
-                                <h6 className="text-3xl xl:text-4xl 2xl:text-5xl text-[#1B1B1F] font-bold tracking-[-2.24px]">{categoryTitle}</h6>
+                                <h3 className="text-3xl xl:text-4xl 2xl:text-5xl text-[#1B1B1F] font-bold tracking-[-2.24px]">{categoryTitle}</h3>
                             </div>
                             <div className="flex items-center justify-end gap-2 min-w-72 ml-auto">
-                                <p className="shrink-0">Sort by:</p>
-                                <FormControl
+                                <label className="shrink-0" >Sort by: </label> 
+                                        <FormControl
                                     type="multiselect"
                                     options={content_types}
                                     value={filters.types}
@@ -859,6 +861,7 @@ export default function PageContent() {
                                         filter({ types: e })
                                     }}
                                 />
+                             
                             </div>
                         </div>
                         {contentCategory.map((item, i) => {

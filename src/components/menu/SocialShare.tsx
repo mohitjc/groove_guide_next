@@ -22,7 +22,7 @@ const SocialShare = ({ shareUrl }: Props) => {
       {/* Headless UI Dropdown (Menu) */}
       <Menu as="div" className="relative">
         <TooltipHtml title="Social Share">
-          <Menu.Button className="flex cursor-pointer hover:shadow-lg flex-col items-center justify-center  bg-gray-white rounded-lg text-[16px] 2xl:text-[20px] focus:outline-none">
+          <Menu.Button  aria-label="SocialShare" className="flex cursor-pointer hover:shadow-lg flex-col items-center justify-center  bg-gray-white rounded-lg text-[16px] 2xl:text-[20px] focus:outline-none">
             <IoShareSocialOutline className='text-black' />
           </Menu.Button>
         </TooltipHtml>
