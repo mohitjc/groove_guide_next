@@ -51,6 +51,7 @@ export default function Layout({
   const spathname = pathname.split('/')[1]
   const query = useSearchParams()
   const user: any = useSelector((state: RootState) => state.user?.data);
+console.log(user,'useruser');
 
 
   const isCancel = spathname == 'cs' ? true : false
@@ -944,10 +945,8 @@ export default function Layout({
                 <div className="flex flex-col items-center border border-gray-200   w-full p-6 md:!p-10 2xl:!px-20 2xl:!pt-16 2xl:!pb-12 rounded-xl shadow ">
                   <Link href={"/profile"}>
                     <Image
-                    width={20} height={20}
-                        src={userImg
-                          ? methodModel.userImg(user?.image || "")
-                          : "../assets/img/person.jpg"}
+                    width={300} height={200}
+                        src={noImg(user?.image || "")}
                         className="h-32 w-32 mx-auto rounded-full object-cover" alt={""}                    />
                   </Link>
 

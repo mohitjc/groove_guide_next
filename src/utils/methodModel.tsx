@@ -38,7 +38,9 @@ const userImg = (img:string) => {
   if (!img) return "/assets/img/person.jpg";
 
   if (img.includes("https")) return img;
-  return `${environment.image_path}/${img}`;
+  // return `${environment.image_path}/${img}`;
+    return `${environment.sasurl}/${environment.container}/${img}`;
+
 };
 
 const noImg = (img:string, defaultImg = "/assets/img/placeholder.jpg") => {

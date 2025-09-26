@@ -12,6 +12,7 @@ const envirnment={
     env:env.NEXT_PUBLIC_ENV,
     googleapi:env.NEXT_PUBLIC_GOOGLEAPI,
     sasurl: process.env.REACT_APP_STORAGE_URL,
+     container: process.env.REACT_APP_CONTAINER,
 
 }
 export default envirnment

@@ -1,0 +1,179 @@
+.maininutcls i.fa.fa-times {
+    position: absolute;
+    left: 2rem;
+    top: 2rem;
+    background: #ffffffcf;
+    border-radius: 29px;
+    width: 19px;
+    height: 18px;
+    display: none;
+    z-index: 9999;
+}
+
+.maininutcls:hover .fa.fa-times {
+    display: inline-block;
+}
+
+.maininutcls {
+    display: inline-block;
+    position: relative;
+
+}
+
+.maininutcls {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: end;
+}
+
+.profile_btn {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.start {
+    color: red;
+}
+
+.form-control:disabled,
+.form-control[readonly] {
+    background-color: #540C0F26;
+    opacity: 1;
+}
+
+// i.fa.fa-search {
+//     display: none;
+// }
+
+// .headerSearch .Searchbar {
+//     background: #FFFFFF;
+//     border-radius: 100px;
+//     border: none;
+//     padding: 10px 35px;
+//     display: none;
+// }
+.inputFlex {
+    display: flex;
+    column-gap: 10px;
+
+    >label {
+        width: 200px;
+        font-weight: 500;
+        margin-bottom: 0px;
+    }
+
+    >div {
+        width: 100%;
+        font-weight: 300;
+    }
+
+}
+
+
+// changes
+
+@media only screen and (min-width:694px) and (max-width:730px) {
+    .profile_btn {
+        margin-top: 15px;
+    }
+
+    label.profileImageLabel {
+        margin-right: 15px;
+    }
+
+    label.btn.btn-primary.edit.ml-3 {
+        margin-left: 0rem !important;
+    }
+}
+
+@media only screen and (min-width:596px) and (max-width:693px) {
+
+    .profile_btn {
+        margin-top: 15px;
+    }
+
+    label.btn.btn-primary.edit.ml-3 {
+        margin-left: 0px !important;
+    }
+}
+
+@media only screen and (min-width:548px) and (max-width:595px) {
+
+    .profile_btn {
+        margin-top: 15px;
+    }
+
+    label.btn.btn-primary.edit.ml-3 {
+        margin-left: 0px !important;
+        margin-right: 15px !important;
+    }
+
+    label.btn.btn-primary.delete.ml-3 {
+        margin-left: 0px !important;
+    }
+
+    .inputFlex>label {
+        width: 150px;
+        font-weight: 500;
+    }
+
+    .ViewUser {
+        font-size: 20px;
+    }
+}
+
+@media only screen and (min-width:384px) and (max-width:547px) {
+    .profile_btn {
+        margin-top: 15px;
+    }
+
+    label.btn.btn-primary.edit.ml-3 {
+        margin-left: 0px !important;
+    }
+
+    label.btn.btn-primary.delete.ml-3 {
+        margin-left: 0px !important;
+    }
+
+    .inputFlex>label {
+        width: 150px;
+        font-weight: 500;
+    }
+
+    .ViewUser {
+        font-size: 20px;
+    }
+}
+
+@media only screen and (min-width:320px)and (max-width:383px) {
+    .profile_btn {
+        margin-top: 15px;
+    }
+
+    label.btn.btn-primary.edit.ml-3 {
+        margin-left: 0px !important;
+    }
+
+    label.btn.btn-primary.delete.ml-3 {
+        margin-left: 0px !important;
+    }
+
+    .inputFlex>label {
+        width: 100px;
+        font-weight: 500;
+    }
+
+    .ViewUser {
+        font-size: 20px;
+    }
+
+   
+}
+
+
+@media(max-width:767px){
+    .mainarea {
+        padding: 15px !important;
+    }
+}
