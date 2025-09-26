@@ -182,6 +182,7 @@ const OptionDropdown: React.FC<OptionDropdownProps> = ({
         onClick={() => !disabled?setIsOpen((prev) => !prev):{}}
         className={`${className} ${isOpen?openClass:closeClass}`}
         aria-expanded={isOpen?'true':'false'}
+        aria-label="Toggle Notifications"
       >
       {title}
       </div>
