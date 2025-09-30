@@ -5,35 +5,15 @@ import { PiCheckCircleFill } from "react-icons/pi";
 import datepipeModel from "@/utils/datepipemodel";
 import pipeModel from "@/utils/pipeModel";
 import Image from "next/image";
+import { getDiscountList, getDiscout } from "@/utils/shared.utils";
 
 export default function BoxReceipt({ data, detail }:any) {
-
-  const getDicount = (row:any) => {
-    const arr = row?.lineItems?.elements || []
-    let itemtotal = 0;
-    if (arr.length) itemtotal = arr.reduce((sum:any, itm:any) => sum + (itm.price / 100), 0);
-    const discounts = row?.discounts?.elements
-    let value = 0
-    if (discounts?.length) {
-      value = discounts?.reduce((acc:any, item:any) => {
-        if (item?.amount) {
-          acc += -(item.amount / 100);
-        }
-        if (item?.percentage) {
-          acc += (itemtotal * item.percentage) / 100;
-        }
-        return acc;
-      }, 0);
-    }
-
-    return value
-  }
 
   const subTotal = (row:any) => {
     const arr = row?.lineItems?.elements || []
     let total = 0;
     if (arr.length) total = arr.reduce((sum:any, itm:any) => sum + (itm.price / 100), 0);
-    const discount = getDicount(row)
+    const discount = getDiscout(row)
     return total - discount
   }
 
@@ -171,7 +151,7 @@ export default function BoxReceipt({ data, detail }:any) {
               </div>
             ))}
 
-            {data?.discounts?.elements?.map((item:any) => (
+            {getDiscountList(data)?.map((item:any) => (
               <div className="flex justify-between text-base text-green-600 font-medium" key={item.id}>
                 <p>{item.name || 'Reward'}</p>
                 {item.amount ? <>
