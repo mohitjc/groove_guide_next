@@ -44,7 +44,7 @@ export default function Layout({
   const pathname = usePathname()
   const spathname = pathname.split('/')[1]
   const query = useSearchParams()
-  const user: any = useSelector((state: RootState) => state.user.data);
+  const user: any = useSelector((state: RootState) => state.user?.data);
 
 
   const isCancel = spathname == 'cs' ? true : false
@@ -81,7 +81,7 @@ export default function Layout({
   const currentURL = `/${pathname}`;
 
   const getUserDetail = () => {
-    get("user/profile", { id: (user._id || user.id) }).then(async (res) => {
+    get("user/profile", { id: (user?._id || user?.id) }).then(async (res) => {
       if (res.success) {
         const data = { ...user, ...res.data };
         dispatch(login(data));
@@ -295,7 +295,6 @@ export default function Layout({
   }, [user]);
 
   const [isOpen1, setIsOpen1] = useState(false)
-  const [isOpen2, setIsOpen2] = useState(false)
   const [loginForm, setLoginForm] = useState<any>({ email: '', mobileNo: '', lastName: '', firstName: '', birthday: '' })
   const [isForgot, setForgot] = useState(false)
   const [signupModal, setSignupModal] = useState(false)
@@ -320,7 +319,6 @@ export default function Layout({
   function closeModal() {
     setIsOpen1(false)
     setIsOpen(false)
-    setIsOpen2(false)
   }
 
   function openModal() {
@@ -449,7 +447,6 @@ export default function Layout({
   useEffect(() => {
     if (user) {
       setIsOpen1(false)
-      setIsOpen2(false)
     }
   }, [user])
 
@@ -485,13 +482,15 @@ export default function Layout({
     const f = { ...p };
     loaderHtml(true);
     post("user/vertication-otp", f).then((res) => {
+      console.log(res);
+      
       loaderHtml(false);
     });
   };
 
   const handleChangeEmail = () => {
     loaderHtml(true);
-    put("user/profile", { email: changedEmail, id: user._id }).then(
+    put("user/profile", { email: changedEmail, id: user?._id }).then(
       async (res) => {
         if (res.success) {
           loaderHtml(false);
@@ -615,7 +614,7 @@ export default function Layout({
                         </div>
                       </TooltipHtml>
                       <TooltipHtml placement="top" title="Messages">
-                        <div className="relative notif">
+                        <span className="relative notif">
                           <OptionDropdown
                             title={<>
                               {unreadCount > 0 ? (
@@ -654,7 +653,7 @@ export default function Layout({
                               </>
                             }
                           />
-                        </div>
+                        </span>
                       </TooltipHtml>
 
                     </>
@@ -729,7 +728,7 @@ export default function Layout({
                           </div>
                         </TooltipHtml>
                         <TooltipHtml placement="top" title="Messages">
-                          <a className="relative notif">
+                          <span className="relative notif">
                             <OptionDropdown
                               title={<>
                                 {unreadCount > 0 ? (
@@ -768,7 +767,7 @@ export default function Layout({
                                 </>
                               }
                             />
-                          </a>
+                          </span>
                         </TooltipHtml>
 
                       </>

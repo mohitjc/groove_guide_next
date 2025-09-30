@@ -3,12 +3,10 @@ import { Fragment } from "react";
 import { MdChevronRight } from "react-icons/md";
 
 type Props={
-  links:[
-    {
+  links:{
       name:string;
       link:string;
-    }
-  ];
+    }[];
   currentPage:string;
   className?:string;
 }

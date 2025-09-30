@@ -8,8 +8,8 @@ import SingleProduct from "./SingleProduct";
 import Link from "next/link";
 import Image from "next/image";
 function ProductsList({ title, products = [], isBox = false, setBoxes = () => { }, boxExclusive = false, link, onSuccess, seeMore = false, viewProduct, category_detail = null, categoryId = '', pfilter = {}, isSlider = false, productCount = 3 }: any) {
-  const user = useSelector((state: any) => state.user)
-  const {get,post,isLoading:apiLoading}=ApiClientB()
+  const user = useSelector((state: any) => state.user.data)
+  const {post}=ApiClientB()
   const handleFavClick = (id: any) => {
     post("fav/add-remove", { product_id: id }).then((res) => {
       if (res.success) {
@@ -49,7 +49,7 @@ function ProductsList({ title, products = [], isBox = false, setBoxes = () => { 
       category: categoryId,
       status: 'active',
       sortBy: 'name asc',
-      user_id: (user._id || user.id || '')
+      user_id: (user?._id || user?.id || '')
     }
 
     if (!f.isBox) {
@@ -121,11 +121,6 @@ function ProductsList({ title, products = [], isBox = false, setBoxes = () => { 
     }
   }, [products])
 
-  const loadMore = () => {
-    let page = filters.page
-    page = page + 1
-    filter({ page: page })
-  }
 
   const seeAllClick = () => {
     setSeeAll(!seeAll)

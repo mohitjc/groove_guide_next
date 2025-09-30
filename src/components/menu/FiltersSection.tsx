@@ -84,16 +84,15 @@ type Props={
 }
 
 const FilterSection = ({
-  priceRages,
   priceRangeData,
   priceRangeChange = () => { },
   showSearchinput,
-  searchValue, onSearch, setSearchValue, onSearchCick, handleClearSearch, page, categorytypes, categoryTypes, categorychange, grooves, SelectFilter, theraCategories, grooveChange, setSelectFilter, isBlogPage, funcCategories, recentPosts, showCategories, categories, onCategoryClick, selectedCategory, showTags, experience, selectedTag, handleTagInputChange, experienceH, isBox = false, setIsBox = () => { },
+  searchValue, onSearch, setSearchValue, onSearchCick, handleClearSearch, page, categorytypes, categoryTypes, categorychange, grooves, SelectFilter, theraCategories, grooveChange, setSelectFilter, showCategories, categories, onCategoryClick, selectedCategory, showTags, experience, selectedTag, handleTagInputChange, isBox = false, setIsBox = () => { },
   boxExclusive = false,
   setBoxExclusive = () => { },
   dietaryKeys = {},
   dietaryResult = () => { },
-  setFilter=(_)=>{},
+  setFilter=()=>{},
   filters,
   placeholder=''
 }:Props) => {
@@ -318,7 +317,7 @@ const FilterSection = ({
                       checked={filters.categories?.includes(item.id)}
                       value={item.id}
                       style={{ accentColor: "#540C0F" }}
-                      onChange={(e) => {
+                      onChange={() => {
                         setSelectFilter(true)
                       }}
                     />
@@ -387,7 +386,7 @@ const FilterSection = ({
                       className="h-3 w-3 cursor-pointer custom-input "
                       checked={dietaryKeys?.[item.id] ? true : false}
                       style={{ accentColor: "#540C0F" }}
-                      onChange={(e) => {
+                      onChange={() => {
                         dietaryOnChange(item.id)
                       }}
                     />

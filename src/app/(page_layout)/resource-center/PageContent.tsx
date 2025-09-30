@@ -1,5 +1,4 @@
 'use client';
-
 import AudioHtml from "@/components/AudioHtml";
 import DebouncedInput from "@/components/DebouncedInput";
 import FormControl from "@/components/FormControl";
@@ -27,6 +26,7 @@ import "swiper/css/effect-fade";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 import 'swiper/css/grid';
+import Image from "next/image";
 
 type FiltersType={
   search?:string;
@@ -50,14 +50,97 @@ type ContentListType={
   showAnotherSlider?:boolean;
 }
 
-const ResourceItem=({}:any)=>{
-  return <></>
+const ResourceItem=({item,onClick = () => { }}:any)=>{
+    
+    const scrollRef = useRef(null);
+
+const noImg = (img:any='', defaultImg = '/assets/img/placeholder.png') => {
+  let value = defaultImg;
+  if (img?.includes("https")) return img;
+  if (img) value = `${envirnment.image_path}${img}`;
+  return value;
+};
+    
+  return <>
+    <div className="w-full rounded-xl overflow-hidden  border bg-white">
+                {/* Image with Favorite Icon */}
+                <div className="relative">
+                        <Image width={351} height={398} src={noImg(item.thumbnail || item.image)} alt="" className="w-full cursor-pointer" onClick={() => onClick(item)}/>
+                </div>
+                {/* Content */}
+                <div className="p-4 flex flex-col gap-2">
+                    {/* Tags */}
+                    <div className="flex gap-2 mb-2 items-center">
+                        {/* Scrollable Tags */}
+                        <div
+                            ref={scrollRef}
+                            className="flex gap-2 custom-scrollbar overflow-x-auto flex-grow items-center min-h-[24px] scrollbar-hide"
+                        >
+                            {(item?.tags || []).slice(0, 2).map((item:any, i:any) => (
+                                <span
+                                    key={i}
+                                    // onClick={() => onclick(item)}
+                                    className="capitalize text-[#540C0F] text-white text-[11px] 2xl:text-xs px-3 py-1 bg-primary rounded-full whitespace-nowrap"
+                                >
+                                    {item}
+                                </span>
+                            ))}
+                        </div>
+
+                        {/* Fixed "+X more" Button */}
+                        {(item?.tags || []).length > 2 && (
+                            <span
+                                // onClick={() => onClick(tags)}
+                                className="capitalize text-[#540C0F] text-white text-[11px] 2xl:text-xs px-3 py-1 bg-primary rounded-full shrink-0"
+                            >
+                                +{(item?.tags || []).length - 2} more
+                            </span>
+                        )}
+                    </div>
+
+
+                    {/* Engagement */}
+                    <div className="flex items-center text-gray-600 text-[12px] 2xl:text-sm gap-2">
+                        <div className="flex gap-1 items-center">
+                            <Image
+                            width={105} height={16}
+                                src="/assets/img/v2/2.svg"
+                                alt="Author"
+                                className=" h-4 "
+                            />
+                            <span className="text-[#828282] mr-2">Helpful</span>
+                        </div>
+                        <div className="flex gap-1 items-center">
+                            <span className="material-symbols-outlined">visibility</span>
+                            <span className="font-semibold">{item.views}</span>
+                        </div>
+                        <SocialShare  shareUrl={`${envirnment.frontUrl}resource-center/${item?.content}/${item?.id}`} />               
+                    </div>
+                    {/* Title */}
+                    <h3
+                        // onClick={() => onclick(item)}
+                        className={`cursor-pointer text-[17px] 2xl:!text-[24px] line-clamp-2 font-bold text-gray-800 text-left leading-[22px] 2xl:leading-[28px] capitalize ${(item?.title?.length || 0) > 18 ? 'lg:h-[50px] 2xl:h-[60px]' : ''
+                            }`}
+                    >
+                        {item?.title || ''}
+                    </h3>
+                    {/* Author Info */}
+                    <div className="flex justify-between items-center mt-3 text-gray-500 text-sm gap-2 ">
+                        <div className="flex text-left items-center gap-2">
+                          
+                            <span className="text-[12px] 2xl:text-[16px] font-[500] text-[#97989F] worksans max-w-40 line-clamp-1">{contentTypes.find(itm => itm.id == item.content)?.name}</span>
+                        </div>
+
+                        <span className="text-[12px] 2xl:text-[16px] text-[#97989F] font-[400] worksans shrink-0">{datepipeModel.date(item.createdAt)}</span>
+                    </div>
+                </div>
+            </div>
+  </>
 }
 
     const ContentList = ({ list = [], api = '', content = '', onClick, pfilter = {}, title = '', slideCount = 4, isLoading = false, noData = '', showAnotherSlider = false }:ContentListType) => {
     const width = document.body.offsetWidth
     const isMobile = width < 769 ? true : false
-
     const [data, setData] = useState([])
     const [loading, setLoading] = useState(api ? true : false)
     const [slider, setSlider] = useState(true)
@@ -163,47 +246,28 @@ const ResourceItem=({}:any)=>{
                             className="container centers_style px-2 mx-auto "
                             breakpoints={{
                                 200: {
-                                    slidesPerView: 1, // 1 slide per view on screens smaller than 640px
-                                    // grid: {
-                                    //   rows: 1, // Optionally, reduce rows to 1 on mobile
-                                    // },
+                                    slidesPerView: 1, 
                                     spaceBetween: 10,
                                 },
 
                                 550: {
-                                    slidesPerView: 2, // 1 slide per view on screens smaller than 640px
-                                    // grid: {
-                                    //   rows: 1, // Optionally, reduce rows to 1 on mobile
-                                    // },
+                                    slidesPerView: 2, 
                                 },
 
                                 1099: {
-                                    slidesPerView: 3, // 1 slide per view on screens smaller than 640px
-                                    // grid: {
-                                    //   rows: 1, // Optionally, reduce rows to 1 on mobile
-                                    // },
+                                    slidesPerView: 3, 
                                 },
 
                                 1280: {
-                                    slidesPerView: 4, // 1 slide per view on screens smaller than 640px
-                                    // grid: {
-                                    //   rows: 1, // Optionally, reduce rows to 1 on mobile
-                                    // },
+                                    slidesPerView: 4, 
                                 },
                                 1380: {
-                                    slidesPerView: slideCount, // 1 slide per view on screens smaller than 640px
-                                    // grid: {
-                                    //   rows: 1, // Optionally, reduce rows to 1 on mobile
-                                    // },
+                                    slidesPerView: slideCount,
                                 },
-
-
                             }}
                         >
-
                             {listData.map((itm, i) => {
-                                const key=itm.id||itm._id
-                                return  <SwiperSlide key={`list_${key}_${i}`}>
+                                return  <SwiperSlide key={i}>
                                         <ResourceItem item={itm} isMobile={isMobile} onClick={onClick} />
                                     </SwiperSlide>
                             })}
@@ -226,48 +290,27 @@ const ResourceItem=({}:any)=>{
                     // }}
                     breakpoints={{
                         200: {
-                            slidesPerView: 1, // 1 slide per view on screens smaller than 640px
-                            // grid: {
-                            //   rows: 1, // Optionally, reduce rows to 1 on mobile
-                            // },
+                            slidesPerView: 1,
                             spaceBetween: 10,
                         },
-
                         769: {
-                            slidesPerView: 1, // 1 slide per view on screens smaller than 640px
-                            // grid: {
-                            //   rows: 1, // Optionally, reduce rows to 1 on mobile
-                            // },
+                            slidesPerView: 1, 
                         },
 
                         770: {
-                            slidesPerView: 2, // 1 slide per view on screens smaller than 640px
-                            // grid: {
-                            //   rows: 1, // Optionally, reduce rows to 1 on mobile
-                            // },
+                            slidesPerView: 2, 
                         },
 
                         1099: {
-                            slidesPerView: 3, // 1 slide per view on screens smaller than 640px
-                            // grid: {
-                            //   rows: 1, // Optionally, reduce rows to 1 on mobile
-                            // },
+                            slidesPerView: 3,
                         },
 
                         1280: {
-                            slidesPerView: 4, // 1 slide per view on screens smaller than 640px
-                            // grid: {
-                            //   rows: 1, // Optionally, reduce rows to 1 on mobile
-                            // },
+                            slidesPerView: 4,
                         },
                         1380: {
-                            slidesPerView: slideCount, // 1 slide per view on screens smaller than 640px
-                            // grid: {
-                            //   rows: 1, // Optionally, reduce rows to 1 on mobile
-                            // },
+                            slidesPerView: slideCount, 
                         },
-
-
                     }}
                     autoplay={{
                         delay: 1000, // delay between slides in ms
@@ -277,15 +320,13 @@ const ResourceItem=({}:any)=>{
                     navigation={true}
                     pagination={false}
                     spaceBetween={10}
-                    // pagination={{
-                    //   clickable: true,
-                    // }}
+                   
                     modules={[Grid, Pagination, Navigation]}
                     className="gridstowslide forarrows"
                 >
                     {listData.map((itm, i) => {
-                        const key=itm.id||itm._id
-                        return <SwiperSlide key={`list_${key}_${i}`}>
+                      
+                        return <SwiperSlide key={i}>
                                 <ResourceItem item={itm} isMobile={isMobile} onClick={onClick} />
                             </SwiperSlide>
                     })}
@@ -294,8 +335,8 @@ const ResourceItem=({}:any)=>{
                 {isMobile ? <>
                     <div className="grid grid-cols-1 gap-4">
                         {listData.map((itm, i) => {
-                            const key=itm.id||itm._id
-                            return <Fragment key={`list_${key}_${i}`}>
+                            // const key=itm.id||itm._id
+                            return <Fragment key={i}>
                                 <ResourceItem item={itm} isMobile onClick={onClick} />
                             </Fragment>
                         })}
@@ -304,8 +345,8 @@ const ResourceItem=({}:any)=>{
                 </> : <>
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
                         {listData.map((itm, i) => {
-                            const key=itm.id||itm._id
-                            return <Fragment key={`list_${key}_${i}`}>
+                            // const key=itm.id||itm._id
+                            return <Fragment key={i}>
                                 <ResourceItem item={itm} onClick={onClick} />
                             </Fragment>
                         })}
@@ -323,34 +364,26 @@ const ResourceItem=({}:any)=>{
                             <GoArrowRight />
                         </> : <>
                             <GoArrowRight />
-                            {/* <span className="material-symbols-outlined h-auto w-auto inline-block my-auto text-[16px]">keyboard_arrow_up</span> */}
+                           
                         </>}
                     </span>
 
                 </> : <></>}
-
             </div>
-
-
             {noData ? <>
                 <div>
                     {noData}
                 </div>
             </> : <></>}
-
         </>}
-
         {title && (listData?.length || load) ? <>
             <div className="h-[30px]"></div>
         </> : <></>}
-
     </>
 }
 
-
-
 export default function PageContent() {
-   const user = useSelector((state:any) => state.user)
+   const user = useSelector((state:any) => state.user?.data)
     const { content, slug } = useParams()
     const [isOpen3, setIsOpen3] = useState(false);
     const [weekLoader, setWeekLoader] = useState(true);
@@ -383,18 +416,19 @@ export default function PageContent() {
         setDetailModal(null)
     }
 
-    const openModal = useCallback((e:any) => {
+    const openModal = (e:any) => {
+        
         setDetailModal(e)
         const url = `/resource-center/${e.content}/${e.id}`
         replaceUrl({ url: url })
         post('menuAccess/page', {
             page: 'info-content',
-            userId: user.id || user._id,
+            userId: user?.id || user?._id,
             contentId: e._id,
             type: e.type || '',
             content_type: e.content
-        }).then(res => { })
-    },[])
+        }).then(() => { })
+    }
 
     const contentchange = (e:any) => {
         const checked = e.target.checked
@@ -407,7 +441,6 @@ export default function PageContent() {
         }
         setContent([...arr])
     }
-
 
     const getThisweekData = async () => {
         setWeekLoader(true)
@@ -440,12 +473,12 @@ export default function PageContent() {
             }
         })
 
-        if (user.loggedIn) {
+        if (user?.loggedIn) {
             post('menuAccess/page', {
                 page: 'info',
-                userId: user.id || user._id,
+                userId: user?.id || user?._id,
             })
-            .then(res => { })
+            .then(() => { })
         }
     }, [])
 
@@ -548,27 +581,22 @@ export default function PageContent() {
   return <>
   
         <div className="bg-[#f9f7f5]">
-
             <section className="resoureceone">
                 <div className="bg-[#1E8F72] border-t border-gray-300">
                     <div className="xl:container mx-auto px-4 py-6 lg:py-2  flex flex-col lg:flex-row items-center justify-between gap-8 xl:gap-8 2xl:gap-10">
 
                         <div className="flex flex-col items-center lg:flex-row gap-4 xl:gap-8">
-                            <img src="/assets/img/v2/res.svg" className="h-20 w-fit" />
-                            <div className="flex flex-col lg:flex-row gap-8 xl:gap-14 2xl:gap-16 items-center">
-                                <h2 className="text-3xl lg:text-3xl xl:text-3xl 2xl:text-5xl text-center lg:text-left font-bold tracking-[-2.24px] text-[#E0EBD4] md:w-[305px] xl:w-[380px] 2xl:w-[605px]">
-                                    Craft Therapy Network
-                                    Resource Center
-                                </h2>
-
-
-                                <p className="text-base 2xl:text-lg  text-[#E0EBD4] text-center lg:text-left font-bold sm:max-w-[385px]  ">
-                                    Your trusted hub for knowledge, education, and community-driven wellness—powered by the Craft Therapy Network.
-                                </p>
-
-                            </div>
+                            <Image width={157} height={80} src="/assets/img/v2/res.svg" className="h-20 w-fit" alt={""} />
+                           <div className="flex flex-col lg:flex-row gap-8 xl:gap-14 2xl:gap-16 items-center">
+  <h2 className="text-3xl lg:text-3xl xl:text-3xl 2xl:text-5xl text-center lg:text-left font-bold tracking-[-2.24px] text-[#E0EBD4] md:w-[305px] xl:w-[380px] 2xl:w-[605px]">
+    Craft Therapy Network
+    Resource Center
+  </h2>
+  <p className="text-base 2xl:text-lg text-[#E0EBD4] text-center lg:text-left font-bold sm:max-w-[385px]">
+    Your trusted hub for knowledge, education, and community-driven wellness—powered by the Craft Therapy Network.
+  </p>
+</div>
                         </div>
-
 
                         <div className="flex flex-col gap-2">
                             <button className="flex items-center gap-2 ">
@@ -588,25 +616,19 @@ export default function PageContent() {
                                 </span>
                             </button>
                         </div>
-
                     </div>
                 </div>
-
             </section>
-
-
-
 
             <section className="resourecetwo sliders_news px-4 sm:px-6 2xl:px-10 py-6 lg:py-16 border-b-2 border-gray-200">
                 <div className="hidden md:block lg:container mx-auto px-6">
                     <div className="text-center">
-                        <h6 className="uppercase text-3xl xl:text-4xl 2xl:text-5xl text-[#1B1B1F] font-bold mb-6 tracking-[-2.24px] mb-8" id="newThisWeek">What’s Fresh in Wellness</h6>
+                        <h3 className="uppercase text-3xl xl:text-4xl 2xl:text-5xl text-[#1B1B1F] font-bold mb-6 tracking-[-2.24px] mb-8" id="newThisWeek">What’s Fresh in Wellness</h3>
                     </div>
                     <div className="relative">
                         <ContentList list={weekData} onClick={openModal} isLoading={weekLoader} showAnotherSlider={true} />
                     </div>
                 </div>
-
                 <div className="block md:hidden lg:container mx-auto">
                     <div className="text-center">
                         <h6 className="uppercase text-3xl xl:text-4xl 2xl:text-5xl text-[#1B1B1F] font-bold mb-6 tracking-[-2.24px] mb-8">What’s Fresh in Wellness</h6>
@@ -616,35 +638,29 @@ export default function PageContent() {
                     </div>
                 </div>
             </section>
-
-
             <section className="resourecethree  px-4 2xl:px-10 py-6 lg:py-16">
                 <div className="lg:container mx-auto">
                     <div className="text-center">
-                        <h6 className="uppercase text-3xl xl:text-4xl 2xl:text-5xl text-[#1B1B1F] font-bold tracking-[-2.24px] mb-10">Choose Category</h6>
+                        <h3 className="uppercase text-3xl xl:text-4xl 2xl:text-5xl text-[#1B1B1F] font-bold tracking-[-2.24px] mb-10">Choose Category</h3>
                     </div>
-
-
                     <div className=" grid max-[480px]:!grid-cols-1 grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 gap-4 mt-8">
-
-                        {topCategory.map(item => {
+                        {topCategory.map((item,i) => {
                             return <div onClick={() => {
                                 filter({ main_category: item.id, types: '' })
                                 scrollId('contentGrid')
                             }} className={`w-full cursor-pointer hover:shadow-lg rounded-xl overflow-hidden  border bg-white ${filters.main_category == item.id ? 'shadow-lg' : ''}`} 
-                            key={`${item.id}_category`}>
+                            key={i}>
                                 {/* Image with Favorite Icon */}
                                 <div className="relative">
-                                    <img
+                                    <Image
+                                    width={369} height={328}
                                         src={item.image}
                                         alt="Workout"
                                         className="w-full h-82 object-cover"
                                     />
                                 </div>
-
                                 {/* Content */}
                                 <div className="p-4 flex flex-col gap-1">
-
                                     {/* Title */}
                                     <h3 className="text-[20px] xl:text-[22px] 2xl:text-[24px] line-clamp-2 font-[700] leading-[26px] sm:leading-[27px] md:leading-[28px] text-[#181A2A]">
                                         {item.name}
@@ -657,9 +673,6 @@ export default function PageContent() {
                     </div>
                 </div>
             </section>
-
-
-
             <section className="resourecetwo ">
                 <div className="hidden md:grid grid-cols-12  gap-4 xl:gap-8 px-4 2xl:px-16 py-16">
                     <div className="col-span-12 md:col-span-4 xl:col-span-3">
@@ -677,25 +690,21 @@ export default function PageContent() {
                                     />
                                 </div>
                             </div>
-
                             <div className="flex flex-col gap-2">
-
-
                                 <div className="flex gap-2 items-center">
                                     <label className="text-[#061522] font-inter text-[14px] xl:text-[16px] font-bold leading-[28px] uppercase flex gap-2 items-center">
                                         <input type="checkbox" className="h-3 w-3 cursor-pointer custom-input"
                                             checked={allContentCategorySelect}
-                                            onChange={(e) => {
+                                            onChange={() => {
                                                 allContentCategoryClick()
                                             }}
                                         />
                                         All
                                     </label>
                                 </div>
-
                                 {contentCategory.map((item, i) => {
-                                    const key=item.id
-                                    return <div className="flex gap-2 items-center" key={`content_${key}`}>
+                                    // const key=item.id
+                                    return <div className="flex gap-2 items-center" key={i}>
                                         <label className="text-[#061522] font-inter text-[14px] xl:text-[16px] font-bold leading-[28px] uppercase flex gap-2 items-center">
                                             <input type="checkbox" className="h-3 w-3 cursor-pointer custom-input"
                                                 checked={contents.includes(item.id)}
@@ -710,7 +719,6 @@ export default function PageContent() {
                                 })}
 
                             </div>
-
                             {tagsLoading ? <>
                                 <div className="flex flex-wrap gap-2">
                                     <p className="h-[38px] w-[100px] rounded-full shine"></p>
@@ -725,8 +733,8 @@ export default function PageContent() {
                                             allTagsClick()
                                         }}>All</p>
                                         {tags.slice(0, 5).map((itm, i) => {
-                                             const key=itm.id||itm._id
-                                            return <p key={`tags_${key}`} onClick={() => tagClick(itm.id)} className={`capitalize ${filters.tags?.includes(itm.id) ? 'text-white bg-primary border-[#1a604c] font-bold' : 'text-black'} cursor-pointer px-4 xl:px-5 py-2 text-sm border border-[#000] rounded-full`}>{itm.name}</p>
+                                            //  const key=itm.id||itm._id
+                                            return <p key={i} onClick={() => tagClick(itm.id)} className={`capitalize ${filters.tags?.includes(itm.id) ? 'text-white bg-primary border-[#1a604c] font-bold' : 'text-black'} cursor-pointer px-4 xl:px-5 py-2 text-sm border border-[#000] rounded-full`}>{itm.name}</p>
                                         })}
                                         <span className="capitalize flex items-center text-[14px] text-primary cursor-pointer ml-auto" onClick={() => setTagModal(true)}>See All</span>
                                     </div>
@@ -738,11 +746,11 @@ export default function PageContent() {
                     <div className="col-span-12 md:col-span-8 xl:col-span-9" id="contentGrid">
                         <div className="flex flex-col gap-2 mb-4">
                             <div className="">
-                                <h6 className="text-3xl xl:text-4xl 2xl:text-5xl text-[#1B1B1F] font-bold tracking-[-2.24px]">{categoryTitle}</h6>
+                                <h3 className="text-3xl xl:text-4xl 2xl:text-5xl text-[#1B1B1F] font-bold tracking-[-2.24px]">{categoryTitle}</h3>
                             </div>
                             <div className="flex items-center justify-end gap-2 min-w-72 ml-auto">
-                                <p className="shrink-0">Sort by:</p>
-                                <FormControl
+                                <label className="shrink-0" >Sort by: </label> 
+                                        <FormControl
                                     type="multiselect"
                                     options={content_types}
                                     value={filters.types}
@@ -752,23 +760,21 @@ export default function PageContent() {
                                         filter({ types: e })
                                     }}
                                 />
+                             
                             </div>
                         </div>
                         {contentCategory.map((item, i) => {
                             let url = 'audio/list'
-                             const key=item.id
+                            //  const key=item.id
                             if (item.id == 'video') url = 'video/list'
                             if (item.id == 'guide') url = 'resource/listing'
                             if (contents.includes(item.id) || !contents.length)
-                                return <Fragment key={`content_${key}`}>
+                                return <Fragment key={i}>
                                     <ContentList title={item.name} api={url} content={item.id} pfilter={filters} onClick={openModal} />
                                 </Fragment>
                         })}
                     </div>
-
-
                 </div>
-
 
                 <div className="grid md:hidden grid-cols-12  gap-4 xl:gap-8 px-4 py-6  lg:py-16">
 
@@ -788,21 +794,15 @@ export default function PageContent() {
                                                 onChange={e => {
                                                     filter({ search: e })
                                                 }} />
-                                            {/* {search && search.length > 0 && (
-                                    <div className="-translate-y-1/2 top-1/2 text-[12px] xl:text-[18px] right-3 cursor-pointer hover:text-[#540C0F] absolute">
-                                        <MdOutlineClose onClick={handleClearSearch} />
-                                    </div>
-                                )} */}
+                                          
                                             <IoIosSearch
                                                 className="text-black text-[14px] 2xl:text-[18px]"
                                             />
                                         </div>
-
                                         <div onClick={() => setIsOpen3(true)} className="bg-[#F9F7F5] border border-[#E8E8EA] cursor-pointer flex items-center justify-center px-4 py-1 rounded-lg">
-                                            <img alt="filter" src="/assets/img/v2/filter.svg" className="h-8" />
+                                            <Image width={157} height={80} alt="filter" src="/assets/img/v2/filter.svg" className="h-8" />
                                         </div>
                                     </div>
-
                                     <div className="flex flex-wrap gap-2">
                                         <p className={`capitalize px-3 ${allTagSelected ? 'text-white bg-primary font-semibold text-[#540C0F]' : 'text-black '} py-1 rounded-full border-[#1a604c] border text-xs italic`}
                                             onClick={() => {
@@ -810,7 +810,7 @@ export default function PageContent() {
                                             }}
                                         >All</p>
                                         {tags.slice(0, 6).map((item, i) => {
-                                            return <p key={`tags_${i}`} onClick={() => tagClick(item.id)}
+                                            return <p key={i} onClick={() => tagClick(item.id)}
                                                 className={`capitalize px-3 ${filters?.tags?.includes(item.id) ? 'text-white bg-primary font-semibold text-[#540C0F]' : 'text-black '}  py-1 border-[#1a604c] border rounded-full text-xs italic`}>{item.name}</p>
                                         })}
                                         <span className="capitalize flex items-center text-[14px] text-primary cursor-pointer ml-auto" onClick={() => setTagModal(true)}>See All</span>
@@ -819,19 +819,17 @@ export default function PageContent() {
                                 <div className="flex items-center flex-wrap  gap-2">
                                     <p className="font-bold text-sm text-black">Sort by:</p>
                                     {sortByList.map((item, i) => {
-                                        return <p className={`${item.id == filters.sortBy ? 'font-bold' : ''} text-sm text-black`} key={`sort_${i}`} onClick={() => filter({ sortBy: item.id })}>{item.name}</p>
+                                        return <p className={`${item.id == filters.sortBy ? 'font-bold' : ''} text-sm text-black`} key={i} onClick={() => filter({ sortBy: item.id })}>{item.name}</p>
                                     })}
                                 </div>
                             </div>
                         </div>
-
                         {contentCategory.map((item, i) => {
                             let url = 'audio/list'
-                             const key=item.id
                             if (item.id == 'video') url = 'video/list'
                             if (item.id == 'guide') url = 'resource/listing'
                             if (contents.includes(item.id) || !contents.length)
-                                return <Fragment key={`content_${key}`}>
+                                return <Fragment key={i}>
                                     <ContentList title={item.name} api={url} content={item.id} pfilter={filters} onClick={openModal} />
                                 </Fragment>
                         })}
@@ -839,7 +837,6 @@ export default function PageContent() {
                 </div>
             </section>
         </div>
-
         {detailModal ? <>
             <Modal
                 title="Details"
@@ -850,11 +847,7 @@ export default function PageContent() {
                             {detailModal?.title}
                         </p>
                         <div className="mt-4 bg-gray-100">
-                            {/* <img
-                                                src="/assets/img/v2/girl.png"
-                                                alt="Workout"
-                                                className="w-full h-82 object-cover"
-                                            /> */}
+                           
                             {detailModal?.audio ? <>
                                 <AudioHtml
                                     src={detailModal?.audio}
@@ -882,7 +875,8 @@ export default function PageContent() {
                         {/* Author Info */}
                         <div className="flex gap-4 items-center mt-2 sm:mt-3 text-gray-500 text-[10px] sm:text-sm flex-wrap">
                             <div className="flex items-center gap-1 sm:gap-2">
-                                <img
+                                <Image
+                                width={328} height={360}
                                     src="/assets/img/v2/123.png"
                                     alt="Author"
                                     className="w-6 sm:w-8 h-6 sm:h-8 rounded-full"
@@ -891,9 +885,7 @@ export default function PageContent() {
                             </div>
                             <span className="text-[12px]">{datepipeModel.date(detailModal?.createdAt)}</span>
 
-                            {/* <div className="flex gap-1 items-center ">
-                                                    <img src="/assets/img/v2/3.svg" alt="Comment" className="h-3 sm:h-4" />
-                                                </div> */}
+                           
                             <div className="">
                                 <SocialShare shareUrl={`${envirnment.frontUrl}resource-center/${detailModal?.content}/${detailModal?.id}`} />
                             </div>
@@ -905,12 +897,11 @@ export default function PageContent() {
 
                         <div className="flex gap-2 mb-2 flex-wrap">
                             {detailModal?.tags?.map((item:any, i:any) => {
-                                return <span key={`tags_${i}`} className="bg-primary  text-white text-xs px-3 py-2 rounded-full">
+                                return <span key={i} className="bg-primary  text-white text-xs px-3 py-2 rounded-full">
                                     {item}
                                 </span>
                             })}
                         </div>
-
 
                         <div>
                             <div className="text-[16px] text-[#6D6E76]" dangerouslySetInnerHTML={{ __html: detailModal?.description }}></div>
@@ -930,9 +921,6 @@ export default function PageContent() {
                 }}
             />
         </> : <></>}
-
-       
-
         {/* sidebar modals */}
         {isOpen3?<>
          <div className="rightheader_modals">
@@ -957,15 +945,9 @@ export default function PageContent() {
                             <div className="">
                                 <p className="font-bold text-lg mb-2">Content Type:</p>
                             </div>
-                            {/* <div className="flex gap-1 items-center">
-                                <p className="text-[13px] font-bold  text-[#000] capitalize flex items-center gap-2">
-                                    <input type="checkbox" className="h-4 w-4 cursor-pointer" />
-                                    All
-                                </p>
-                            </div> */}
-
+                          
                             {contentCategory.map((item, i) => {
-                                return <div className="flex gap-2 items-center" key={`content_${item.id}`}>
+                                return <div className="flex gap-2 items-center" key={i}>
                                     <label className="text-[#061522] font-inter text-[14px] xl:text-[16px] font-bold leading-[28px] uppercase flex gap-2 items-center">
                                         <input type="checkbox" className="h-3 w-3 cursor-pointer custom-input"
                                             checked={contents.includes(item.id)}
@@ -996,8 +978,6 @@ export default function PageContent() {
                     onClick={() => setIsOpen3(false)}
                 ></div>
             )}
-
-           
         </div>
         </>:<></>}
         {tagModal ? <>
@@ -1022,7 +1002,7 @@ export default function PageContent() {
                                             allTagsClick()
                                         }}>All</p>
                                         {tags.map((itm, i) => {
-                                            return <p key={`tags_${itm.id}`} onClick={() => tagClick(itm.id)} className={`capitalize ${filters?.tags?.includes(itm.id) ? 'text-white bg-primary border-[#1a604c] font-bold' : 'text-black'} cursor-pointer px-4 xl:px-5 py-2 text-sm border border-[#000] rounded-full`}>{itm.name}</p>
+                                            return <p key={i} onClick={() => tagClick(itm.id)} className={`capitalize ${filters?.tags?.includes(itm.id) ? 'text-white bg-primary border-[#1a604c] font-bold' : 'text-black'} cursor-pointer px-4 xl:px-5 py-2 text-sm border border-[#000] rounded-full`}>{itm.name}</p>
                                         })}
                                     </div>
                                 </div>
@@ -1035,7 +1015,5 @@ export default function PageContent() {
                     }}
                 />
             </> : <></>}
-
-
   </>
 }

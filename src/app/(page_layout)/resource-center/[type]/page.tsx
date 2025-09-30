@@ -3,7 +3,7 @@ import { APP_DESCRIPTION, APP_NAME, noImg } from "@/utils/shared";
 import axios from "axios";
 import envirnment from "@/envirnment";
 import { cookies } from "next/headers";
-import PageContent from "./PageContent";
+import PageContent from "../PageContent";
 
 async function fetchDetail(slug: string) {
   try {

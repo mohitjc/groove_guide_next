@@ -269,7 +269,7 @@ type ProductDetailProps = {
 }
 
 export default function ProductDetail({ id, isModal = false, dietary = {} }: ProductDetailProps) {
-  const user: any = useSelector((state: RootState) => state.user.data);
+  const user: any = useSelector((state: RootState) => state.user?.data);
     const {slug}=useParams()
     const productId=id||slug||''
   const { get, post, put } = ApiClientB()
@@ -353,7 +353,7 @@ export default function ProductDetail({ id, isModal = false, dietary = {} }: Pro
           setImages(variant.image ? variant.images : data.images);
           post('menuAccess/page', {
             page: 'menu-product',
-            userId: user.id || user._id,
+            userId: user?.id || user?._id,
             categoryId: data.category,
             productId: data._id
           }).then(res => { })
@@ -453,7 +453,7 @@ export default function ProductDetail({ id, isModal = false, dietary = {} }: Pro
   useEffect(() => {
     if (product) {
       getProductReviews();
-      get('review/own', { user_id: user._id, product_id: product?.id }).then(res => {
+      get('review/own', { user_id: user?._id, product_id: product?.id }).then(res => {
         if (res.success) {
           const data = res.data?.[0]
           if (data) {

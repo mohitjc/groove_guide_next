@@ -27,8 +27,10 @@ const Loading = ({ id = '', className = '' }) => {
   return <>
     <div id={id} className={`flex fixed items-center justify-center top-0 left-0 w-full h-full z-[9999] backdrop-blur ${className}`}>
       <div>
-        <img
+        <Image
           src="/img/loader.gif"
+          width={20}
+          height={20}
           alt="logo"
           className="w-[50px]"
         />
@@ -41,6 +43,7 @@ const CLIENT_ID = envirnment.googleClientId;
 
 
 import { Inter } from 'next/font/google'
+import Image from "next/image";
 // If loading a variable font, you don't need to specify the font weight
 const inter = Inter({ subsets: ['latin'] })
 

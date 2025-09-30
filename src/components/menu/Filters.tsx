@@ -4,6 +4,7 @@ import FilterSection from "./FiltersSection";
 import { IoIosSearch, IoMdClose } from "react-icons/io";
 import ApiClientB from "@/utils/Apiclient";
 import { primaryUseList } from "@/utils/shared.utils";
+import Image from "next/image";
 
 type FilterType = {
   page?: string;
@@ -59,9 +60,9 @@ function MenuFilters({
   selectedTag,
   onClearAll,
   showTags=true,
-  onSearch = (e) => { },
+  onSearch = () => { },
   searchValue,
-  setSearchValue = (e) => { },
+  setSearchValue = () => { },
   onSearchCick = () => { },
   showheader=true,
   placeholder="Explore Products, Mushrooms, Mexican, Italian Etc.",
@@ -215,17 +216,6 @@ function MenuFilters({
     setCategoryTypes([...arr])
   }
 
-  const onDealClick = (id:string) => {
-    const value = id
-    let arr = selectedDeals || []
-    const checked = arr.includes(value)
-    if (!checked) {
-      arr.push(value)
-    } else {
-      arr = arr.filter(itm => itm != value)
-    }
-    setSelectedDeals([...arr])
-  }
 
 
   const catClick = (itm:any) => {
@@ -271,7 +261,7 @@ function MenuFilters({
             <>
               <div className={`flex items-center !justify-start md:!justify-between gap-4 mb-0 border-gray-200 md:border-none md:pb-0  `}>
                 <div className="hidden max-md:flex  items-center gap-2">
-                  <img src="/assets/img/filter.svg" />
+                  <Image width={20} height={20} src="/assets/img/filter.svg" alt={""} />
                   <h5 className="text-black font-semibold text-[16px] lg:text-[20px]">
                     {" "}
                     Filter
@@ -403,7 +393,7 @@ function MenuFilters({
               </div>
 
               <div onClick={() => setIsOpen3(true)} className="bg-[#F9F7F5] border border-[#E8E8EA] cursor-pointer flex items-center justify-center px-4 py-1 rounded-lg">
-                <img alt="filter" src="/assets/img/v2/filter.svg" className="h-8" />
+                <Image width={20} height={20} alt="filter" src="/assets/img/v2/filter.svg" className="h-8" />
               </div>
             </div>
 

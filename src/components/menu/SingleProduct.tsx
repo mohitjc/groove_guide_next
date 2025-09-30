@@ -11,13 +11,12 @@ function SingleProduct({
   item,
   outerdivClass,
   imgClass,
-  imgHeight,
   tagsToDisplay=3,
   onClick=(_:any)=>{},
   viewProduct=(_:any)=>{},
   filter = {}
 }: any) {
-  const user = useSelector((state: any) => state.user);
+  const user = useSelector((state: any) => state.user.data);
   const router=useRouter()
   const history = (p = '') => {
     router.push(p)
@@ -28,7 +27,7 @@ function SingleProduct({
 
   const categoryName = item?.categoryName?.trim()?.toLowerCase()
   let price = item.price
-  let gram = item.gram
+  // let gram = item.gram
 
   const view = (id: any) => {
     // if (isBox) return
@@ -44,7 +43,7 @@ function SingleProduct({
     const ext = variants.find((itm: any) => itm.gram == '3.5')
     if (ext) {
       price = ext.price
-      gram = ext.gram
+      // gram = ext.gram
     }
   }
 
@@ -73,7 +72,7 @@ function SingleProduct({
 
     if (ext) {
       price = ext.price
-      gram = ext.gram
+      // gram = ext.gram
     }
   }
 
@@ -82,7 +81,7 @@ function SingleProduct({
     <>
       <div className={`imgtext border border-gray-300  hover:shadow-xl  ${outerdivClass}`}>
         <div className="overflow-hidden relative">
-          {user.loggedIn && !isBox && (
+          {user?.loggedIn && !isBox && (
             <a
               onClick={handleOnClick}
               className="h-10 w-10 bg-[#E0D5CE] rounded-full absolute right-5 top-3 flex items-center justify-center cursor-pointer shadow-md z-10"

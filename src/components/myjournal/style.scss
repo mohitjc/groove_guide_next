@@ -1,0 +1,46 @@
+.dropdownOverlap {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  display: none;
+  z-index: 999;
+}
+
+.daterangeDropdown {
+  z-index: 999;
+}
+
+.rdrDateDisplayWrapper,.rdrDefinedRangesWrapper {
+  display: none;
+}
+
+.rdrDateRangePickerWrapper{
+  display:block !important;
+}
+
+.cld_btn button {
+  width: 47%;
+}
+
+.datepickerDropdown {
+  position: relative;
+
+  .dropdown-menu {
+    right: 0;
+    top: 41px;
+    left: initial;
+  }
+}
+
+.customcalender .rdrMonth {
+  width: 100%;
+}
+
+
+.customcalender .rdrCalendarWrapper {
+  color: #000000;
+  font-size: 12px;
+  width: 100%;
+}

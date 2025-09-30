@@ -17,7 +17,7 @@ import Image from "next/image";
 
 
 export default function HomeComponent() {
-  const user: any = useSelector((state: RootState) => state.user.data);
+  const user: any = useSelector((state: RootState) => state.user?.data);
   const router = useRouter()
   const history = (url = '') => {
     router.push(url)

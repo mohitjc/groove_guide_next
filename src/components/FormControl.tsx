@@ -4,6 +4,7 @@ import OptionDropdown from "./OptionDropdown";
 import {fire} from "./Swal";
 import datepipeModel from "@/utils/datepipemodel";
 import { isNumber } from "@/utils/shared";
+import MultiSelectDropdown from "./MultiSelectDropdown/page";
 
 const FormControl = memo(function FormControl({
   join = "",
@@ -167,8 +168,8 @@ const FormControl = memo(function FormControl({
         )}
 
         {type == "multiselect" ? (<>
-        MultiSelectDropdown
-         {/* <MultiSelectDropdown
+        {/* MultiSelectDropdown */}
+         <MultiSelectDropdown
             id={`statusDropdown_${id}`}
             displayValue={displayValue}
             intialValue={value}
@@ -179,7 +180,7 @@ const FormControl = memo(function FormControl({
             }}
             options={options}
             disabled={disabled}
-          /> */}
+          />
         </>
          
         ): type == 'dob' ? <>
@@ -312,7 +313,7 @@ const FormControl = memo(function FormControl({
                         <input
                           type="radio"
                           checked={value == itm.id ? true : false}
-                          onChange={(e) => onChange(itm.id)}
+                          onChange={() => onChange(itm.id)}
                           className="mr-2"
                           name={name}
                           autoComplete="off"
@@ -335,7 +336,7 @@ const FormControl = memo(function FormControl({
                   <input
                     type="checkbox"
                     checked={value?.includes(itm.id) ? true : false}
-                    onChange={(e) => addItem(itm.id)}
+                    onChange={() => addItem(itm.id)}
                     className="mr-2"
                     autoComplete="off"
                   />
