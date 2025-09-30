@@ -158,3 +158,32 @@ export const receivingMethodList = [
     { id: "local_pickup", name: 'Pickup' },
     { id: "shipping", name: 'Delivery' },
 ]
+
+export const getDiscountList = (row:any) => {
+    const arr = row?.lineItems?.elements || []
+    let discounts = row?.discounts?.elements
+    if (!discounts?.length) {
+        discounts = arr.filter((itm:any) => itm.discounts).reduce((acc:any, itm:any) => [...acc, ...itm.discounts?.elements], []);
+    }
+    return discounts
+}
+
+export const getDiscout = (row:any) => {
+    const arr:any[] = row?.lineItems?.elements || []
+    let itemtotal = 0;
+    if (arr.length) itemtotal = arr.reduce((sum, itm) => sum + (itm.price / 100), 0);
+    const discounts=getDiscountList(row)
+    let value = 0
+    if (discounts?.length) {
+      value = discounts?.reduce((acc:any, item:any) => {
+        if (item?.amount) {
+          acc += -(item.amount / 100);
+        }
+        if (item?.percentage) {
+          acc += (itemtotal * item.percentage) / 100;
+        }
+        return acc;
+      }, 0);
+    }
+    return value
+}
