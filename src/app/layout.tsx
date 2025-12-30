@@ -58,36 +58,12 @@ export default function RootLayout({
         <link
           href="https://fonts.gstatic.com"
           rel="preconnect"
-          crossOrigin="anonymous"
         />
         <link
-          href="https://fonts.googleapis.com"
-          rel="preconnect"
-          crossOrigin="anonymous"
-        />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&display=swap"
+          href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0"
           rel="stylesheet"
-          media="print"
-          // @ts-ignore
-          onLoad="this.media='all'"
         />
-        <noscript>
-          <link
-            href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&display=swap"
-            rel="stylesheet"
-          />
-        </noscript>
-        <link 
-          rel="stylesheet" 
-          href="/assets/fontstyle/stylesheet.css" 
-          media="print"
-          // @ts-ignore
-          onLoad="this.media='all'"
-        />
-        <noscript>
-          <link rel="stylesheet" href="/assets/fontstyle/stylesheet.css" />
-        </noscript>
+         <link rel="stylesheet" href="/assets/fontstyle/stylesheet.css" />
       </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased ${inter.className}`}
