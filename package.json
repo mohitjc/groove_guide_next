@@ -3,13 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "predev": "node scripts/cleanup-port.js 3000 || true",
     "dev": "next dev --turbopack",
     "build": "next build --turbopack",
-    "prestart": "node scripts/cleanup-port.js 3000 || true",
     "start": "next start",
-    "start:clean": "npm run prestart && npm start",
-    "kill-port": "node scripts/cleanup-port.js 3000",
     "lint": "eslint"
   },
   "dependencies": {
