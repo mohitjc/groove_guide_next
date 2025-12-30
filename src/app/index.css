@@ -600,6 +600,7 @@ button.swal2-cancel.swal2-styled.swal2-default-outline {
   font-style: normal;
   font-weight: normal;
   src: local('burgus script'), url('/public/assets/font/norwester.ttf') format('woff');
+  font-display: swap;
 }
 
 .pro{
@@ -616,4 +617,5 @@ button.swal2-cancel.swal2-styled.swal2-default-outline {
   font-style: normal;
   font-weight: normal;
   src: local('burgus script'), url('/public/assets/font/PPTelegraf-UltraBold.otf') format('woff');
+  font-display: swap;
 }
