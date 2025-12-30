@@ -61,17 +61,19 @@ export default function RootLayout({
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
         
-        {/* Inline critical CSS */}
+        {/* Inline critical CSS for above-the-fold content */}
         <style dangerouslySetInnerHTML={{
           __html: `
             .bg-primary{background-color:#541218}
             .text-primary{color:#541218}
             button{cursor:pointer}
-            body{font-family:var(--font-inter),Arial,Helvetica,sans-serif}
+            body{font-family:var(--font-inter),Arial,Helvetica,sans-serif;margin:0;padding:0}
             div#headlessui-portal-root{z-index:999;position:relative}
             .z-9999{z-index:99999}
             .react-tooltip{z-index:99999}
             .d-none{display:none!important}
+            header,footer,main{display:block}
+            img{max-width:100%;height:auto}
           `
         }} />
       </head>
@@ -80,18 +82,20 @@ export default function RootLayout({
       >
         <CSSLoader />
         
-        {/* Load Material Icons asynchronously */}
+        {/* Load Material Icons asynchronously after page load */}
         <Script
           id="load-material-icons"
-          strategy="lazyOnload"
+          strategy="afterInteractive"
         >
           {`
-            (function() {
-              var link = document.createElement('link');
-              link.rel = 'stylesheet';
-              link.href = 'https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&display=swap';
-              document.head.appendChild(link);
-            })();
+            if(typeof window!=='undefined'){
+              window.addEventListener('load',function(){
+                var link=document.createElement('link');
+                link.rel='stylesheet';
+                link.href='https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&display=swap';
+                document.head.appendChild(link);
+              });
+            }
           `}
         </Script>
 

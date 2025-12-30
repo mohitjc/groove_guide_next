@@ -91,9 +91,9 @@ export default function Layout({
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });
-    if (!user) {
-    } else {
-      getUserDetail()
+    if (user) {
+      // Defer non-critical user details fetch
+      setTimeout(() => getUserDetail(), 100);
     }
   }, []);
 
@@ -239,16 +239,21 @@ export default function Layout({
 
   useEffect(() => {
     if (user) {
-      const notify = sessionStorage.getItem("notify-message");
-      if (!notify) {
-        socketModel.emit("notify-message", { user_id: user?._id });
-      }
-      socketModel.on("notify-message", (data: any) => {
-        const count = data.data.unread_count;
-        setUnreadMessagesCount(count);
-      });
+      // Defer socket connection to avoid blocking initial render
+      const initSocket = () => {
+        const notify = sessionStorage.getItem("notify-message");
+        if (!notify) {
+          socketModel.emit("notify-message", { user_id: user?._id });
+        }
+        socketModel.on("notify-message", (data: any) => {
+          const count = data.data.unread_count;
+          setUnreadMessagesCount(count);
+        });
+      };
+      
+      setTimeout(initSocket, 500);
     }
-    return ()=>{
+    return () => {
       socketModel.off('notify-message')
     }
   }, [user]);
@@ -280,17 +285,21 @@ export default function Layout({
 
   useEffect(() => {
     if (user) {
-      const unreadCount = sessionStorage.getItem('unreadCount')
-      if (!unreadCount) {
-        socketModel.emit("unread-noti-count", { user_id: user?._id });
-
-        getNotificationsList();
-      }
-      getActiveSubscription()
-      sessionStorage.setItem('unreadCount', 'true')
-      socketModel.on("unread-noti-count", (data: any) => {
-        setUnreadCount(data.data?.unread_count);
-      });
+      // Defer notifications and subscription fetches
+      const initNotifications = () => {
+        const unreadCount = sessionStorage.getItem('unreadCount')
+        if (!unreadCount) {
+          socketModel.emit("unread-noti-count", { user_id: user?._id });
+          getNotificationsList();
+        }
+        getActiveSubscription()
+        sessionStorage.setItem('unreadCount', 'true')
+        socketModel.on("unread-noti-count", (data: any) => {
+          setUnreadCount(data.data?.unread_count);
+        });
+      };
+      
+      setTimeout(initNotifications, 500);
     }
   }, [user]);
 

@@ -4,13 +4,12 @@
 import { TbArrowUpRight } from "react-icons/tb";
 import { GoArrowRight } from "react-icons/go";
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { loaderHtml } from "@/utils/shared";
 import { useRouter, useSearchParams } from "next/navigation";
 import { login } from "@/redux/slices/userSlice";
 import { fire } from "@/components/Swal";
 import ApiClientB from "@/utils/Apiclient";
-import Modal from "@/components/Modal";
 import { RootState } from "@/redux/store";
 import envirnment from "@/envirnment";
 import Image from "next/image";
@@ -19,18 +18,13 @@ import Image from "next/image";
 export default function HomeComponent() {
   const user: any = useSelector((state: RootState) => state.user?.data);
   const router = useRouter()
+  const dispatch = useDispatch()
+  const { post } = ApiClientB()
+  const query = useSearchParams();
+
   const history = (url = '') => {
     router.push(url)
   }
-  const dispatch = useDispatch()
-  const { post } = ApiClientB()
-
-  const query = useSearchParams();
-  const [isLoginAlert, setLoginAlert] = useState(false);
-  const productId = query?.get("productId");
-  const id = query?.get("id");
-  const accessGroove = query?.get('newRegister')
-
 
   const setLogin = async (data: any) => {
     const hasOnboarding = data?.primary_interest ? true : false;
@@ -62,42 +56,35 @@ export default function HomeComponent() {
   };
 
   useEffect(() => {
-    if (productId != null) {
-      if (!user) {
-        if (!query?.get('id')) setLoginAlert(true);
-      }
-    } else if (user && productId) {
-      history(`/myjournal?product=${productId}`);
-    }
-  }, [productId]);
-
-  useEffect(() => {
+    const id = query?.get("id");
+    const productId = query?.get("productId");
+    
     if (id && !user) {
       loaderHtml(true)
-      post("user/auto/login", { id, number: query?.get('numb'), newRegister: accessGroove, isMobile: query?.get('isMobile') }).then((res) => {
-        const data = res.data;
+      post("user/auto/login", { 
+        id, 
+        number: query?.get('numb'), 
+        newRegister: query?.get('newRegister'), 
+        isMobile: query?.get('isMobile') 
+      }).then((res) => {
         if (res.success) {
-          setLogin(data)
+          setLogin(res.data)
         }
         loaderHtml(false)
       });
-    } else if (id) {
+    } else if (id && user) {
       history("/");
       fire({
         title: "You are already logged into the system.",
         description: 'If you want to log in, please log out of the current account first.',
         icon: "error",
-        // showCancelButton: true,
         confirmButtonText: "Ok",
         confirmButtonColor: "#540C0F",
-      }).then((result) => {
-        /* Read more about isConfirmed, isDenied below */
-        if (result.isConfirmed) {
-
-        }
       });
+    } else if (user && productId) {
+      history(`/myjournal?product=${productId}`);
     }
-  }, [id]);
+  }, []);
 
   return <>
     <section className="homesecond">
@@ -672,32 +659,5 @@ export default function HomeComponent() {
 
     </section>
 
-    {isLoginAlert ? <>
-      <Modal
-        body={<>
-          <div className="text-center flex flex-col items-center gap-6">
-            <Image
-              height={128}
-              width={128}
-              src="/assets/img/alert.png"
-              alt=""
-              className="h-32 mx-auto"
-            />
-            <span className="inline-flex text-[20px] font-semibold text-gray-800">
-              You Must Register Yourself to Access.
-            </span>
-
-            <div className="mt-2">
-              <button
-                className="bg-primary px-4 py-2  w-28 text-white text-[16px] leading-[20px] h-10 "
-                onClick={() => history(`/login?product=${productId}`)}
-              >
-                Login
-              </button>
-            </div>
-          </div>
-        </>}
-      />
-    </> : <></>}
   </>;
 }

@@ -4,7 +4,7 @@ import { useEffect } from 'react';
 
 export default function CSSLoader() {
   useEffect(() => {
-    // Load non-critical CSS after initial render
+    // Load non-critical CSS after initial paint
     const loadCSS = (href: string) => {
       const link = document.createElement('link');
       link.rel = 'stylesheet';
@@ -16,20 +16,20 @@ export default function CSSLoader() {
       document.head.appendChild(link);
     };
 
-    // Batch load all non-critical stylesheets
-    if (typeof window !== 'undefined' && 'requestIdleCallback' in window) {
-      window.requestIdleCallback(() => {
-        loadCSS('/index.css');
-        loadCSS('/main_css.css');
-        loadCSS('/assets/fontstyle/stylesheet.css');
-      }, { timeout: 1000 });
-    } else {
-      // Fallback for browsers without requestIdleCallback
-      setTimeout(() => {
-        loadCSS('/index.css');
-        loadCSS('/main_css.css');
-        loadCSS('/assets/fontstyle/stylesheet.css');
-      }, 1);
+    // Use requestIdleCallback for better performance
+    const loadStyles = () => {
+      loadCSS('/index.css');
+      loadCSS('/main_css.css');
+      loadCSS('/assets/fontstyle/stylesheet.css');
+    };
+
+    if (typeof window !== 'undefined') {
+      if ('requestIdleCallback' in window) {
+        window.requestIdleCallback(loadStyles, { timeout: 2000 });
+      } else {
+        // Fallback: load after a short delay
+        setTimeout(loadStyles, 100);
+      }
     }
   }, []);
 
