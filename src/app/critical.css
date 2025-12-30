@@ -1,0 +1,61 @@
+/* Critical above-the-fold CSS */
+.bg-primary {
+  background-color: #541218;
+}
+.text-primary {
+  color: #541218;
+}
+button {
+  cursor: pointer;
+}
+
+/* Critical layout styles */
+body {
+  font-family: var(--font-inter), Arial, Helvetica, sans-serif;
+  background: var(--background);
+  color: var(--foreground);
+}
+
+/* Critical z-index fixes */
+div#headlessui-portal-root {
+  z-index: 999;
+  position: relative;
+}
+
+.z-9999 {
+  z-index: 99999;
+}
+
+.react-tooltip {
+  z-index: 99999;
+}
+
+/* Critical visibility classes */
+.d-none {
+  display: none !important;
+}
+
+.hidden {
+  display: none;
+}
+
+/* Loading spinner critical styles */
+.flex {
+  display: flex;
+}
+
+.fixed {
+  position: fixed;
+}
+
+.items-center {
+  align-items: center;
+}
+
+.justify-center {
+  justify-content: center;
+}
+
+.backdrop-blur {
+  backdrop-filter: blur(8px);
+}

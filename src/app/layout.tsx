@@ -1,8 +1,6 @@
 "use client";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import "./index.css";
-import "./main_css.css";
 
 import { ToastContainer } from "react-toastify";
 import { Provider } from "react-redux";
@@ -13,6 +11,7 @@ import { GoogleOAuthProvider } from "@react-oauth/google";
 import { Inter } from 'next/font/google';
 import Image from "next/image";
 import Script from "next/script";
+import CSSLoader from "@/components/CSSLoader";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -61,26 +60,25 @@ export default function RootLayout({
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
+        
+        {/* Inline critical CSS */}
+        <style dangerouslySetInnerHTML={{
+          __html: `
+            .bg-primary{background-color:#541218}
+            .text-primary{color:#541218}
+            button{cursor:pointer}
+            body{font-family:var(--font-inter),Arial,Helvetica,sans-serif}
+            div#headlessui-portal-root{z-index:999;position:relative}
+            .z-9999{z-index:99999}
+            .react-tooltip{z-index:99999}
+            .d-none{display:none!important}
+          `
+        }} />
       </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${inter.variable} antialiased`}
       >
-        {/* Load custom fonts asynchronously */}
-        <Script
-          id="load-custom-fonts"
-          strategy="afterInteractive"
-        >
-          {`
-            (function() {
-              var link = document.createElement('link');
-              link.rel = 'stylesheet';
-              link.href = '/assets/fontstyle/stylesheet.css';
-              link.media = 'print';
-              link.onload = function() { this.media = 'all'; };
-              document.head.appendChild(link);
-            })();
-          `}
-        </Script>
+        <CSSLoader />
         
         {/* Load Material Icons asynchronously */}
         <Script
