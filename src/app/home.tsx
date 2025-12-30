@@ -175,6 +175,7 @@ export default function HomeComponent() {
                   height={260}
                   width={280}
                   priority
+                  fetchPriority="high"
                   
                   src="/assets/img/v2/home/6.png" alt="People working" className="rounded-xl w-full h-auto object-content mb-4" />
                 <Image
