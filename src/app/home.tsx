@@ -174,7 +174,8 @@ export default function HomeComponent() {
                 <Image
                   height={260}
                   width={280}
-                  fetchPriority="high"
+                  priority
+                  
                   src="/assets/img/v2/home/6.png" alt="People working" className="rounded-xl w-full h-auto object-content mb-4" />
                 <Image
                   height={500}
