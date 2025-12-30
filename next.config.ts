@@ -19,6 +19,17 @@ const nextConfig: NextConfig = {
       },
     ],
   },
+  // Enable optimizations
+  compress: true,
+  poweredByHeader: false,
+  
+  // Enable React strict mode for better performance insights
+  reactStrictMode: true,
+  
+  // Experimental features for better performance
+  experimental: {
+    optimizePackageImports: ['react-icons', '@react-oauth/google', 'react-toastify'],
+  },
 };
 
 export default nextConfig;
